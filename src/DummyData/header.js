@@ -1,7 +1,7 @@
 export default {
     authenticated: true,
     links: [
-        { link: '#', auth: false, name: 'Pricing' },
+        { link: '/pricing', auth: false, name: 'Pricing' },
         { link: '#', auth: false, name: 'WTF' },
         { link: '#', auth: false, name: 'Login' },
         { link: '#', auth: true, name: 'Recipes' },

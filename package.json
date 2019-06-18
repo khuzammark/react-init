@@ -54,11 +54,14 @@
         "jest": "^24.8.0",
         "jest-dom": "^3.5.0",
         "node-sass": "^4.12.0",
+        "npm": "^6.9.0",
         "prettier": "^1.18.2",
         "prettier-stylelint": "^0.4.2",
         "react-testing-library": "^8.0.1",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.1",
+        "stylelint-config-prettier": "^5.2.0",
+        "stylelint-prettier": "^1.1.1",
         "url-loader": "^2.0.0",
         "webpack": "^4.34.0",
         "webpack-cli": "^3.3.4",
@@ -68,6 +71,7 @@
     },
     "dependencies": {
         "@material-ui/core": "^4.1.1",
+        "@material-ui/icons": "^4.2.0",
         "cross-env": "^5.2.0",
         "dpcomponents": "file:../dp-components/build",
         "prop-types": "^15.7.2",
@@ -76,6 +80,7 @@
         "react-player": "^1.11.1",
         "react-router-dom": "^5.0.1",
         "react-router-prop-types": "^1.0.4",
+        "stylelint": "^10.1.0",
         "stylelint-config-recommended": "^2.2.0"
     },
     "jest": {
