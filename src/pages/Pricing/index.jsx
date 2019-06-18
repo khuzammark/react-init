@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core';
 import Page from '../../layouts/Page';
 import HeroData from '../../DummyData/hero';
 import pricingData from '../../DummyData/pricingCard';
-import './styles.scss';
 
 const useStyles = makeStyles(theme => ({
     cardContainer: {
