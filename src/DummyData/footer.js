@@ -1,7 +1,7 @@
 export default {
-    links: [
-        { link: '#', name: 'Support', auth: true },
-        { link: '#', name: 'Blog', auth: true },
-    ],
-    authenticated: true,
+  links: [
+    { link: '#', name: 'Support', auth: true },
+    { link: '#', name: 'Blog', auth: true }
+  ],
+  authenticated: true
 };
