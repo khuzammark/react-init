@@ -1,21 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Box } from '@material-ui/core';
-import { Header, Footer } from 'dpcomponents';
+import { Container, Box, makeStyles } from '@material-ui/core';
+import { Header, Footer, mainTheme } from 'dpcomponents';
 import HeaderData from '../../DummyData/header';
 import FooterData from '../../DummyData/footer';
 import './styles.scss';
 
+const useStyles = makeStyles(theme => ({
+    box: {
+        padding: theme.spacing(8, 0, 0, 0)
+    }
+}));
+
 export default Component => {
     const PageLayout = ({ authenticated }) => {
+        const classes = useStyles(mainTheme);
         return (
-            <Container maxWidth="xl" id="m-c">
-                <Box height={100}>
-                    <Header {...{ ...HeaderData, authenticated }} />
+            <Box height={100} className={classes.box}>
+                <Header {...{ ...HeaderData, authenticated }} />
+                <Container maxWidth="xl">
                     <Component authenticated={authenticated} />
-                    <Footer {...FooterData} />
-                </Box>
-            </Container>
+                </Container>
+                <Footer {...FooterData} />
+            </Box>
         );
     };
 
