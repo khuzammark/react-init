@@ -1,8 +1,8 @@
 {
-    "name": "react-init",
+    "name": "cifl-ui",
     "version": "1.0.0",
     "main": "index.js",
-    "repository": "git@github.com:khuzammark/react-init.git",
+    "repository": "git@github.com:coding-is-for-losers/react-init.git",
     "author": "Mark Khuzam <khuzammark@gmail.com>",
     "license": "MIT",
     "scripts": {
@@ -51,7 +51,6 @@
         "file-loader": "^4.0.0",
         "html-webpack-plugin": "^3.2.0",
         "husky": "^2.4.1",
-        "img-loader": "^3.0.1",
         "jest": "^24.8.0",
         "jest-dom": "^3.5.0",
         "node-sass": "^4.12.0",
@@ -68,10 +67,13 @@
         "webpack-merge": "^4.2.1"
     },
     "dependencies": {
+        "@material-ui/core": "^4.1.1",
         "cross-env": "^5.2.0",
+        "dpcomponents": "file:../dp-components/build",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
+        "react-player": "^1.11.1",
         "react-router-dom": "^5.0.1",
         "react-router-prop-types": "^1.0.4",
         "stylelint-config-recommended": "^2.2.0"

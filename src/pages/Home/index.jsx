@@ -1,10 +1,19 @@
-import React from 'react';
-import HelloWorld from '../../components/HelloWorld';
+import React, { Component, Fragment } from 'react';
+import { Hero } from 'dpcomponents';
 
-const Home = () => {
-    return <HelloWorld />;
-};
+import Page from '../../layouts/Page';
+import HeroData from '../../DummyData/hero';
+
+class Home extends Component {
+    render() {
+        return (
+            <Fragment>
+                <Hero {...HeroData} />
+            </Fragment>
+        );
+    }
+}
 
 Home.propTypes = {};
 
-export default Home;
+export default Page(Home);
