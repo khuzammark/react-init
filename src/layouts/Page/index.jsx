@@ -26,7 +26,7 @@ export default Component => {
         const classes = useStyles(mainTheme);
         return (
             <Box height={1} className={classes.box}>
-                <Header {...{ ...HeaderData, authenticated: true }} />
+                <Header {...{ ...HeaderData, authenticated }} />
                 <Container maxWidth="xl">
                     <Component authenticated={authenticated} />
                 </Container>

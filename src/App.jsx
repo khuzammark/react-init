@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Recipes from './pages/Recipes';
 import WTF from './pages/WTF';
+import Login from './pages/Login';
 import './constants/styles.scss';
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
                 <Route exact path="/wtf" component={WTF} />
                 <Route path="/pricing" component={Pricing} />
                 <Route path="/recipes" component={Recipes} />
+                <Route path="/login" component={Login} />
             </Switch>
         </Router>
     );
