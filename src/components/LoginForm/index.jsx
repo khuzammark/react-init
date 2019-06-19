@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Typography, TextField } from '@material-ui/core/';
+import { Typography, TextField, Link } from '@material-ui/core/';
 
 const LoginForm = ({ handleChange, email, password }) => {
     return (
@@ -29,6 +29,15 @@ const LoginForm = ({ handleChange, email, password }) => {
                 onChange={handleChange}
                 autoComplete="current-password"
             />
+            <Typography
+                variant="body1"
+                component="p"
+                align="center"
+                gutterbottom="true"
+            >
+                {`Don't have an account? `}
+                <Link href="/register">Register</Link>
+            </Typography>
         </Fragment>
     );
 };

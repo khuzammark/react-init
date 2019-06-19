@@ -5,6 +5,7 @@ import Pricing from './pages/Pricing';
 import Recipes from './pages/Recipes';
 import WTF from './pages/WTF';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import './constants/styles.scss';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
                 <Route path="/pricing" component={Pricing} />
                 <Route path="/recipes" component={Recipes} />
                 <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
             </Switch>
         </Router>
     );
