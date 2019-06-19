@@ -1,13 +1,13 @@
 export default {
-    authenticated: true,
+    authenticated: false,
     links: [
         { link: '/pricing', auth: false, name: 'Pricing' },
-        { link: '#', auth: false, name: 'WTF' },
-        { link: '#', auth: false, name: 'Login' },
-        { link: '#', auth: true, name: 'Recipes' },
-        { link: '#', auth: true, name: 'Sites' },
-        { link: '#', auth: true, name: 'Account' },
-        { link: '#', auth: true, name: 'Logout' }
+        { link: '/wtf', auth: false, name: 'WTF' },
+        { link: '/login', auth: false, name: 'Login' },
+        { link: '/recipes', auth: true, name: 'Recipes' },
+        { link: '/sites', auth: true, name: 'Sites' },
+        { link: '/account', auth: true, name: 'Account' },
+        { link: '/logout', auth: true, name: 'Logout' }
     ],
     logo: '',
     showLinks: true

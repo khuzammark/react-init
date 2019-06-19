@@ -8,7 +8,16 @@ import './styles.scss';
 
 const useStyles = makeStyles(theme => ({
     box: {
-        padding: theme.spacing(8, 0, 0, 0)
+        padding: theme.spacing(8, 0, 0, 0),
+        display: 'flex',
+        flexDirection: 'column',
+        alignContent: 'center'
+    },
+    footerWrapper: {
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end'
     }
 }));
 
@@ -16,12 +25,14 @@ export default Component => {
     const PageLayout = ({ authenticated }) => {
         const classes = useStyles(mainTheme);
         return (
-            <Box height={100} className={classes.box}>
-                <Header {...{ ...HeaderData, authenticated }} />
+            <Box height={1} className={classes.box}>
+                <Header {...{ ...HeaderData, authenticated: true }} />
                 <Container maxWidth="xl">
                     <Component authenticated={authenticated} />
                 </Container>
-                <Footer {...FooterData} />
+                <div className={classes.footerWrapper}>
+                    <Footer {...FooterData} />
+                </div>
             </Box>
         );
     };
