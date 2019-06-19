@@ -22,16 +22,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default Component => {
-    const PageLayout = ({ authenticated }) => {
+    const PageLayout = props => {
         const classes = useStyles(mainTheme);
         return (
             <Box height={1} className={classes.box}>
-                <Header {...{ ...HeaderData, authenticated }} />
+                <Header {...{ ...HeaderData, ...props }} />
                 <Container maxWidth="xl">
-                    <Component authenticated={authenticated} />
+                    <Component {...props} />
                 </Container>
                 <div className={classes.footerWrapper}>
-                    <Footer {...FooterData} />
+                    <Footer {...{ ...FooterData, ...props }} />
                 </div>
             </Box>
         );

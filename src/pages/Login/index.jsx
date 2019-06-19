@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Wizard } from 'dpcomponents';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import Page from '../../layouts/Page';
 import LoginForm from '../../components/LoginForm';
 
@@ -14,8 +15,12 @@ class Login extends Component {
     }
 
     onComplete = e => {
+        const {
+            props: { history }
+        } = this;
         e.preventDefault();
         console.log('Values from state! ', this.state);
+        history.push('/recipes');
     };
 
     handleChange = e => {
@@ -51,5 +56,9 @@ class Login extends Component {
         );
     }
 }
+
+Login.propTypes = {
+    history: ReactRouterPropTypes.history.isRequired
+};
 
 export default Page(Login);
