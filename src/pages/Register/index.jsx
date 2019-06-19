@@ -29,8 +29,12 @@ class Register extends Component {
 
     handleChange = e => {
         e.preventDefault();
+        const {
+            target: { name, value }
+        } = e;
+
         this.setState({
-            [e.target.name]: e.target.value
+            [name]: name === 'agreeTOS' ? value === 'yes' : value
         });
     };
 

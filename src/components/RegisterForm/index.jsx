@@ -39,6 +39,7 @@ const RegisterForm = ({
                 value={firstName}
                 fullWidth
                 autoComplete="fname"
+                onChange={handleChange}
             />
             <TextField
                 required
@@ -48,6 +49,7 @@ const RegisterForm = ({
                 value={lastName}
                 fullWidth
                 autoComplete="lname"
+                onChange={handleChange}
             />
             <TextField
                 required
@@ -57,6 +59,7 @@ const RegisterForm = ({
                 value={organization}
                 fullWidth
                 autoComplete="organization"
+                onChange={handleChange}
             />
             <TextField
                 id="password"
@@ -74,8 +77,10 @@ const RegisterForm = ({
                     <Checkbox
                         color="secondary"
                         required
+                        onChange={handleChange}
                         name="agreeTOS"
-                        value={agreeTOS ? 'yes' : 'no'}
+                        checked={agreeTOS}
+                        value="yes"
                     />
                 }
                 label="I agree to the terms and conditions"
