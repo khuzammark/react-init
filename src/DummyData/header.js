@@ -1,5 +1,5 @@
 export default {
-    authenticated: false,
+    authenticated: true,
     links: [
         { link: '/pricing', auth: false, name: 'Pricing' },
         { link: '/wtf', auth: false, name: 'WTF' },

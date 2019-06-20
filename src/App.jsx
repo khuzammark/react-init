@@ -6,6 +6,7 @@ import theme from './ui-lib/theme';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import RecipesRouter from './pages/Recipes/router';
+import SitesRouter from './pages/Sites/router';
 import ErrorPage from './pages/404';
 import WTF from './pages/WTF';
 import Login from './pages/Login';
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path="/wtf" component={WTF} />
                     <Route path="/pricing" component={Pricing} />
                     <Route path="/recipes" component={RecipesRouter} />
+                    <Route path="/sites" component={SitesRouter} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route component={ErrorPage} />
