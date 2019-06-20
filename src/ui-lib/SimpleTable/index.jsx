@@ -14,10 +14,11 @@ import Theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%',
         marginTop: theme.spacing(3),
-        overflowX: 'auto',
-        maxWidth: theme.breakpoints.values.sm
+        overflowX: 'auto'
+    },
+    table: {
+        width: '100%'
     },
     cellLink: {
         textDecoration: 'none'

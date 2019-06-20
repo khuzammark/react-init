@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const PricingPage = () => {
+const RecipeIndexes = () => {
     const classes = useStyles(mainTheme);
     return (
         <Fragment>
@@ -32,6 +32,6 @@ const PricingPage = () => {
     );
 };
 
-PricingPage.propTypes = {};
+RecipeIndexes.propTypes = {};
 
-export default Page(PricingPage);
+export default Page(RecipeIndexes);

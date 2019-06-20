@@ -12,6 +12,7 @@ import Modal from './Modal';
 import Hero from './Hero';
 import DropDown from './DropDown';
 import CTA from './CTA';
+import CTAButton from './CTAButton';
 import Testimonial from './Testimonial';
 import themeProvider from './themeProvider';
 import mainTheme from './theme';
@@ -30,6 +31,7 @@ export {
     Hero,
     DropDown,
     CTA,
+    CTAButton,
     Link,
     Testimonial,
     themeProvider,
