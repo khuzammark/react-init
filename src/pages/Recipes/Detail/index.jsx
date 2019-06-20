@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { RecipeDetail, mainTheme, Stepper, SimpleTable } from '../../ui-lib';
+import { RecipeDetail, mainTheme, Stepper, SimpleTable } from '../../../ui-lib';
 
-import Page from '../../layouts/Page';
-import recipeDetailData from '../../DummyData/recipeDetail';
-import stepperData from '../../DummyData/stepper';
-import simpletableData from '../../DummyData/simpletable';
+import Page from '../../../layouts/Page';
+import recipeDetailData from '../../../DummyData/recipeDetail';
+import stepperData from '../../../DummyData/stepper';
+import simpletableData from '../../../DummyData/simpletable';
 
 const useStyles = makeStyles(theme => ({
     sideBarContainer: {
