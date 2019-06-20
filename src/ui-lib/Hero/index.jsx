@@ -94,12 +94,12 @@ const Hero = ({ mainText, subText, action, media, video }) => {
                 component="h2"
                 variant="h2"
                 align="center"
-                gutterbottom="true"
+                gutterbottom
             >
                 {mainText.toUpperCase()}
             </Typography>
             <Typography
-                variant="p"
+                variant="subtitle1"
                 component="p"
                 color="primary"
                 align="center"

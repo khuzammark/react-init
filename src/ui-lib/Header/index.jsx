@@ -72,7 +72,7 @@ const Header = ({ showLinks, authenticated, links, logo }) => {
                                     color="secondary"
                                     href={link}
                                     link={link}
-                                    key={name}
+                                    key={`${name} desktop`}
                                     name={name}
                                     className={classes.link}
                                 />
@@ -98,12 +98,14 @@ const Header = ({ showLinks, authenticated, links, logo }) => {
                                 onClose={handleClose}
                             >
                                 {filteredLinks.map(({ name, link }) => (
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem
+                                        onClick={handleClose}
+                                        key={`${name} mobile`}
+                                    >
                                         <Link
                                             color="primary"
                                             link={link}
                                             href={link}
-                                            key={name}
                                             name={name}
                                             className={classes.link}
                                         />

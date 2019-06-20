@@ -8,7 +8,7 @@ import {
     CardActions,
     CardContent
 } from '@material-ui/core';
-import CTAButton from "../CTAButton";
+import CTAButton from '../CTAButton';
 import Theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
@@ -55,8 +55,9 @@ const RecipeIndex = ({ title, price, authenticated, links, description }) => {
                 {filteredLinks.map(({ name, link }, index) => (
                     <CTAButton
                         name={name}
+                        key={`${name  } RI`}
                         link={link}
-                        color={index ? 'primary' : null}
+                        color={index ? 'primary' : 'grey'}
                         mini
                     />
                 ))}

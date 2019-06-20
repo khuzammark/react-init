@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Typography, Box } from '@material-ui/core';
-import CTAButton from "../CTAButton";
+import CTAButton from '../CTAButton';
 import Theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
@@ -60,7 +60,7 @@ const CTA = ({ mainText, subText, action: { name, link } }) => {
                     {mainText.toUpperCase()}
                 </Typography>
                 <Typography
-                    variant="p"
+                    variant="subtitle1"
                     color="primary"
                     align="left"
                     className={classes.subtext}

@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography, Link } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
+import { makeStyles } from '@material-ui/styles';
 import Theme from '../theme';
 
-const LinkComponent = ({ name, link, color }) => {
+const useStyles = makeStyles(() => ({
+    link: {
+        display: 'inline-block'
+    }
+}));
+
+const LinkComponent = ({ name, link, color, button }) => {
+    const classes = useStyles();
     const CollisionLink = React.forwardRef((props, ref) => (
         <RouterLink innerRef={ref} to={link || '#'} {...props} />
     ));
@@ -26,19 +34,35 @@ const LinkComponent = ({ name, link, color }) => {
         linkColor = hundred;
         break;
     }
-    return (
+    return button ? (
         <Button color={linkColor} component={CollisionLink}>
             <Typography component="p" variant="body1">
                 {name}
             </Typography>
         </Button>
+    ) : (
+        <Link
+            color={linkColor}
+            component={CollisionLink}
+            href={link}
+            className={classes.link}
+        >
+            <Typography component="p" variant="body1">
+                {name}
+            </Typography>
+        </Link>
     );
 };
 
 LinkComponent.propTypes = {
     name: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired
+    color: PropTypes.string.isRequired,
+    button: PropTypes.bool
+};
+
+LinkComponent.defaultProps = {
+    button: true
 };
 
 export default LinkComponent;

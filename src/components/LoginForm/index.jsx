@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Typography, TextField, Link } from '@material-ui/core/';
+import { Typography, TextField } from '@material-ui/core/';
+import { Link } from '../../ui-lib';
 
 const LoginForm = ({ handleChange, email, password }) => {
     return (
@@ -36,7 +37,13 @@ const LoginForm = ({ handleChange, email, password }) => {
                 gutterbottom="true"
             >
                 {`Don't have an account? `}
-                <Link href="/register">Register</Link>
+                <Link
+                    name="Register"
+                    link="/register"
+                    href="/register"
+                    color="primary"
+                    button={false}
+                />
             </Typography>
         </Fragment>
     );
