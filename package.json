@@ -72,8 +72,10 @@
     "dependencies": {
         "@material-ui/core": "^4.1.1",
         "@material-ui/icons": "^4.2.0",
+        "@material-ui/styles": "^4.1.1",
+        "circular-std": "^1.0.0",
+        "clsx": "^1.0.4",
         "cross-env": "^5.2.0",
-        "dpcomponents": "file:../dp-components/build",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",

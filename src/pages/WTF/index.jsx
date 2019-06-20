@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Hero, Stepper, CTA } from 'dpcomponents';
+import { Hero, Stepper, CTA } from '../../ui-lib';
 
 import Page from '../../layouts/Page';
 import HeroData from '../../DummyData/hero';

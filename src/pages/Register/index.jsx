@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Wizard } from 'dpcomponents';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { Wizard } from '../../ui-lib';
 import Page from '../../layouts/Page';
 import RegisterForm from '../../components/RegisterForm';
 

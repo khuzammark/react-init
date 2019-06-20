@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Box, makeStyles } from '@material-ui/core';
-import { Header, Footer, mainTheme } from 'dpcomponents';
+import { Container, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
+import { Header, Footer, mainTheme } from '../../ui-lib';
 import HeaderData from '../../DummyData/header';
 import FooterData from '../../DummyData/footer';
 import './styles.scss';

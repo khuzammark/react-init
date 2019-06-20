@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { Hero, PricingCard, mainTheme } from 'dpcomponents';
 import { makeStyles } from '@material-ui/core';
+import { Hero, PricingCard, mainTheme } from '../../ui-lib';
 
 import Page from '../../layouts/Page';
 import HeroData from '../../DummyData/hero';
