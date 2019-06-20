@@ -107,7 +107,7 @@ StepCard.propTypes = {
         PropTypes.shape({
             link: PropTypes.string.isRequired,
             linkName: PropTypes.string.isRequired,
-            Icon: React.propTypes.node.isRequired
+            Icon: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
         })
     ).isRequired
 };
