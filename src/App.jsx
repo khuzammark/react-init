@@ -11,6 +11,8 @@ import ErrorPage from './pages/404';
 import WTF from './pages/WTF';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Account from './pages/Account';
+
 import './constants/styles.scss';
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
                     <Route path="/pricing" component={Pricing} />
                     <Route path="/recipes" component={RecipesRouter} />
                     <Route path="/sites" component={SitesRouter} />
+                    <Route path="/account" component={Account} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route component={ErrorPage} />

@@ -43,7 +43,7 @@ const Footer = ({ links, authenticated }) => {
         authenticated ? auth : !auth
     );
     return (
-        <Toolbar className={classes.footer}>
+        <Toolbar className={classes.footer} id="footer-ui-lib">
             <Typography className={classes.copyright}>
                 © Coding Is For Losers
             </Typography>

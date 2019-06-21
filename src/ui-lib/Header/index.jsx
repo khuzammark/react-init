@@ -58,6 +58,7 @@ const Header = ({ showLinks, authenticated, links, logo }) => {
     return (
         <React.Fragment>
             <AppBar
+                id="header-ui-lib"
                 position="static"
                 color="primary"
                 elevation={0}
