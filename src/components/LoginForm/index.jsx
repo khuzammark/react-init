@@ -35,6 +35,7 @@ const LoginForm = ({ handleChange, email, password }) => {
                 component="p"
                 align="center"
                 gutterbottom="true"
+                style={{ paddingTop: 16 }}
             >
                 {`Don't have an account? `}
                 <Link

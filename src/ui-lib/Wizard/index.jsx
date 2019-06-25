@@ -18,7 +18,9 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(4),
         minHeight: 500,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignContent: 'center',
+        textAlign: 'center'
     },
     container: {
         margin: `${theme.spacing(4)}px auto`,

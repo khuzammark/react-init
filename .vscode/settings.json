@@ -3,4 +3,5 @@
     "prettier.stylelintIntegration": true,
     "eslint.autoFixOnSave": false,
     "editor.formatOnSave": false,
+    "editor.snippetSuggestions": "top"
 }

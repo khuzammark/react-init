@@ -1,11 +1,12 @@
-import React, { Fragment } from 'react';
-import { makeStyles } from '@material-ui/core';
-import { Hero, mainTheme } from '../../ui-lib';
+import React, { Fragment, Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/styles';
+import { Hero } from '../../ui-lib';
 
 import Page from '../../layouts/Page';
 import HeroData from '../../DummyData/hero';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
     cardContainer: {
         display: 'flex',
         flexDirection: 'row',
@@ -14,17 +15,38 @@ const useStyles = makeStyles(theme => ({
         alignContent: 'center',
         margin: theme.spacing(4, 0)
     }
-}));
+});
 
-const SitesIndexes = () => {
-    const classes = useStyles(mainTheme);
-    return (
-        <Fragment>
-            <Hero {...HeroData} classes={classes.none} />
-        </Fragment>
-    );
+class SitesIndex extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            selectedSite: '',
+            selectedRecipe: ''
+        };
+    }
+
+    handleSelect = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
+
+    render() {
+        const {
+            props: { classes }
+        } = this;
+        return (
+            <Fragment>
+                <Hero {...HeroData} classes={classes.none} />
+            </Fragment>
+        );
+    }
+}
+
+SitesIndex.propTypes = {
+    classes: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
-SitesIndexes.propTypes = {};
-
-export default Page(SitesIndexes);
+export default Page(withStyles(styles)(SitesIndex));

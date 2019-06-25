@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
+import withApollo from './withApollo';
 import theme from './ui-lib/theme';
 import Home from './pages/Home';
 import Pricing from './pages/Pricing';
@@ -12,7 +13,6 @@ import WTF from './pages/WTF';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Account from './pages/Account';
-
 import './constants/styles.scss';
 
 const App = () => {
@@ -38,4 +38,4 @@ const App = () => {
 
 App.propTypes = {};
 
-export default App;
+export default withApollo(App);

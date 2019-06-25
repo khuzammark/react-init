@@ -1,0 +1,116 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "INTERFACE",
+        "name": "Node",
+        "possibleTypes": [
+          { "name": "Invoice" },
+          { "name": "User" },
+          { "name": "Org" },
+          { "name": "Recipe" },
+          { "name": "RecipeFeedConfiguration" },
+          { "name": "RecipeInstance" },
+          { "name": "Feed" },
+          { "name": "GoogleAnalyticsDataSource" },
+          { "name": "AuthStore" },
+          { "name": "GoogleAuth" },
+          { "name": "UserGoogleAuth" },
+          { "name": "MajesticAuth" },
+          { "name": "SemrushAuth" },
+          { "name": "DeepcrawlAuth" },
+          { "name": "ShopifyAuth" },
+          { "name": "UserShopifyAuth" },
+          { "name": "FacebookAuth" },
+          { "name": "UserFacebookAuth" },
+          { "name": "AdobeAuth" },
+          { "name": "DataSource" },
+          { "name": "DataTarget" },
+          { "name": "BigQueryDataTarget" },
+          { "name": "GoogleWebmastersDataSource" },
+          { "name": "GoogleAdwordsAdPerformanceReportDataSource" },
+          { "name": "GoogleAdwordsCampaignPerformanceReportDataSource" },
+          { "name": "GoogleAdwordsFinalUrlReportDataSource" },
+          { "name": "MajesticBacklinkDataSource" },
+          { "name": "SemrushDomainOrganicKeywordsDataSource" },
+          { "name": "DeepcrawlAllPagesReportDataSource" },
+          { "name": "ShopifyCustomersDataSource" },
+          { "name": "ShopifyProductsDataSource" },
+          { "name": "ShopifyOrdersDataSource" },
+          { "name": "ShopifyRefundsDataSource" },
+          { "name": "FacebookAdCreativesDataSource" },
+          { "name": "FacebookAdInsightsDataSource" },
+          { "name": "FacebookAdsDataSource" },
+          { "name": "AdobeAnalyticsDataSource" },
+          { "name": "FeedEvent" },
+          { "name": "FeedErrorEntry" },
+          { "name": "DBTErrorEntry" },
+          { "name": "Charge" },
+          { "name": "Payment" }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "DataSourceUnion",
+        "possibleTypes": [
+          { "name": "GoogleAnalyticsDataSource" },
+          { "name": "GoogleWebmastersDataSource" },
+          { "name": "GoogleAdwordsAdPerformanceReportDataSource" },
+          { "name": "GoogleAdwordsCampaignPerformanceReportDataSource" },
+          { "name": "GoogleAdwordsFinalUrlReportDataSource" },
+          { "name": "MajesticBacklinkDataSource" },
+          { "name": "SemrushDomainOrganicKeywordsDataSource" },
+          { "name": "DeepcrawlAllPagesReportDataSource" },
+          { "name": "ShopifyCustomersDataSource" },
+          { "name": "ShopifyProductsDataSource" },
+          { "name": "ShopifyOrdersDataSource" },
+          { "name": "ShopifyRefundsDataSource" },
+          { "name": "FacebookAdCreativesDataSource" },
+          { "name": "FacebookAdInsightsDataSource" },
+          { "name": "FacebookAdsDataSource" },
+          { "name": "AdobeAnalyticsDataSource" },
+          { "name": "DataSource" }
+        ]
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "DataSourceInterface",
+        "possibleTypes": [
+          { "name": "GoogleAnalyticsDataSource" },
+          { "name": "DataSource" },
+          { "name": "GoogleWebmastersDataSource" },
+          { "name": "GoogleAdwordsAdPerformanceReportDataSource" },
+          { "name": "GoogleAdwordsCampaignPerformanceReportDataSource" },
+          { "name": "GoogleAdwordsFinalUrlReportDataSource" },
+          { "name": "MajesticBacklinkDataSource" },
+          { "name": "SemrushDomainOrganicKeywordsDataSource" },
+          { "name": "DeepcrawlAllPagesReportDataSource" },
+          { "name": "ShopifyCustomersDataSource" },
+          { "name": "ShopifyProductsDataSource" },
+          { "name": "ShopifyOrdersDataSource" },
+          { "name": "ShopifyRefundsDataSource" },
+          { "name": "FacebookAdCreativesDataSource" },
+          { "name": "FacebookAdInsightsDataSource" },
+          { "name": "FacebookAdsDataSource" },
+          { "name": "AdobeAnalyticsDataSource" }
+        ]
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "DataTargetInterface",
+        "possibleTypes": [
+          { "name": "DataTarget" },
+          { "name": "BigQueryDataTarget" }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "DataTargetUnion",
+        "possibleTypes": [
+          { "name": "BigQueryDataTarget" },
+          { "name": "DataTarget" }
+        ]
+      }
+    ]
+  }
+}
