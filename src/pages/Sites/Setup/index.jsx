@@ -5,7 +5,6 @@ import { Wizard, Stepper } from '../../../ui-lib';
 import Page from '../../../layouts/Page';
 import SiteDetailsForm from '../../../components/SiteDetailsForm';
 import stepperData from '../../../DummyData/stepper';
-import wizardData from '../../../DummyData/wizard';
 
 const styles = theme => ({
     sideBarContainer: {
