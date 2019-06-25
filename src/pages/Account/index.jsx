@@ -12,14 +12,17 @@ import simpletableData from '../../DummyData/simpletable';
 const styles = theme => {
     return {
         sideBarContainer: {
-            maxWidth: theme.breakpoints.values.sm / 2
+            maxWidth: theme.breakpoints.values.sm / 2,
+            minWidth: theme.breakpoints.values.sm / 2,
+            [theme.breakpoints.down('sm')]: {
+                display: 'none'
+            }
         },
         contentWrapper: {
             display: 'flex',
             flexDirection: 'row',
             height: 'fit-content',
             justifyContent: 'center',
-            flexWrap: 'wrap',
             alignContent: 'flex-start',
             margin: theme.spacing(4)
         },
