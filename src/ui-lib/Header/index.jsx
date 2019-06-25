@@ -77,6 +77,7 @@ const Header = ({ showLinks, authenticated, links, logo, history }) => {
                                     <Link
                                         href={link}
                                         color="secondary"
+                                        button={false}
                                         bold={currentPage.includes(link)}
                                         link={link}
                                         key={`${name} desktop`}

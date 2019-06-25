@@ -49,10 +49,13 @@ const LinkComponent = ({ name, link, color, button, bold }) => {
             color={linkColor}
             component={CollisionLink}
             href={link}
-            style={{ fontWeight: bold ? 'bold' : 'normal' }}
             className={classes.link}
         >
-            <Typography component="p" variant="body1">
+            <Typography
+                component="p"
+                variant="body1"
+                style={{ fontWeight: bold ? 'bold' : 'normal' }}
+            >
                 {name}
             </Typography>
         </Link>
