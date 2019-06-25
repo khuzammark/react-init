@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
     right: {
         maxWidth: theme.breakpoints.values.sm,
-        padding: theme.spacing(4, 2),
+        padding: theme.spacing(0, 2, 4),
         display: 'flex',
         flexDirection: 'column'
     },
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(0, 0, 2)
     },
     subtext: {
-        fontSize: 24
+        fontSize: 20
     }
 }));
 

@@ -13,7 +13,7 @@ import Theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: theme.breakpoints.values.sm,
+        maxWidth: 350,
         padding: theme.spacing(0),
         margin: theme.spacing(2)
     },
@@ -55,7 +55,7 @@ const RecipeIndex = ({ title, price, authenticated, links, description }) => {
                 {filteredLinks.map(({ name, link }, index) => (
                     <CTAButton
                         name={name}
-                        key={`${name  } RI`}
+                        key={`${name} RI`}
                         link={link}
                         color={index ? 'primary' : 'grey'}
                         mini

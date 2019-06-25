@@ -8,18 +8,23 @@ import Theme from '../theme';
 const useStyles = makeStyles(theme => ({
     link: {
         margin: theme.spacing(0, 0, 2),
+        padding: theme.spacing(1, 1),
         height: 70,
-        width: 250,
+        width: 200,
         fontFamily: 'CircularStd',
         alignSelf: 'center',
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             width: 180,
-            height: 70
+            height: 70,
+            fontSize: 14
         }
     },
     mini: {
-        width: 180,
-        height: 70
+        width: 170,
+        height: 60
+    },
+    textMini: {
+        fontSize: 16
     }
 }));
 
@@ -53,7 +58,7 @@ const MUIButton = ({ link, name, color, mini }) => {
     return (
         <Button
             variant="contained"
-            size="large"
+            size={mini ? 'small' : 'large'}
             color={backgroundColor}
             component={CollisionLink}
             className={`${classes.link} ${mini ? classes.mini : null}`}
@@ -62,8 +67,11 @@ const MUIButton = ({ link, name, color, mini }) => {
                 component="h6"
                 variant="h6"
                 color={titleColor}
+                noWrap
+                classes
                 align="center"
                 gutterBottom="true"
+                className={mini ? classes.textMini : classes.textLarge}
             >
                 {name}
             </Typography>

@@ -6,10 +6,10 @@ import {
     Card,
     CardHeader,
     CardContent,
-    CardActions,
-    Button
+    CardActions
 } from '@material-ui/core';
 import Theme from '../theme';
+import CTAButton from '../CTAButton';
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -36,6 +36,12 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
         alignItems: 'baseline',
         marginBottom: theme.spacing(2)
+    },
+    actions: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
     }
 }));
 
@@ -73,15 +79,13 @@ const PricingCard = ({
                     ))}
                 </ul>
             </CardContent>
-            <CardActions>
-                <Button
-                    fullWidth
-                    href={paymentTaken ? '#' : link}
-                    variant="contained"
+            <CardActions className={classes.actions}>
+                <CTAButton
+                    link={paymentTaken ? '#' : link}
+                    name={name}
                     color="primary"
-                >
-                    {name}
-                </Button>
+                    mini
+                />
             </CardActions>
         </Card>
     );

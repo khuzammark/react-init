@@ -13,7 +13,7 @@ import {
 import clsx from 'clsx';
 import { ExpandMore } from '@material-ui/icons';
 import ReactPlayer from 'react-player';
-import CTAButton from "../CTAButton";
+import CTAButton from '../CTAButton';
 import Theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
@@ -22,14 +22,20 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(2),
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        [theme.breakpoints.down('md')]: {
+            padding: theme.spacing(4, 2)
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: theme.spacing(2, 1)
+        }
     },
     wrapper: {
         display: 'flex',
         flexDirection: 'row',
         alignContent: 'center',
         justifyContent: 'space-evenly',
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
             flexWrap: 'wrap-reverse'
         }
     },
@@ -51,7 +57,10 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(0, 1, 0, 0)
     },
     container: {
-        minWidth: 300
+        minWidth: 300,
+        [theme.breakpoints.down('lg')]: {
+            minWidth: 150
+        }
     },
     player: {
         alignSelf: 'center',
@@ -124,6 +133,7 @@ const RecipeIndex = ({
                             <CTAButton
                                 name={name}
                                 link={link}
+                                mini
                                 color={index ? 'primary' : null}
                                 className={!index ? classes.grey : null}
                             />

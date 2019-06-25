@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
         overflow: 'hidden'
     },
     heroButtons: {
-        marginTop: theme.spacing(4)
+        marginTop: theme.spacing(0, 4, 4)
     },
     player: {
         position: 'absolute',
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
     },
     subtext: {
         padding: theme.spacing(4, 2),
-        fontSize: 24,
+        fontSize: 20,
         maxWidth: theme.breakpoints.values.md
     },
     link: {

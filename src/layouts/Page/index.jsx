@@ -22,12 +22,17 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default Component => {
+const defaultOptions = {
+    showLinks: true
+};
+
+export default (Component, options) => {
     const PageLayout = props => {
         const classes = useStyles(mainTheme);
+        const { showLinks } = options || defaultOptions;
         return (
             <Box height={1} className={classes.box}>
-                <Header {...{ ...HeaderData, ...props }} />
+                <Header {...{ ...HeaderData, ...props, showLinks }} />
                 <Container maxWidth="xl">
                     <Component {...props} />
                 </Container>

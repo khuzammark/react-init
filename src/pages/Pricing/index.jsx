@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Hero, PricingCard, mainTheme } from '../../ui-lib';
+import { PricingCard, mainTheme } from '../../ui-lib';
 
 import Page from '../../layouts/Page';
-import HeroData from '../../DummyData/hero';
 import pricingData from '../../DummyData/pricingCard';
 
 const useStyles = makeStyles(theme => ({
@@ -21,7 +20,6 @@ const PricingPage = () => {
     const classes = useStyles(mainTheme);
     return (
         <Fragment>
-            <Hero {...HeroData} />
             <div className={classes.cardContainer}>
                 <PricingCard {...pricingData} />
                 <PricingCard {...pricingData} />

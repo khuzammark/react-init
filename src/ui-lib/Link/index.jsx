@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const LinkComponent = ({ name, link, color, button }) => {
+const LinkComponent = ({ name, link, color, button, bold }) => {
     const classes = useStyles();
     const CollisionLink = React.forwardRef((props, ref) => (
         <RouterLink innerRef={ref} to={link || '#'} {...props} />
@@ -36,7 +36,11 @@ const LinkComponent = ({ name, link, color, button }) => {
     }
     return button ? (
         <Button color={linkColor} component={CollisionLink}>
-            <Typography component="p" variant="body1">
+            <Typography
+                component="p"
+                variant="body1"
+                style={{ fontWeight: bold ? 'bold' : 'normal' }}
+            >
                 {name}
             </Typography>
         </Button>
@@ -45,6 +49,7 @@ const LinkComponent = ({ name, link, color, button }) => {
             color={linkColor}
             component={CollisionLink}
             href={link}
+            style={{ fontWeight: bold ? 'bold' : 'normal' }}
             className={classes.link}
         >
             <Typography component="p" variant="body1">
@@ -58,11 +63,13 @@ LinkComponent.propTypes = {
     name: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
-    button: PropTypes.bool
+    button: PropTypes.bool,
+    bold: PropTypes.bool
 };
 
 LinkComponent.defaultProps = {
-    button: true
+    button: true,
+    bold: false
 };
 
 export default LinkComponent;

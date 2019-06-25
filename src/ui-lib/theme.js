@@ -1,7 +1,7 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import 'circular-std';
 
-export default responsiveFontSizes(
+const theme = responsiveFontSizes(
     createMuiTheme({
         palette: {
             primary: {
@@ -40,3 +40,17 @@ export default responsiveFontSizes(
         }
     })
 );
+
+export default {
+    ...theme,
+    overrides: {
+        MuiTypography: {
+            h2: {
+                fontFamily: 'CircularStd',
+                [theme.breakpoints.down('sm')]: {
+                    fontSize: '3rem'
+                }
+            }
+        }
+    }
+};

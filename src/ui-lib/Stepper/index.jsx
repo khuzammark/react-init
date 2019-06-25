@@ -25,8 +25,10 @@ const useStyles = makeStyles(theme => ({
     connectorRoot: {
         width: 'fit-content',
         alignSelf: 'center',
-        margin: theme.spacing(2, 0),
-        minHeight: 30
+        padding: 0
+    },
+    line: {
+        minHeight: 50
     },
     card: {},
     stepLabel: {
@@ -118,8 +120,8 @@ const StepperComponent = ({ activeStep, steps }) => {
         <StepConnector
             classes={{
                 root: classes.connectorRoot,
-                line: classes.connector,
-                lineVertical: classes.connector
+                lineVertical: classes.connector,
+                line: classes.line
             }}
         />
     );

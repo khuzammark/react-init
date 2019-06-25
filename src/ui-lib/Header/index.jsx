@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import { makeStyles } from '@material-ui/styles';
 import {
     AppBar,
@@ -23,6 +24,9 @@ const useStyles = makeStyles(theme => ({
     toolbar: {
         flexWrap: 'wrap'
     },
+    bold: {
+        fontWeight: 'bold'
+    },
     nav: {
         display: 'flex',
         flexDirection: 'row',
@@ -41,13 +45,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Header = ({ showLinks, authenticated, links, logo }) => {
+const Header = ({ showLinks, authenticated, links, logo, history }) => {
     const classes = useStyles(Theme);
     const filteredLinks = links.filter(({ auth }) =>
         authenticated ? auth : !auth
     );
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    const currentPage = history.location.pathname;
     function handleClick(event) {
         setAnchorEl(event.currentTarget);
     }
@@ -68,16 +72,19 @@ const Header = ({ showLinks, authenticated, links, logo }) => {
                     <Logo src={logo} />
                     <nav className={classes.nav}>
                         {showLinks
-                            ? filteredLinks.map(({ name, link }) => (
-                                <Link
-                                    color="secondary"
-                                    href={link}
-                                    link={link}
-                                    key={`${name} desktop`}
-                                    name={name}
-                                    className={classes.link}
-                                />
-                            ))
+                            ? filteredLinks.map(({ name, link }) => {
+                                return (
+                                    <Link
+                                        href={link}
+                                        color="secondary"
+                                        bold={currentPage.includes(link)}
+                                        link={link}
+                                        key={`${name} desktop`}
+                                        name={name}
+                                        className={classes.link}
+                                    />
+                                );
+                            })
                             : null}
                     </nav>
                     {showLinks ? (
@@ -122,6 +129,7 @@ const Header = ({ showLinks, authenticated, links, logo }) => {
 };
 
 Header.propTypes = {
+    history: ReactRouterPropTypes.history.isRequired,
     showLinks: PropTypes.bool.isRequired,
     authenticated: PropTypes.bool.isRequired,
     links: PropTypes.arrayOf(
