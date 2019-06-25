@@ -13,14 +13,12 @@ import Theme from '../theme';
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        flexDirection: 'column',
+        justifyContent: 'center',
         maxWidth: theme.breakpoints.values.sm
     },
     formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-        maxWidth: 300
+        margin: theme.spacing(3, 0)
     }
 }));
 
@@ -30,8 +28,10 @@ const DropDown = ({ sets, handleSelect }) => {
         <div className={classes.container}>
             {sets.map(({ name, data, selection }) => {
                 return (
-                    <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="select-multiple-chip">{name}</InputLabel>
+                    <FormControl className={classes.formControl} fullWidth>
+                        <InputLabel htmlFor="select-multiple-chip">
+                            {name}
+                        </InputLabel>
                         <Select
                             multiple
                             value={selection}

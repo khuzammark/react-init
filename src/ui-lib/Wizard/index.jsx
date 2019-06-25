@@ -10,13 +10,23 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
+        flexGrow: 1,
+        alignItems: 'flex-end',
         padding: theme.spacing(2, 0, 0)
     },
     boxContainer: {
-        padding: theme.spacing(4)
+        padding: theme.spacing(4),
+        minHeight: 500,
+        display: 'flex',
+        flexDirection: 'column'
     },
     container: {
-        margin: `${theme.spacing(4)  }px auto`
+        margin: `${theme.spacing(4)}px auto`,
+        minWidth: 700
+    },
+    button: {
+        minWidth: 120,
+        minHeight: 40
     }
 }));
 
@@ -43,24 +53,35 @@ const Wizard = ({ steps, onComplete, completeName }) => {
                 {steps[activeStep].component}
                 <div className={classes.actionContainer}>
                     {activeStep ? (
+                        <div>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                onClick={handleBack}
+                                className={classes.button}
+                            >
+                                Back
+                            </Button>
+                        </div>
+                    ) : null}
+                    <div>
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={handleBack}
+                            size="large"
+                            onClick={
+                                activeStep === steps.length - 1
+                                    ? onComplete
+                                    : handleNext
+                            }
                             className={classes.button}
                         >
-              Back
+                            {activeStep === steps.length - 1
+                                ? completeName
+                                : 'Next'}
                         </Button>
-                    ) : null}
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        onClick={activeStep === steps.length - 1 ? onComplete : handleNext}
-                        className={classes.button}
-                    >
-                        {activeStep === steps.length - 1 ? completeName : 'Next'}
-                    </Button>
+                    </div>
                 </div>
             </Box>
         </Container>
