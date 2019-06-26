@@ -91,8 +91,8 @@ const Hero = ({ mainText, subText, action, media, video }) => {
         <div className={classes.content}>
             <Typography
                 color="primary"
-                component="h2"
-                variant="h2"
+                component="h1"
+                variant="h1"
                 align="center"
                 gutterbottom
             >
