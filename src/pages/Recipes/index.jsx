@@ -8,12 +8,21 @@ import recipeIndexData from '../../DummyData/recipeIndex';
 
 const useStyles = makeStyles(theme => ({
     cardContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
-        alignContent: 'center',
-        margin: theme.spacing(4, 0)
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gridGap: '20px 20px',
+        padding: theme.spacing(4, 10),
+        justifyItems: 'center',
+        [theme.breakpoints.down('md')]: {
+            padding: theme.spacing(2)
+        },
+        [theme.breakpoints.down('sm')]: {
+            padding: theme.spacing(1, 0),
+            gridTemplateColumns: 'repeat(2, 1fr)'
+        },
+        [theme.breakpoints.down('xs')]: {
+            gridTemplateColumns: 'repeat(1, 1fr)'
+        }
     }
 }));
 

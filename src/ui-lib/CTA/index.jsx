@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
             margin: theme.spacing(0, 0, 0, -4)
         },
         [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
             margin: theme.spacing(0, 0, 0, -3)
         },
         [theme.breakpoints.down('xs')]: {
@@ -26,18 +27,26 @@ const useStyles = makeStyles(theme => ({
         }
     },
     left: {
-        maxWidth: theme.breakpoints.values.sm,
+        maxWidth: '50%',
         padding: theme.spacing(4, 2),
-        textAlign: 'left'
+        textAlign: 'left',
+        [theme.breakpoints.down('sm')]: {
+            maxWidth: '100%'
+        }
     },
     right: {
-        maxWidth: theme.breakpoints.values.sm,
+        minWidth: '25%',
         padding: theme.spacing(0, 2, 4),
         display: 'flex',
         flexDirection: 'column'
     },
     header: {
-        padding: theme.spacing(0, 0, 2)
+        padding: theme.spacing(0, 0, 2),
+        [theme.breakpoints.down('sm')]: {
+            whiteSpace: 'normal',
+            textOverflow: 'normal',
+            textAlign: 'center'
+        }
     },
     subtext: {
         fontSize: 20
@@ -54,6 +63,7 @@ const CTA = ({ mainText, subText, action: { name, link } }) => {
                     component="h2"
                     variant="h2"
                     align="left"
+                    noWrap
                     gutterbottom="true"
                     className={classes.header}
                 >

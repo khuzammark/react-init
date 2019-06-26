@@ -20,13 +20,16 @@ const theme = responsiveFontSizes(
                 `sans-serif`
             ].join(','),
             h1: {
-                fontFamily: 'CircularStd'
+                fontFamily: 'CircularStd',
+                fontWeight: 'bold'
             },
             h2: {
-                fontFamily: 'CircularStd'
+                fontFamily: 'CircularStd',
+                fontWeight: 'bold'
             },
             h3: {
-                fontFamily: 'CircularStd'
+                fontFamily: 'CircularStd',
+                fontWeight: 'bold'
             },
             h4: {
                 fontFamily: 'CircularStd'
@@ -47,8 +50,14 @@ export default {
         MuiTypography: {
             h2: {
                 fontFamily: 'CircularStd',
-                [theme.breakpoints.down('sm')]: {
+                [theme.breakpoints.down('md')]: {
                     fontSize: '3rem'
+                }
+            },
+            h6: {
+                fontSize: 20,
+                [theme.breakpoints.down('md')]: {
+                    fontSize: 16
                 }
             }
         }

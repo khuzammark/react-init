@@ -7,7 +7,6 @@ import Theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
     link: {
-        margin: theme.spacing(0, 0, 2),
         padding: theme.spacing(1, 1),
         height: 70,
         width: 200,
@@ -20,7 +19,7 @@ const useStyles = makeStyles(theme => ({
         }
     },
     mini: {
-        width: 170,
+        width: 140,
         height: 60
     },
     textMini: {

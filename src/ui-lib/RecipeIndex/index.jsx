@@ -13,9 +13,13 @@ import Theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: 350,
+        maxWidth: 300,
         padding: theme.spacing(0),
-        margin: theme.spacing(2)
+        margin: theme.spacing(2),
+        [theme.breakpoints.down('sm')]: {
+            margin: theme.spacing(0),
+            padding: theme.spacing(0)
+        }
     },
     actions: {
         justifyContent: 'space-evenly',
@@ -29,8 +33,8 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         textAlign: 'center',
-        width: 180,
-        height: 60
+        width: 150,
+        height: 50
     }
 }));
 

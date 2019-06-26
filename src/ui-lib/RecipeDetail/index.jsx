@@ -44,7 +44,9 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-evenly',
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignContent: 'flex-start',
+        flexWrap: 'wrap',
+        maxWidth: 400
     },
     header: {
         padding: theme.spacing(2, 1, 0, 2)
