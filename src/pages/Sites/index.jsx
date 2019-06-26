@@ -21,10 +21,7 @@ class SitesIndex extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            selectedSite: '',
-            selectedRecipe: ''
-        };
+        this.state = {};
     }
 
     handleSelect = e => {
