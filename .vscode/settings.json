@@ -3,5 +3,6 @@
     "prettier.stylelintIntegration": true,
     "eslint.autoFixOnSave": false,
     "editor.formatOnSave": false,
-    "editor.snippetSuggestions": "top"
+    "editor.snippetSuggestions": "top",
+    "eslint.packageManager": "yarn"
 }

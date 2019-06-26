@@ -54,7 +54,9 @@ class SiteSetup extends Component {
             <Fragment>
                 <div className={classes.tableNavWrapper}>
                     <aside className={classes.sideBarContainer}>
-                        <Stepper {...{ ...stepperData, activeStep }} />
+                        <Stepper
+                            {...{ ...stepperData, activeStep, detail: true }}
+                        />
                     </aside>
                     <div className={classes.tableContainer}>
                         <Wizard

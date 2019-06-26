@@ -36,6 +36,4 @@ const App = () => {
     );
 };
 
-App.propTypes = {};
-
 export default withApollo(App);

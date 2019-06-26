@@ -1,5 +1,3 @@
-import VisibleIcon from '@material-ui/icons/Visibility';
-
 export default {
     activeStep: 2,
     steps: [
@@ -7,14 +5,13 @@ export default {
             label: 'Site Details',
             links: [
                 {
-                    Icon: VisibleIcon,
-                    linkName: 'Coding Is For Losers',
-                    link: 'https://www.codingisforlosers.com'
+                    fieldName: 'Name',
+                    value: 'Coding Is For Losers'
                 },
                 {
-                    Icon: VisibleIcon,
-                    linkName: 'Coding Is For Losers',
-                    link: 'https://www.codingisforlosers.com'
+                    fieldName: 'Domain',
+                    link: 'codingisforlosers.com',
+                    value: ''
                 }
             ]
         },
@@ -22,9 +19,21 @@ export default {
             label: 'Select Accounts',
             links: [
                 {
-                    Icon: VisibleIcon,
-                    linkName: 'Coding Is For Losers',
-                    link: 'https://www.codingisforlosers.com'
+                    fieldName: 'Google Analytics',
+                    value: 'CIFL'
+                },
+                {
+                    fieldName: 'Google Search Console',
+                    link: 'https://codingisforlosers.com/',
+                    value: ''
+                },
+                {
+                    fieldName: 'Deepcrawl',
+                    value: 'Account included in QR Subscription'
+                },
+                {
+                    fieldName: 'SEMRush',
+                    value: 'Account included in QR Subscription'
                 }
             ]
         },
@@ -32,9 +41,8 @@ export default {
             label: 'Select BigQuery Project',
             links: [
                 {
-                    Icon: VisibleIcon,
-                    linkName: 'Coding Is For Losers',
-                    link: 'https://www.codingisforlosers.com'
+                    fieldName: 'BigQuery Project ID',
+                    value: 'Account included in QR Subscription'
                 }
             ]
         },
@@ -42,9 +50,8 @@ export default {
             label: 'Confirm setup',
             links: [
                 {
-                    Icon: VisibleIcon,
-                    linkName: 'Coding Is For Losers',
-                    link: 'https://www.codingisforlosers.com'
+                    fieldName: 'Confirm',
+                    link: 'confirmationlink.com'
                 }
             ]
         }

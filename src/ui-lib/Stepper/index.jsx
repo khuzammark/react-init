@@ -17,7 +17,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignContent: 'center',
+        margin: theme.spacing(2, 0)
     },
     connector: {
         height: '100%'
@@ -44,24 +45,21 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontWeight: 'bold'
     },
-    link: {
-        display: 'flex',
-        flexDirection: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    linkName: {
-        padding: theme.spacing(1)
-    },
     content: {
-        padding: theme.spacing(2)
+        padding: theme.spacing(2, 1)
+    },
+    fname: {
+        fontWeight: 800
+    },
+    cardDetail: {
+        margin: theme.spacing(0.5, 0)
     }
 }));
 
-const StepCard = ({ label, links }) => {
+const StepCard = ({ label, links, detail }) => {
     const classes = useStyles(Theme);
     return (
-        <Card className={classes.card}>
+        <Card className={`${classes.card} ${detail ? classes.cardDetail : ''}`}>
             <CardHeader
                 title={
                     <Typography
@@ -77,24 +75,53 @@ const StepCard = ({ label, links }) => {
             />
             <div className={classes.content}>
                 {links
-                    ? links.map(({ link, linkName, Icon }) => {
-                        return (
-                            <Link
-                                key={`${linkName} Link`}
-                                color="inherit"
-                                className={classes.link}
-                                href={link || '#'}
-                            >
-                                <Icon />{' '}
+                    ? links.map(({ link, fieldName, value }) => {
+                        return link ? (
+                            <div>
+                                <Typography
+                                    component="p"
+                                    className={classes.fname}
+                                    color="textSecondary"
+                                    gutterBottom
+                                >
+                                    {`${fieldName}:`}
+                                </Typography>
+                                <Link
+                                    key={`${fieldName} Link`}
+                                    color="inherit"
+                                    className={classes.link}
+                                    href={link || '#'}
+                                >
+                                    <Typography
+                                        component="p"
+                                        className={classes.linkName}
+                                        color="textSecondary"
+                                        align="left"
+                                        gutterBottom
+                                    >
+                                        {link}
+                                    </Typography>
+                                </Link>
+                            </div>
+                        ) : (
+                            <div>
+                                <Typography
+                                    component="p"
+                                    className={classes.fname}
+                                    color="textSecondary"
+                                    gutterBottom
+                                >
+                                    {`${fieldName}:`}
+                                </Typography>
                                 <Typography
                                     component="p"
                                     className={classes.linkName}
                                     color="textSecondary"
                                     gutterBottom
                                 >
-                                    {linkName}
+                                    {value}
                                 </Typography>
-                            </Link>
+                            </div>
                         );
                     })
                     : null}
@@ -107,14 +134,15 @@ StepCard.propTypes = {
     label: PropTypes.string.isRequired,
     links: PropTypes.arrayOf(
         PropTypes.shape({
-            link: PropTypes.string.isRequired,
-            linkName: PropTypes.string.isRequired,
-            Icon: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+            link: PropTypes.string,
+            fieldName: PropTypes.string.isRequired,
+            value: PropTypes.string
         })
-    ).isRequired
+    ).isRequired,
+    detail: PropTypes.bool.isRequired
 };
 
-const StepperComponent = ({ activeStep, steps }) => {
+const StepperComponent = ({ activeStep, steps, detail }) => {
     const classes = useStyles(Theme);
     const connector = (
         <StepConnector
@@ -126,7 +154,13 @@ const StepperComponent = ({ activeStep, steps }) => {
         />
     );
 
-    return (
+    return detail ? (
+        <div className={classes.root}>
+            {steps.map(step => {
+                return <StepCard {...{ ...step, done: false, detail }} />;
+            })}
+        </div>
+    ) : (
         <div className={classes.root}>
             <Stepper
                 activeStep={activeStep}
@@ -143,7 +177,11 @@ const StepperComponent = ({ activeStep, steps }) => {
                             }}
                         >
                             <StepCard
-                                {...{ ...step, done: activeStep - 1 > index }}
+                                {...{
+                                    ...step,
+                                    done: activeStep - 1 > index,
+                                    detail
+                                }}
                             />
                         </StepLabel>
                     </Step>
@@ -155,7 +193,12 @@ const StepperComponent = ({ activeStep, steps }) => {
 
 StepperComponent.propTypes = {
     activeStep: PropTypes.number.isRequired,
-    steps: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+    steps: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    detail: PropTypes.bool
+};
+
+StepperComponent.defaultProps = {
+    detail: false
 };
 
 export default StepperComponent;
