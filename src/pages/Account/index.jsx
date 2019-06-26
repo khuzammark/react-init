@@ -79,7 +79,13 @@ class Account extends Component {
             <Fragment>
                 <div className={classes.contentWrapper}>
                     <aside className={classes.sideBarContainer}>
-                        <Stepper {...{...stepperData, detail: true}} />
+                        <Stepper
+                            {...{
+                                ...stepperData,
+                                detail: true,
+                                hideLabels: true
+                            }}
+                        />
                     </aside>
                     <div className={classes.contentContainer}>
                         <Wizard

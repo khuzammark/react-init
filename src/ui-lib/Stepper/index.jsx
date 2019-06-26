@@ -53,14 +53,16 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2, 1)
     },
     fname: {
-        fontWeight: 800
+        fontWeight: 800,
+        fontSize: '.75rem',
+        marginBottom: 0
     },
     cardDetail: {
         margin: theme.spacing(0.5, 0)
     }
 }));
 
-const StepCard = ({ label, links, detail }) => {
+const StepCard = ({ label, links, detail, hideLabels }) => {
     const classes = useStyles(Theme);
     return (
         <Card className={`${classes.card} ${detail ? classes.cardDetail : ''}`}>
@@ -82,14 +84,16 @@ const StepCard = ({ label, links, detail }) => {
                     ? links.map(({ link, fieldName, value }) => {
                         return link ? (
                             <div>
-                                <Typography
-                                    component="p"
-                                    className={classes.fname}
-                                    color="textSecondary"
-                                    gutterBottom
-                                >
-                                    {`${fieldName}:`}
-                                </Typography>
+                                {hideLabels ? null : (
+                                    <Typography
+                                        component="p"
+                                        className={classes.fname}
+                                        color="textSecondary"
+                                        gutterBottom
+                                    >
+                                        {`${fieldName}`}
+                                    </Typography>
+                                )}
                                 <Link
                                     key={`${fieldName} Link`}
                                     color="inherit"
@@ -109,14 +113,16 @@ const StepCard = ({ label, links, detail }) => {
                             </div>
                         ) : (
                             <div>
-                                <Typography
-                                    component="p"
-                                    className={classes.fname}
-                                    color="textSecondary"
-                                    gutterBottom
-                                >
-                                    {`${fieldName}:`}
-                                </Typography>
+                                {hideLabels ? null : (
+                                    <Typography
+                                        component="p"
+                                        className={classes.fname}
+                                        color="textSecondary"
+                                        gutterBottom
+                                    >
+                                        {`${fieldName}`}
+                                    </Typography>
+                                )}
                                 <Typography
                                     component="p"
                                     className={classes.linkName}
@@ -143,10 +149,11 @@ StepCard.propTypes = {
             value: PropTypes.string
         })
     ).isRequired,
-    detail: PropTypes.bool.isRequired
+    detail: PropTypes.bool.isRequired,
+    hideLabels: PropTypes.bool.isRequired
 };
 
-const StepperComponent = ({ activeStep, steps, detail }) => {
+const StepperComponent = ({ activeStep, steps, detail, hideLabels }) => {
     const classes = useStyles(Theme);
     const connector = (
         <StepConnector
@@ -161,7 +168,11 @@ const StepperComponent = ({ activeStep, steps, detail }) => {
     return detail ? (
         <div className={`${classes.root} ${classes.rootFix}`}>
             {steps.map(step => {
-                return <StepCard {...{ ...step, done: false, detail }} />;
+                return (
+                    <StepCard
+                        {...{ ...step, done: false, detail, hideLabels }}
+                    />
+                );
             })}
         </div>
     ) : (
@@ -184,7 +195,8 @@ const StepperComponent = ({ activeStep, steps, detail }) => {
                                 {...{
                                     ...step,
                                     done: activeStep - 1 > index,
-                                    detail
+                                    detail,
+                                    hideLabels
                                 }}
                             />
                         </StepLabel>
@@ -198,11 +210,13 @@ const StepperComponent = ({ activeStep, steps, detail }) => {
 StepperComponent.propTypes = {
     activeStep: PropTypes.number.isRequired,
     steps: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    detail: PropTypes.bool
+    detail: PropTypes.bool,
+    hideLabels: PropTypes.bool
 };
 
 StepperComponent.defaultProps = {
-    detail: false
+    detail: false,
+    hideLabels: false
 };
 
 export default StepperComponent;
