@@ -17,8 +17,12 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         margin: theme.spacing(2, 0)
+    },
+    rootFix: {
+        alignItems: 'normal'
     },
     connector: {
         height: '100%'
@@ -155,7 +159,7 @@ const StepperComponent = ({ activeStep, steps, detail }) => {
     );
 
     return detail ? (
-        <div className={classes.root}>
+        <div className={`${classes.root} ${classes.rootFix}`}>
             {steps.map(step => {
                 return <StepCard {...{ ...step, done: false, detail }} />;
             })}
