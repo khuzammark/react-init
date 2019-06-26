@@ -24,7 +24,13 @@ const useStyles = makeStyles(theme => ({
     },
     container: {
         margin: `${theme.spacing(4)}px auto`,
-        minWidth: 700
+        minWidth: 700,
+        [theme.breakpoints.down('sm')]: {
+            minWidth: 300
+        },
+        [theme.breakpoints.down('xs')]: {
+            minWidth: 'fit-content'
+        }
     },
     button: {
         minWidth: 120,
