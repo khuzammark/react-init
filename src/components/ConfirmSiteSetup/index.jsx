@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     container: {
         display: 'flex',
         flexDirection: 'column'
@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
 const ConfirmSiteSetup = ({ data }) => {
     const classes = useStyles();
     const { siteName, siteDomain, sources, targets } = data;
-    console.log(sources, targets);
     return (
         <div className={classes.container}>
             <Typography component="h6" variant="h6" align="center">
@@ -77,6 +76,15 @@ const ConfirmSiteSetup = ({ data }) => {
     );
 };
 
-ConfirmSiteSetup.propTypes = {};
+ConfirmSiteSetup.propTypes = {
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            siteName: PropTypes.string.isRequired,
+            siteDomain: PropTypes.string.isRequired,
+            sources: PropTypes.array.isRequired,
+            targets: PropTypes.array.isRequired
+        })
+    ).isRequired
+};
 
 export default ConfirmSiteSetup;
