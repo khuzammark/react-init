@@ -6,6 +6,7 @@ import Page from '../../../layouts/Page';
 import SiteDetailsForm from '../../../components/SiteDetailsForm';
 import SiteSourcesForm from '../../../components/SiteSourcesForm';
 import BigQueryForm from '../../../components/BigQueryForm';
+import ConfirmSiteSetup from '../../../components/ConfirmSiteSetup';
 import stepperData from '../../../DummyData/stepper';
 
 const styles = theme => ({
@@ -119,6 +120,12 @@ class SiteSetup extends Component {
                                             }}
                                             sources={targets}
                                         />
+                                    )
+                                },
+                                {
+                                    name: 'Confirm',
+                                    component: (
+                                        <ConfirmSiteSetup data={this.state} />
                                     )
                                 }
                             ]}
