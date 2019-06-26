@@ -2,12 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { withStyles } from '@material-ui/core';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
-import { Stepper, SimpleTable, Wizard, PricingCard } from '../../ui-lib';
+import { Stepper, Wizard, PricingCard } from '../../ui-lib';
 import Page from '../../layouts/Page';
-import LoginForm from '../../components/LoginForm';
+import AccountDetailsForm from '../../components/AccountDetailsForm';
+import BillingDetailsForm from '../../components/BillingDetailsForm';
+import InvoiceTable from '../../components/InvoiceTable';
 import stepperData from '../../DummyData/stepper';
 import pricingData from '../../DummyData/pricingCard';
-import simpletableData from '../../DummyData/simpletable';
+import invoiceData from '../../DummyData/invoice';
 
 const styles = theme => {
     return {
@@ -50,7 +52,14 @@ class Account extends Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            firstName: '',
+            lastName: '',
+            organization: '',
+            cardName: '',
+            cardNumber: '',
+            expDate: '',
+            cvv: ''
         };
     }
 
@@ -72,9 +81,20 @@ class Account extends Component {
 
     render() {
         const {
-            state: { email, password },
+            state: {
+                email,
+                password,
+                firstName,
+                lastName,
+                organization,
+                cardName,
+                cardNumber,
+                expDate,
+                cvv
+            },
             props: { classes }
         } = this;
+        const cardInformation = { cardName, cardNumber, expDate, cvv };
         return (
             <Fragment>
                 <div className={classes.contentWrapper}>
@@ -89,27 +109,51 @@ class Account extends Component {
                     </aside>
                     <div className={classes.contentContainer}>
                         <Wizard
-                            completeName="Login"
+                            completeName="Update"
                             onComplete={this.onComplete}
                             steps={[
                                 {
-                                    name: 'Login',
+                                    name: 'Account Details',
                                     component: (
-                                        <LoginForm
+                                        <AccountDetailsForm
                                             handleChange={this.handleChange}
                                             email={email}
                                             password={password}
+                                            firstName={firstName}
+                                            lastName={lastName}
+                                            organization={organization}
                                         />
                                     )
+                                },
+                                {
+                                    name: 'Billing Details',
+                                    component: (
+                                        <BillingDetailsForm
+                                            handleChange={this.handleChange}
+                                            cardInformation={cardInformation}
+                                        />
+                                    )
+                                },
+                                {
+                                    name: 'Pricing',
+                                    component: (
+                                        <div className={classes.cardContainer}>
+                                            <PricingCard {...pricingData} />
+                                            <PricingCard {...pricingData} />
+                                            <PricingCard {...pricingData} />
+                                        </div>
+                                    ),
+                                    flex: true
+                                },
+                                {
+                                    name: 'InvoiceTable',
+                                    component: (
+                                        <InvoiceTable {...invoiceData} />
+                                    ),
+                                    flex: true
                                 }
                             ]}
                         />
-                        <div className={classes.cardContainer}>
-                            <PricingCard {...pricingData} />
-                            <PricingCard {...pricingData} />
-                            <PricingCard {...pricingData} />
-                        </div>
-                        <SimpleTable {...simpletableData} />
                     </div>
                 </div>
             </Fragment>

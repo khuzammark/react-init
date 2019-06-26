@@ -35,6 +35,9 @@ const useStyles = makeStyles(theme => ({
     button: {
         minWidth: 120,
         minHeight: 40
+    },
+    wide: {
+        minWidth: '100%'
     }
 }));
 
@@ -51,7 +54,13 @@ const Wizard = ({ steps, onComplete, completeName }) => {
         setStep(activeStep - 1);
     };
     return (
-        <Container maxWidth="xs" border={1} className={classes.container}>
+        <Container
+            maxWidth="xs"
+            border={1}
+            className={`${classes.container} ${
+                steps[activeStep].flex ? classes.wide : ''
+            }`}
+        >
             <Box
                 border={1}
                 borderRadius={16}
