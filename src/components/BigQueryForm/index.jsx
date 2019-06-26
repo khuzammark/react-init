@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core/';
 import { DropDown } from '../../ui-lib';
 
-const SiteSourcesForm = ({ handleSelect, sources }) => {
+const BigQueryForm = ({ handleSelect, sources }) => {
     return (
         <Fragment>
             <Typography variant="h6" gutterbottom="true" align="center">
-                Set Site Sources
+                Select Targets
             </Typography>
             <DropDown sets={sources} handleSelect={handleSelect} />
         </Fragment>
     );
 };
 
-SiteSourcesForm.propTypes = {
+BigQueryForm.propTypes = {
     handleSelect: PropTypes.func.isRequired,
     sources: PropTypes.arrayOf(PropTypes.any).isRequired
 };
 
-export default SiteSourcesForm;
+export default BigQueryForm;

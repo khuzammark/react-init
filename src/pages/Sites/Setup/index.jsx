@@ -5,6 +5,7 @@ import { Wizard, Stepper } from '../../../ui-lib';
 import Page from '../../../layouts/Page';
 import SiteDetailsForm from '../../../components/SiteDetailsForm';
 import SiteSourcesForm from '../../../components/SiteSourcesForm';
+import BigQueryForm from '../../../components/BigQueryForm';
 import stepperData from '../../../DummyData/stepper';
 
 const styles = theme => ({
@@ -27,9 +28,22 @@ class SiteSetup extends Component {
         super(props);
 
         this.state = {
-            activeStep: 0,
             siteName: '',
-            siteDomain: ''
+            siteDomain: '',
+            sources: [
+                {
+                    name: 'Select A Google Analytics Profile',
+                    data: ['Profile 1', 'Profile 2', 'Profile 3'],
+                    selection: []
+                }
+            ],
+            targets: [
+                {
+                    name: 'Select A BigQuery Project',
+                    data: ['Project 1', 'Project 2', 'Project 3'],
+                    selection: []
+                }
+            ]
         };
     }
 
@@ -45,18 +59,30 @@ class SiteSetup extends Component {
         });
     };
 
+    handleSelect = (collection, e) => {
+        const {
+            state: { [collection]: oldSources }
+        } = this;
+        this.setState({
+            [collection]: oldSources.map(source => {
+                if (source.name === e.target.name) {
+                    return { ...source, selection: [...e.target.value] };
+                }
+                return source;
+            })
+        });
+    };
+
     render() {
         const { classes } = this.props;
         const {
-            state: { activeStep, siteName, siteDetails }
+            state: { siteName, siteDetails, sources, targets }
         } = this;
         return (
             <Fragment>
                 <div className={classes.tableNavWrapper}>
                     <aside className={classes.sideBarContainer}>
-                        <Stepper
-                            {...{ ...stepperData, activeStep, detail: true }}
-                        />
+                        <Stepper {...{ ...stepperData, detail: true }} />
                     </aside>
                     <div className={classes.tableContainer}>
                         <Wizard
@@ -77,7 +103,21 @@ class SiteSetup extends Component {
                                     name: 'SiteSources',
                                     component: (
                                         <SiteSourcesForm
-                                            handleChange={this.handleChange}
+                                            handleSelect={e => {
+                                                this.handleSelect('sources', e);
+                                            }}
+                                            sources={sources}
+                                        />
+                                    )
+                                },
+                                {
+                                    name: 'TargetSource',
+                                    component: (
+                                        <BigQueryForm
+                                            handleSelect={e => {
+                                                this.handleSelect('targets', e);
+                                            }}
+                                            sources={targets}
                                         />
                                     )
                                 }

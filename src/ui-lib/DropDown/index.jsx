@@ -35,6 +35,7 @@ const DropDown = ({ sets, handleSelect }) => {
                         <Select
                             multiple
                             value={selection}
+                            name={name}
                             onChange={handleSelect}
                             input={<Input id="select-multiple-chip" />}
                         >
