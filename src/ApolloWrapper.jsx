@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ApolloClient } from 'apollo-client';
 import { ApolloLink, concat } from 'apollo-link';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
@@ -10,13 +11,9 @@ import {
 import { ApolloProvider } from 'react-apollo';
 import introspectionQueryResultData from './fragmentTypes.json';
 
-const GITHUB_BASE_URL = 'https://api.github.com/graphql';
-
 const httpLink = new HttpLink({
-    uri: GITHUB_BASE_URL,
-    headers: {
-        authorization: `Bearer ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`
-    }
+    // todo: update with env vars.
+    uri: "https://localhost:8003/graphql",
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
@@ -43,13 +40,18 @@ const client = new ApolloClient({
     cache
 });
 
-export default App => {
-    const ApolloWrapper = () => (
+function ApolloWrapper({ children }) {
+    return (
         <ApolloProvider client={client}>
             <ApolloHooksProvider client={client}>
-                <App />
+                {children}
             </ApolloHooksProvider>
         </ApolloProvider>
     );
-    return ApolloWrapper;
+}
+
+ApolloWrapper.propTypes = {
+    children: PropTypes.node.isRequired
 };
+
+export default ApolloWrapper;

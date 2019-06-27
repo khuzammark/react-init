@@ -6,6 +6,12 @@ module.exports = [
             loader: 'babel-loader'
         }
     },
+    // process gql file
+    {
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: "graphql-tag/loader"
+    },
     {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader',

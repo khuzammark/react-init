@@ -41,7 +41,7 @@ const BillingForm = ({
                 onChange={handleChange}
                 value={cvv}
                 label="CVV"
-                helperText="Last three digits on signature strip"
+                helperText="Last three digits on signature stripe"
                 fullWidth
             />
         </Fragment>

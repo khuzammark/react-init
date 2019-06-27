@@ -1,0 +1,6 @@
+query HealthQuery {
+  health {
+    error
+    healthy
+  }
+}
