@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import { orderBy, uniqBy } from 'lodash';
 import { compareAsc, compareDesc } from 'date-fns';
 import { withStyles } from '@material-ui/styles';
@@ -119,7 +120,7 @@ class SitesIndex extends Component {
 
     render() {
         const {
-            props: { classes },
+            props: { classes, history },
             state: {
                 sites,
                 recipeNames,
@@ -154,6 +155,7 @@ class SitesIndex extends Component {
                     sortAlphabetically={this.sortAlphabetically}
                     sortDate={this.sortDate}
                     sortStatus={this.sortStatus}
+                    history={history}
                 />
             </Fragment>
         );
@@ -161,7 +163,8 @@ class SitesIndex extends Component {
 }
 
 SitesIndex.propTypes = {
-    classes: PropTypes.objectOf(PropTypes.any).isRequired
+    classes: PropTypes.objectOf(PropTypes.any).isRequired,
+    history: ReactRouterPropTypes.history.isRequired
 };
 
 export default Page(withStyles(styles)(SitesIndex));

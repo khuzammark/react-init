@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import { format } from 'date-fns';
@@ -127,7 +128,13 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const EnhancedTable = ({ sites, sortAlphabetically, sortDate, sortStatus }) => {
+const EnhancedTable = ({
+    sites,
+    sortAlphabetically,
+    sortDate,
+    sortStatus,
+    history
+}) => {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('recipe');
@@ -168,10 +175,14 @@ const EnhancedTable = ({ sites, sortAlphabetically, sortDate, sortStatus }) => {
     };
 
     function handleClick(event) {
+        event.stopPropagation();
+        event.preventDefault();
         setAnchorEl(event.currentTarget);
     }
 
-    function handleClose() {
+    function handleClose(e) {
+        e.stopPropagation();
+        e.preventDefault();
         setAnchorEl(null);
     }
 
@@ -206,8 +217,12 @@ const EnhancedTable = ({ sites, sortAlphabetically, sortDate, sortStatus }) => {
                                         <Fragment>
                                             <TableRow
                                                 hover
-                                                href="#"
                                                 key={row.site}
+                                                onClick={() => {
+                                                    history.push(
+                                                        `/recipes/detail/${row.recipeId}`
+                                                    );
+                                                }}
                                             >
                                                 <TableCell
                                                     component="th"
@@ -231,7 +246,7 @@ const EnhancedTable = ({ sites, sortAlphabetically, sortDate, sortStatus }) => {
                                                 <TableCell align="center">
                                                     <IconButton
                                                         aria-controls="simple-menu"
-                                                        color="secondary"
+                                                        color="primary"
                                                         aria-haspopup="true"
                                                         onClick={handleClick}
                                                         className={
@@ -247,7 +262,25 @@ const EnhancedTable = ({ sites, sortAlphabetically, sortDate, sortStatus }) => {
                                                         open={Boolean(anchorEl)}
                                                         onClose={handleClose}
                                                     >
-                                                        {[].map(
+                                                        {[
+                                                            {
+                                                                name: 'Pause',
+                                                                link: '#'
+                                                            },
+                                                            {
+                                                                name: 'Delete',
+                                                                link: '#'
+                                                            },
+                                                            {
+                                                                name:
+                                                                    'BigQuery',
+                                                                link: '#'
+                                                            },
+                                                            {
+                                                                name: 'Add',
+                                                                link: '#'
+                                                            }
+                                                        ].map(
                                                             ({
                                                                 name,
                                                                 link
@@ -321,7 +354,8 @@ EnhancedTable.propTypes = {
     ).isRequired,
     sortAlphabetically: PropTypes.func.isRequired,
     sortDate: PropTypes.func.isRequired,
-    sortStatus: PropTypes.func.isRequired
+    sortStatus: PropTypes.func.isRequired,
+    history: ReactRouterPropTypes.history.isRequired
 };
 
 export default EnhancedTable;

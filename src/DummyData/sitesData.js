@@ -5,6 +5,7 @@ const makeSite = date => {
         updated: new Date(2019, 6, date),
         site: `Site ${date}`,
         recipe: date % 2 === 0 ? 'Recipe 1' : 'Recipe 2',
+        recipeId: date - 2,
         status: 3 - Math.floor(Math.random() * 3)
     };
 };
