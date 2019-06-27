@@ -91,7 +91,7 @@ const StepCard = ({ label, links, detail, hideLabels }) => {
                                         color="textSecondary"
                                         gutterBottom
                                     >
-                                        {`${fieldName}`}
+                                        {fieldName}
                                     </Typography>
                                 )}
                                 <Link

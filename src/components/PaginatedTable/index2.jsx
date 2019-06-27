@@ -75,6 +75,13 @@ const MenuComponent = ({ handleClose, handleClick, classes, anchorEl }) => {
     );
 };
 
+MenuComponent.propTypes = {
+    handleClose: PropTypes.func.isRequired,
+    handleClick: PropTypes.func.isRequired,
+    classes: PropTypes.objectOf(PropTypes.any).isRequired,
+    anchorEl: PropTypes.node.isRequired
+};
+
 const headRows = [
     {
         id: 'recipe',
@@ -135,6 +142,11 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         flex: '0 0 auto'
+    },
+    fname: {
+        fontWeight: 800,
+        fontSize: '.75rem',
+        marginBottom: 0
     }
 }));
 
@@ -245,11 +257,19 @@ const EnhancedTable = ({
                                         >
                                             <div className={classes.tRow}>
                                                 <div className="t-cell">
-                                                    {row.recipe}
-                                                </div>
-                                                <div className="t-cell">
+                                                    <Typography
+                                                        component="p"
+                                                        className={
+                                                            classes.fname
+                                                        }
+                                                        color="textSecondary"
+                                                        gutterBottom
+                                                    >
+                                                        {row.recipe}
+                                                    </Typography>
                                                     {row.site}
                                                 </div>
+                                                <div className="t-cell" />
                                                 <div className="t-cell">
                                                     {format(
                                                         row.updated,
