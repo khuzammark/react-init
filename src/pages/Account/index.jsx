@@ -17,7 +17,8 @@ const styles = theme => {
             maxWidth: theme.breakpoints.values.sm / 2,
             minWidth: theme.breakpoints.values.sm / 2,
             [theme.breakpoints.down('sm')]: {
-                display: 'none'
+                minWidth: 0,
+                maxWidth: 'none'
             }
         },
         contentWrapper: {
@@ -26,7 +27,11 @@ const styles = theme => {
             height: 'fit-content',
             justifyContent: 'center',
             alignContent: 'flex-start',
-            margin: theme.spacing(4)
+            margin: theme.spacing(4),
+            [theme.breakpoints.down('xs')]: {
+                flexDirection: 'column',
+                margin: theme.spacing(0)
+            }
         },
         contentContainer: {
             flexGrow: 1,
@@ -103,7 +108,8 @@ class Account extends Component {
                             {...{
                                 ...stepperData,
                                 detail: true,
-                                hideLabels: true
+                                hideLabels: true,
+                                drawer: true
                             }}
                         />
                     </aside>

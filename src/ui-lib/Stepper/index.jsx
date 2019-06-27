@@ -9,8 +9,11 @@ import {
     StepConnector,
     Card,
     CardHeader,
-    Link
+    Link,
+    Drawer,
+    IconButton
 } from '@material-ui/core';
+import KeyBoardRightIcon from '@material-ui/icons/KeyboardArrowRightSharp';
 import Theme from '../theme';
 
 const useStyles = makeStyles(theme => ({
@@ -219,4 +222,100 @@ StepperComponent.defaultProps = {
     hideLabels: false
 };
 
-export default StepperComponent;
+const useDrawerStyles = makeStyles(theme => ({
+    list: {
+        width: 250
+    },
+    fullList: {
+        width: 'auto'
+    },
+    stepperMobileButton: {
+        [theme.breakpoints.down('xs')]: {
+            display: 'block'
+        },
+        [theme.breakpoints.up('sm')]: {
+            display: 'none'
+        }
+    },
+    stepperDesktop: {
+        [theme.breakpoints.down('xs')]: {
+            display: 'none'
+        },
+        [theme.breakpoints.up('sm')]: {
+            display: 'block'
+        }
+    }
+}));
+
+const TemporaryDrawer = ({ activeStep, steps, detail, hideLabels, drawer }) => {
+    const classes = useDrawerStyles(Theme);
+    const [state, setState] = React.useState(false);
+
+    const toggleDrawer = e => {
+        e.preventDefault();
+        setState(!state);
+    };
+
+    return drawer ? (
+        <div>
+            <Drawer
+                open={state}
+                onClose={toggleDrawer}
+                className={classes.stepperMobile}
+            >
+                <div
+                    className={classes.list}
+                    role="presentation"
+                    onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleDrawer();
+                    }}
+                    onKeyDown={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleDrawer();
+                    }}
+                >
+                    <StepperComponent
+                        {...{ activeStep, steps, detail, hideLabels }}
+                    />
+                </div>
+            </Drawer>
+            <div className={classes.stepperMobileButton}>
+                <IconButton
+                    aria-controls="simple-menu"
+                    color="primary"
+                    aria-haspopup="true"
+                    onClick={toggleDrawer}
+                    className={classes.mobile}
+                >
+                    <KeyBoardRightIcon />
+                </IconButton>
+            </div>
+            <div className={classes.stepperDesktop}>
+                <StepperComponent
+                    {...{ activeStep, steps, detail, hideLabels }}
+                />
+            </div>
+        </div>
+    ) : (
+        <StepperComponent {...{ activeStep, steps, detail, hideLabels }} />
+    );
+};
+
+TemporaryDrawer.propTypes = {
+    activeStep: PropTypes.number.isRequired,
+    steps: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    detail: PropTypes.bool,
+    drawer: PropTypes.bool,
+    hideLabels: PropTypes.bool
+};
+
+TemporaryDrawer.defaultProps = {
+    detail: false,
+    drawer: false,
+    hideLabels: false
+};
+
+export default TemporaryDrawer;
