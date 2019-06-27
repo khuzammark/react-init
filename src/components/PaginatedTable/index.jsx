@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import { format } from 'date-fns';
-import TableBody from '@material-ui/core/TableBody';
+import { TableBody, IconButton, Menu, MenuItem } from '@material-ui/core';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -12,6 +12,8 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import MenuIcon from '@material-ui/icons/Menu';
+import Link from '../../ui-lib/Link';
 
 const headRows = [
     {
@@ -51,6 +53,9 @@ function EnhancedTableHead(props) {
                         </TableSortLabel>
                     </TableCell>
                 ))}
+                <TableCell key="actions" align="center">
+                    Actions
+                </TableCell>
             </TableRow>
         </TableHead>
     );
@@ -128,6 +133,7 @@ const EnhancedTable = ({ sites, sortAlphabetically, sortDate, sortStatus }) => {
     const [orderBy, setOrderBy] = React.useState('recipe');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleRequestSort = (event, property) => {
         const isDesc = orderBy === property && order === 'desc';
@@ -161,6 +167,14 @@ const EnhancedTable = ({ sites, sortAlphabetically, sortDate, sortStatus }) => {
         }
     };
 
+    function handleClick(event) {
+        setAnchorEl(event.currentTarget);
+    }
+
+    function handleClose() {
+        setAnchorEl(null);
+    }
+
     const emptyRows =
         rowsPerPage - Math.min(rowsPerPage, sites.length - page * rowsPerPage);
 
@@ -189,27 +203,83 @@ const EnhancedTable = ({ sites, sortAlphabetically, sortDate, sortStatus }) => {
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
-                                        <TableRow hover href="#" key={row.site}>
-                                            <TableCell
-                                                component="th"
-                                                id={labelId}
-                                                scope="row"
+                                        <Fragment>
+                                            <TableRow
+                                                hover
+                                                href="#"
+                                                key={row.site}
                                             >
-                                                {row.recipe}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {row.site}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {format(
-                                                    row.updated,
-                                                    'MM/DD/YYYY'
-                                                )}
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                {mapStatus(row.status)}
-                                            </TableCell>
-                                        </TableRow>
+                                                <TableCell
+                                                    component="th"
+                                                    id={labelId}
+                                                    scope="row"
+                                                >
+                                                    {row.recipe}
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    {row.site}
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    {format(
+                                                        row.updated,
+                                                        'MM/DD/YYYY'
+                                                    )}
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    {mapStatus(row.status)}
+                                                </TableCell>
+                                                <TableCell align="center">
+                                                    <IconButton
+                                                        aria-controls="simple-menu"
+                                                        color="secondary"
+                                                        aria-haspopup="true"
+                                                        onClick={handleClick}
+                                                        className={
+                                                            classes.mobile
+                                                        }
+                                                    >
+                                                        <MenuIcon />
+                                                    </IconButton>
+                                                    <Menu
+                                                        id="simple-menu"
+                                                        anchorEl={anchorEl}
+                                                        keepMounted
+                                                        open={Boolean(anchorEl)}
+                                                        onClose={handleClose}
+                                                    >
+                                                        {[].map(
+                                                            ({
+                                                                name,
+                                                                link
+                                                            }) => (
+                                                                <MenuItem
+                                                                    onClick={
+                                                                        handleClose
+                                                                    }
+                                                                    key={`${name} mobile`}
+                                                                >
+                                                                    <Link
+                                                                        color="primary"
+                                                                        link={
+                                                                            link
+                                                                        }
+                                                                        href={
+                                                                            link
+                                                                        }
+                                                                        name={
+                                                                            name
+                                                                        }
+                                                                        className={
+                                                                            classes.link
+                                                                        }
+                                                                    />
+                                                                </MenuItem>
+                                                            )
+                                                        )}
+                                                    </Menu>
+                                                </TableCell>
+                                            </TableRow>
+                                        </Fragment>
                                     );
                                 })}
                             {emptyRows > 0 && (
