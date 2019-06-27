@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.secondary.contrastText
     },
     subtext: {
-        padding: theme.spacing(4, 2),
+        padding: theme.spacing(2, 2, 4),
         fontSize: 20,
         maxWidth: theme.breakpoints.values.md
     },

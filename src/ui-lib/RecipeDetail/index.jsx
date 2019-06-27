@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
     },
     actions: {
         padding: theme.spacing(5, 2),
-        justifyContent: 'space-evenly',
         display: 'flex',
         flexDirection: 'row',
         alignContent: 'flex-start',

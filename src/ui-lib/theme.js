@@ -50,7 +50,10 @@ export default {
         MuiTypography: {
             h2: {
                 fontFamily: 'CircularStd',
-                [theme.breakpoints.down('md')]: {
+                [theme.breakpoints.up('md')]: {
+                    fontSize: '4rem'
+                },
+                [theme.breakpoints.down('sm')]: {
                     fontSize: '3rem'
                 }
             },
