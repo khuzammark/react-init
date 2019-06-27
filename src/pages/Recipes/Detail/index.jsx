@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
         alignContent: 'flex-start'
     },
     tableContainer: {
-        flexGrow: 1
+        flexGrow: 1,
+        padding: theme.spacing(0, 4)
     }
 }));
 
@@ -42,11 +43,8 @@ const RecipeDetails = ({ authenticated, match }) => {
                     <Stepper {...{ ...stepperData, detail: true }} />
                 </aside>
                 <div className={classes.tableContainer}>
-                    {authenticated ? (
-                        <SimpleTable {...simpletableData} />
-                    ) : (
-                        <div />
-                    )}
+                    <SimpleTable {...simpletableData} />
+                    {authenticated ? null : <div />}
                 </div>
             </div>
         </Fragment>
