@@ -17,11 +17,12 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-evenly'
     },
     formControl: {
-        margin: theme.spacing(3, 0),
+        margin: theme.spacing(3, 3, 3, 0),
         minWidth: 300
     },
     row: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'normal'
     }
 }));
 

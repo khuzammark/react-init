@@ -4,7 +4,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { orderBy, uniqBy } from 'lodash';
 import { compareAsc, compareDesc } from 'date-fns';
 import { withStyles } from '@material-ui/styles';
-import { Hero, DropDown } from '../../ui-lib';
+import { Hero, DropDown, CTAButton } from '../../ui-lib';
 import Page from '../../layouts/Page';
 import HeroData from '../../DummyData/hero';
 import PaginatedTable from '../../components/PaginatedTable';
@@ -18,6 +18,11 @@ const styles = theme => ({
         justifyContent: 'space-evenly',
         alignContent: 'center',
         margin: theme.spacing(4, 0)
+    },
+    ddContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignContent: 'center'
     }
 });
 
@@ -29,14 +34,11 @@ class SitesIndex extends Component {
 
         this.state = {
             sites,
-            siteNames: ['', ...uniqBy(sites, 'site').map(({ site }) => site)],
-            recipeNames: [
-                '',
-                ...uniqBy(sites, 'recipe').map(({ recipe }) => recipe)
-            ],
+            siteNames: uniqBy(sites, 'site').map(({ site }) => site),
+            recipeNames: uniqBy(sites, 'recipe').map(({ recipe }) => recipe),
             filterBy: {
-                siteFilter: '',
-                recipeFilter: ''
+                siteFilter: [],
+                recipeFilter: []
             }
         };
     }
@@ -77,14 +79,16 @@ class SitesIndex extends Component {
             }
         } = this;
         return sites.filter(({ site, recipe }) => {
-            if (siteFilter && recipeFilter) {
-                return site === siteFilter && recipe === recipeFilter;
+            if (siteFilter.length && recipeFilter.length) {
+                return (
+                    siteFilter.includes(site) && recipeFilter.includes(recipe)
+                );
             }
-            if (siteFilter) {
-                return site === siteFilter;
+            if (siteFilter.length) {
+                return siteFilter.includes(site);
             }
-            if (recipeFilter) {
-                return recipe === recipeFilter;
+            if (recipeFilter.length) {
+                return recipeFilter.includes(recipe);
             }
             return true;
         });
@@ -132,24 +136,32 @@ class SitesIndex extends Component {
             {
                 name: 'Recipes',
                 data: recipeNames,
-                selection: [recipeFilter]
+                selection: recipeFilter
             },
             {
                 name: 'Sites',
                 data: siteNames,
-                selection: [siteFilter]
+                selection: siteFilter
             }
         ];
         const filtered = this.filterSites(sites);
         return (
             <Fragment>
                 <Hero {...HeroData} classes={classes.none} />
-                <DropDown
-                    handleSelect={this.handleSelect}
-                    sets={sets}
-                    row
-                    single
-                />
+                <div className={classes.ddContainer}>
+                    <DropDown
+                        handleSelect={this.handleSelect}
+                        sets={sets}
+                        row
+                    />
+                    <CTAButton
+                        name="Add Site"
+                        link="/recipes"
+                        mini
+                        color="primary"
+                        className={null}
+                    />
+                </div>
                 <PaginatedTable
                     sites={filtered}
                     sortAlphabetically={this.sortAlphabetically}

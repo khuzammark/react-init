@@ -13,7 +13,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import MenuIcon from '@material-ui/icons/Menu';
+import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from '../../ui-lib/Link';
 
 const headRows = [
@@ -125,6 +125,11 @@ const useStyles = makeStyles(theme => ({
     },
     tableWrapper: {
         overflowX: 'auto'
+    },
+    mobile: {
+        '&:hover': {
+            backgroundColor: 'transparent'
+        }
     }
 }));
 
@@ -253,7 +258,7 @@ const EnhancedTable = ({
                                                             classes.mobile
                                                         }
                                                     >
-                                                        <MenuIcon />
+                                                        <MoreIcon />
                                                     </IconButton>
                                                     <Menu
                                                         id="simple-menu"
