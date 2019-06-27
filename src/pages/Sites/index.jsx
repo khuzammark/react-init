@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/styles';
 import { Hero, DropDown, CTAButton } from '../../ui-lib';
 import Page from '../../layouts/Page';
 import HeroData from '../../DummyData/hero';
-import PaginatedTable from '../../components/PaginatedTable';
+import PaginatedTable from '../../components/PaginatedTable/index2';
 import sitesData from '../../DummyData/sitesData';
 
 const styles = theme => ({

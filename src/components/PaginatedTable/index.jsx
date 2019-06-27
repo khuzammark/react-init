@@ -1,20 +1,26 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import { format } from 'date-fns';
-import { TableBody, IconButton, Menu, MenuItem } from '@material-ui/core';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import {
+    TableBody,
+    IconButton,
+    Menu,
+    MenuItem,
+    TableCell,
+    TableHead,
+    TablePagination,
+    TableRow,
+    TableSortLabel,
+    Toolbar,
+    Typography,
+    Paper
+} from '@material-ui/core';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from '../../ui-lib/Link';
+import './styles.scss';
 
 const headRows = [
     {
@@ -121,7 +127,8 @@ const useStyles = makeStyles(theme => ({
         marginBottom: theme.spacing(2)
     },
     table: {
-        minWidth: 750
+        minWidth: 750,
+        borderCollapse: 'separate'
     },
     tableWrapper: {
         overflowX: 'auto'
@@ -130,6 +137,9 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             backgroundColor: 'transparent'
         }
+    },
+    tBody: {
+        borderCollapse: 'collapse'
     }
 }));
 
@@ -199,17 +209,13 @@ const EnhancedTable = ({
             <Paper className={classes.paper}>
                 <EnhancedTableToolbar />
                 <div className={classes.tableWrapper}>
-                    <Table
-                        className={classes.table}
-                        aria-labelledby="tableTitle"
-                        size="medium"
-                    >
+                    <Table aria-labelledby="tableTitle" size="medium" id="tbl">
                         <EnhancedTableHead
                             order={order}
                             orderBy={orderBy}
                             onRequestSort={handleRequestSort}
                         />
-                        <TableBody>
+                        <TableBody id="t-body">
                             {sites
                                 .slice(
                                     page * rowsPerPage,
@@ -219,105 +225,103 @@ const EnhancedTable = ({
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
-                                        <Fragment>
-                                            <TableRow
-                                                hover
-                                                key={row.site}
-                                                onClick={() => {
-                                                    history.push(
-                                                        `/recipes/detail/${row.recipeId}`
-                                                    );
-                                                }}
+                                        <TableRow
+                                            hover
+                                            key={row.site}
+                                            onClick={() => {
+                                                history.push(
+                                                    `/recipes/detail/${row.recipeId}`
+                                                );
+                                            }}
+                                            className="t-cell"
+                                        >
+                                            <TableCell
+                                                component="th"
+                                                id={labelId}
+                                                scope="row"
+                                                className="t-cell"
                                             >
-                                                <TableCell
-                                                    component="th"
-                                                    id={labelId}
-                                                    scope="row"
+                                                {row.recipe}
+                                            </TableCell>
+                                            <TableCell
+                                                align="left"
+                                                className="t-cell"
+                                            >
+                                                {row.site}
+                                            </TableCell>
+                                            <TableCell
+                                                align="left"
+                                                className="t-cell"
+                                            >
+                                                {format(
+                                                    row.updated,
+                                                    'MM/DD/YYYY'
+                                                )}
+                                            </TableCell>
+                                            <TableCell
+                                                align="left"
+                                                className="t-cell"
+                                            >
+                                                {mapStatus(row.status)}
+                                            </TableCell>
+                                            <TableCell
+                                                align="center"
+                                                className="t-cell"
+                                            >
+                                                <IconButton
+                                                    aria-controls="simple-menu"
+                                                    color="primary"
+                                                    aria-haspopup="true"
+                                                    onClick={handleClick}
+                                                    className={classes.mobile}
                                                 >
-                                                    {row.recipe}
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                    {row.site}
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                    {format(
-                                                        row.updated,
-                                                        'MM/DD/YYYY'
-                                                    )}
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                    {mapStatus(row.status)}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    <IconButton
-                                                        aria-controls="simple-menu"
-                                                        color="primary"
-                                                        aria-haspopup="true"
-                                                        onClick={handleClick}
-                                                        className={
-                                                            classes.mobile
+                                                    <MoreIcon />
+                                                </IconButton>
+                                                <Menu
+                                                    id="simple-menu"
+                                                    anchorEl={anchorEl}
+                                                    keepMounted
+                                                    open={Boolean(anchorEl)}
+                                                    onClose={handleClose}
+                                                >
+                                                    {[
+                                                        {
+                                                            name: 'Pause',
+                                                            link: '#'
+                                                        },
+                                                        {
+                                                            name: 'Delete',
+                                                            link: '#'
+                                                        },
+                                                        {
+                                                            name: 'BigQuery',
+                                                            link: '#'
+                                                        },
+                                                        {
+                                                            name: 'Add',
+                                                            link: '#'
                                                         }
-                                                    >
-                                                        <MoreIcon />
-                                                    </IconButton>
-                                                    <Menu
-                                                        id="simple-menu"
-                                                        anchorEl={anchorEl}
-                                                        keepMounted
-                                                        open={Boolean(anchorEl)}
-                                                        onClose={handleClose}
-                                                    >
-                                                        {[
-                                                            {
-                                                                name: 'Pause',
-                                                                link: '#'
-                                                            },
-                                                            {
-                                                                name: 'Delete',
-                                                                link: '#'
-                                                            },
-                                                            {
-                                                                name:
-                                                                    'BigQuery',
-                                                                link: '#'
-                                                            },
-                                                            {
-                                                                name: 'Add',
-                                                                link: '#'
+                                                    ].map(({ name, link }) => (
+                                                        <MenuItem
+                                                            onClick={
+                                                                handleClose
                                                             }
-                                                        ].map(
-                                                            ({
-                                                                name,
-                                                                link
-                                                            }) => (
-                                                                <MenuItem
-                                                                    onClick={
-                                                                        handleClose
-                                                                    }
-                                                                    key={`${name} mobile`}
-                                                                >
-                                                                    <Link
-                                                                        color="primary"
-                                                                        link={
-                                                                            link
-                                                                        }
-                                                                        href={
-                                                                            link
-                                                                        }
-                                                                        name={
-                                                                            name
-                                                                        }
-                                                                        className={
-                                                                            classes.link
-                                                                        }
-                                                                    />
-                                                                </MenuItem>
-                                                            )
-                                                        )}
-                                                    </Menu>
-                                                </TableCell>
-                                            </TableRow>
-                                        </Fragment>
+                                                            key={`${name} mobile`}
+                                                        >
+                                                            <Link
+                                                                color="primary"
+                                                                link={link}
+                                                                href={link}
+                                                                name={name}
+                                                                className={
+                                                                    classes.link
+                                                                }
+                                                            />
+                                                        </MenuItem>
+                                                    ))}
+                                                </Menu>
+                                            </TableCell>
+                                        </TableRow>
                                     );
                                 })}
                             {emptyRows > 0 && (
