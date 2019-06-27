@@ -24,7 +24,9 @@ const useStyles = makeStyles(theme => ({
     },
     container: {
         margin: `${theme.spacing(4)}px auto`,
-        minWidth: 700,
+        [theme.breakpoints.up('lg')]: {
+            minWidth: 700
+        },
         [theme.breakpoints.down('sm')]: {
             minWidth: 300
         },
