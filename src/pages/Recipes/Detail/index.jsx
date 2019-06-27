@@ -1,4 +1,7 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import { RecipeDetail, mainTheme, Stepper, SimpleTable } from '../../../ui-lib';
 
@@ -22,23 +25,37 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const RecipeDetails = () => {
+const RecipeDetails = ({ authenticated, match }) => {
     const classes = useStyles(mainTheme);
+    const {
+        params: { id }
+    } = match;
+    console.log('the id is ', id);
+    if (id !== '1') {
+        return <Redirect to="/recipes" />;
+    }
     return (
         <Fragment>
             <RecipeDetail {...recipeDetailData} />
             <div className={classes.tableNavWrapper}>
                 <aside className={classes.sideBarContainer}>
-                    <Stepper {...stepperData} />
+                    <Stepper {...{ ...stepperData, detail: true }} />
                 </aside>
                 <div className={classes.tableContainer}>
-                    <SimpleTable {...simpletableData} />
+                    {authenticated ? (
+                        <SimpleTable {...simpletableData} />
+                    ) : (
+                        <div />
+                    )}
                 </div>
             </div>
         </Fragment>
     );
 };
 
-RecipeDetails.propTypes = {};
+RecipeDetails.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    match: ReactRouterPropTypes.match.isRequired
+};
 
 export default Page(RecipeDetails);

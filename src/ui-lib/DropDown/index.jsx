@@ -14,38 +14,46 @@ const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        maxWidth: theme.breakpoints.values.sm
+        justifyContent: 'space-evenly'
     },
     formControl: {
-        margin: theme.spacing(3, 0)
+        margin: theme.spacing(3, 0),
+        minWidth: 300
+    },
+    row: {
+        flexDirection: 'row'
     }
 }));
 
-const DropDown = ({ sets, handleSelect }) => {
+const DropDown = ({ sets, handleSelect, row, single }) => {
     const classes = useStyles(Theme);
     return (
-        <div className={classes.container}>
+        <div className={`${classes.container} ${row ? classes.row : ''}`}>
             {sets.map(({ name, data, selection }) => {
                 return (
-                    <FormControl className={classes.formControl} fullWidth>
-                        <InputLabel htmlFor="select-multiple-chip">
-                            {name}
-                        </InputLabel>
-                        <Select
-                            multiple
-                            value={selection}
-                            name={name}
-                            onChange={handleSelect}
-                            input={<Input id="select-multiple-chip" />}
+                    <div>
+                        <FormControl
+                            className={classes.formControl}
+                            fullWidth={!row}
                         >
-                            {data.map(value => (
-                                <MenuItem key={value} value={value}>
-                                    {value}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                            <InputLabel htmlFor="select-multiple-chip">
+                                {name}
+                            </InputLabel>
+                            <Select
+                                multiple={!single}
+                                value={selection}
+                                name={name}
+                                onChange={handleSelect}
+                                input={<Input id="select-multiple-chip" />}
+                            >
+                                {data.map(value => (
+                                    <MenuItem key={value} value={value}>
+                                        {value}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
                 );
             })}
         </div>
@@ -54,7 +62,14 @@ const DropDown = ({ sets, handleSelect }) => {
 
 DropDown.propTypes = {
     sets: PropTypes.arrayOf(PropTypes.object).isRequired,
-    handleSelect: PropTypes.func.isRequired
+    handleSelect: PropTypes.func.isRequired,
+    row: PropTypes.bool,
+    single: PropTypes.bool
+};
+
+DropDown.defaultProps = {
+    row: false,
+    single: false
 };
 
 export default DropDown;

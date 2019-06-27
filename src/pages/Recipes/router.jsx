@@ -7,7 +7,7 @@ const RecipesRouter = () => {
     return (
         <Switch>
             <Route exact path="/recipes" component={Index} />
-            <Route path="/recipes/detail" component={Detail} />
+            <Route path="/recipes/detail/:id" component={Detail} />
             <Redirect to="/recipes" />
         </Switch>
     );
