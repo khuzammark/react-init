@@ -22,7 +22,17 @@ const useStyles = makeStyles(theme => ({
     },
     row: {
         flexDirection: 'row',
-        justifyContent: 'normal'
+        justifyContent: 'normal',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column',
+            justifyContent: 'center'
+        }
+    },
+    formContainer: {
+        [theme.breakpoints.down('sm')]: {
+            width: 'fit-content',
+            margin: '0 auto'
+        }
     }
 }));
 
@@ -32,7 +42,7 @@ const DropDown = ({ sets, handleSelect, row, single }) => {
         <div className={`${classes.container} ${row ? classes.row : ''}`}>
             {sets.map(({ name, data, selection }) => {
                 return (
-                    <div>
+                    <div className={classes.formContainer}>
                         <FormControl
                             className={classes.formControl}
                             fullWidth={!row}

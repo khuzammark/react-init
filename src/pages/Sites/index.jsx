@@ -22,7 +22,10 @@ const styles = theme => ({
     ddContainer: {
         display: 'flex',
         flexDirection: 'row',
-        alignContent: 'center'
+        alignContent: 'center',
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: 'column'
+        }
     }
 });
 
