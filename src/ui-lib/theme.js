@@ -48,11 +48,13 @@ export default {
     ...theme,
     overrides: {
         MuiTypography: {
-            h2: {
-                fontFamily: 'CircularStd',
+            h1: {
                 [theme.breakpoints.up('md')]: {
                     fontSize: '4rem'
                 },
+            },
+            h2: {
+                fontFamily: 'CircularStd',
                 [theme.breakpoints.down('sm')]: {
                     fontSize: '3rem'
                 }

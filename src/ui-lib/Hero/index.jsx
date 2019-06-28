@@ -61,6 +61,11 @@ const useStyles = makeStyles(theme => ({
         fontSize: 20,
         maxWidth: theme.breakpoints.values.md
     },
+    maintext: {
+        [theme.breakpoints.up('md')]: {
+            fontSize: '4rem'
+        }
+    },
     link: {
         margin: theme.spacing(0, 0, 2),
         height: 70,
@@ -91,10 +96,11 @@ const Hero = ({ mainText, subText, action, media, video }) => {
         <div className={classes.content}>
             <Typography
                 color="primary"
-                component="h1"
                 variant="h1"
+                component="h1"
                 align="center"
                 gutterbottom
+                className={classes.maintext}
             >
                 {mainText.toUpperCase()}
             </Typography>
