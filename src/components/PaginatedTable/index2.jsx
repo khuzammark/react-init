@@ -121,7 +121,11 @@ const useStyles = makeStyles(theme => ({
     mobile: {
         '&:hover': {
             backgroundColor: 'transparent'
-        }
+        },
+        '&:click': {
+            backgroundColor: 'transparent'
+        },
+        backgroundColor: 'transparent'
     },
     tBody: {
         borderCollapse: 'collapse'
