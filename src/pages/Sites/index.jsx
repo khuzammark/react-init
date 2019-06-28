@@ -23,8 +23,16 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'row',
         alignContent: 'center',
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('xs')]: {
             flexDirection: 'column'
+        }
+    },
+    addSiteButton: {
+        flexGrow: 1,
+        display: 'flex',
+        justifyContent: 'flex-end',
+        [theme.breakpoints.down('xs')]: {
+            justifyContent: 'center'
         }
     }
 });
@@ -157,13 +165,15 @@ class SitesIndex extends Component {
                         sets={sets}
                         row
                     />
-                    <CTAButton
-                        name="Add Site"
-                        link="/recipes"
-                        mini
-                        color="primary"
-                        className={null}
-                    />
+                    <div className={classes.addSiteButton}>
+                        <CTAButton
+                            name="Add Site"
+                            link="/recipes"
+                            mini
+                            color="primary"
+                            className={null}
+                        />
+                    </div>
                 </div>
                 <PaginatedTable
                     sites={filtered}

@@ -104,7 +104,7 @@ const useStyles = makeStyles(theme => ({
     header: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         padding: theme.spacing(1, 8, 4)
     },
     paper: {
@@ -129,8 +129,8 @@ const useStyles = makeStyles(theme => ({
     tRow: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: theme.spacing(2, 12, 2, 8),
+        justifyContent: 'space-around',
+        padding: theme.spacing(1, 8, 4),
         alignItems: 'center'
     },
     toolRoot: {
@@ -143,9 +143,14 @@ const useStyles = makeStyles(theme => ({
     title: {
         flex: '0 0 auto'
     },
-    fname: {
+    rname: {
         fontWeight: 800,
         fontSize: '.75rem',
+        marginBottom: 0
+    },
+    sname: {
+        fontWeight: 800,
+        fontSize: '125%',
         marginBottom: 0
     }
 }));
@@ -260,26 +265,36 @@ const EnhancedTable = ({
                                                     <Typography
                                                         component="p"
                                                         className={
-                                                            classes.fname
+                                                            classes.rname
                                                         }
                                                         color="textSecondary"
                                                         gutterBottom
                                                     >
                                                         {row.recipe}
                                                     </Typography>
-                                                    {row.site}
                                                 </div>
-                                                <div className="t-cell" />
+                                                <div className="t-cell">
+                                                    <Typography
+                                                        component="p"
+                                                        className={
+                                                            classes.sname
+                                                        }
+                                                        color="textSecondary"
+                                                        gutterBottom
+                                                    >
+                                                        {row.site}
+                                                    </Typography>
+                                                </div>
                                                 <div className="t-cell">
                                                     {format(
                                                         row.updated,
                                                         'MM/DD/YYYY'
                                                     )}
                                                 </div>
-                                                <div className="t-cell">
+                                                <div className="t-cell status">
                                                     {mapStatus(row.status)}
                                                 </div>
-                                                <div className="t-cell">
+                                                <div className="t-cell action">
                                                     <MenuComponent
                                                         handleClose={
                                                             handleClose

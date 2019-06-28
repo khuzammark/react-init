@@ -18,12 +18,12 @@ const useStyles = makeStyles(theme => ({
     },
     formControl: {
         margin: theme.spacing(3, 3, 3, 0),
-        minWidth: 300
+        minWidth: 200
     },
     row: {
         flexDirection: 'row',
         justifyContent: 'normal',
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('xs')]: {
             flexDirection: 'column',
             justifyContent: 'center'
         }

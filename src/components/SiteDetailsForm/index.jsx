@@ -37,7 +37,9 @@ const SiteDetailsForm = ({ handleChange, siteName, siteDomain }) => {
                 error={error}
                 value={siteDomain}
                 helperText={
-                    error ? 'Please Enter A Valid Domain With Protocol' : ''
+                    error
+                        ? 'Please Enter A Valid Domain Name With Protocol'
+                        : ''
                 }
                 className={classes.input}
                 fullWidth
