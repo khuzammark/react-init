@@ -7,6 +7,9 @@ const useStyles = makeStyles(() => ({
     container: {
         display: 'flex',
         flexDirection: 'column'
+    },
+    type: {
+        fontWeight: 'normal'
     }
 }));
 const ConfirmSiteSetup = ({ data }) => {
@@ -14,11 +17,23 @@ const ConfirmSiteSetup = ({ data }) => {
     const { siteName, siteDomain, sources, targets } = data;
     return (
         <div className={classes.container}>
-            <Typography component="h6" variant="h6" align="center">
-                {`Site Name: ${siteName}`}
+            <Typography
+                component="h6"
+                variant="h6"
+                align="left"
+                className={classes.type}
+            >
+                <b>Site Name: </b>
+                {siteName}
             </Typography>
-            <Typography component="h6" variant="h6" align="center">
-                {`Site Domain: ${siteDomain}`}
+            <Typography
+                component="h6"
+                variant="h6"
+                align="left"
+                className={classes.type}
+            >
+                <b>Site Domain: </b>
+                {siteDomain}
             </Typography>
             {sources.map(({ name, selection }) => {
                 return (
@@ -26,20 +41,24 @@ const ConfirmSiteSetup = ({ data }) => {
                         <Typography
                             component="h6"
                             variant="h6"
-                            align="center"
+                            align="left"
+                            className={classes.type}
                             key={name}
                         >
-                            {`Source Name: ${name}`}
+                            <b>Source Name: </b>
+                            {name}
                         </Typography>
                         {selection.map((source, i) => {
                             return (
                                 <Typography
                                     component="h6"
                                     variant="h6"
-                                    align="center"
+                                    align="left"
+                                    className={classes.type}
                                     key={source}
                                 >
-                                    {`Source ${i + 1}: ${source}`}
+                                    <b>{`Source ${i + 1}: `}</b>
+                                    {source}
                                 </Typography>
                             );
                         })}
@@ -52,20 +71,24 @@ const ConfirmSiteSetup = ({ data }) => {
                         <Typography
                             component="h6"
                             variant="h6"
-                            align="center"
+                            align="left"
+                            className={classes.type}
                             key={name}
                         >
-                            {`Target Name: ${name}`}
+                            <b>Target Name: </b>
+                            {name}
                         </Typography>
                         {selection.map((source, i) => {
                             return (
                                 <Typography
                                     component="h6"
                                     variant="h6"
-                                    align="center"
+                                    align="left"
+                                    className={classes.type}
                                     key={source}
                                 >
-                                    {`Target ${i + 1}: ${source}`}
+                                    <b>{`Target ${i + 1}: `}</b>
+                                    {source}
                                 </Typography>
                             );
                         })}
