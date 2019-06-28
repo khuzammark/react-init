@@ -43,17 +43,19 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Wizard = ({ steps, onComplete, completeName }) => {
+const Wizard = ({ steps, onComplete, completeName, updateStep }) => {
     const classes = useStyles(Theme);
     const [activeStep, setStep] = useState(0);
     const handleNext = () => {
         setStep(activeStep + 1);
+        updateStep(activeStep + 1);
     };
     const handleBack = () => {
         if (!activeStep) {
             return;
         }
         setStep(activeStep - 1);
+        updateStep(activeStep - 1);
     };
     return (
         <Container
@@ -110,7 +112,12 @@ const Wizard = ({ steps, onComplete, completeName }) => {
 Wizard.propTypes = {
     steps: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     onComplete: PropTypes.func.isRequired,
-    completeName: PropTypes.string.isRequired
+    completeName: PropTypes.string.isRequired,
+    updateStep: PropTypes.func
+};
+
+Wizard.defaultProps = {
+    updateStep: () => {}
 };
 
 export default Wizard;

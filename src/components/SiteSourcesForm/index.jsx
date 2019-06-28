@@ -9,7 +9,7 @@ const SiteSourcesForm = ({ handleSelect, sources }) => {
             <Typography variant="h6" gutterbottom="true" align="center">
                 Set Site Sources
             </Typography>
-            <DropDown sets={sources} handleSelect={handleSelect} />
+            <DropDown sets={sources} handleSelect={handleSelect} single />
         </Fragment>
     );
 };

@@ -9,7 +9,7 @@ const BigQueryForm = ({ handleSelect, sources }) => {
             <Typography variant="h6" gutterbottom="true" align="center">
                 Select Targets
             </Typography>
-            <DropDown sets={sources} handleSelect={handleSelect} />
+            <DropDown sets={sources} handleSelect={handleSelect} single />
         </Fragment>
     );
 };

@@ -7,7 +7,7 @@ import SiteDetailsForm from '../../../components/SiteDetailsForm';
 import SiteSourcesForm from '../../../components/SiteSourcesForm';
 import BigQueryForm from '../../../components/BigQueryForm';
 import ConfirmSiteSetup from '../../../components/ConfirmSiteSetup';
-import stepperData from '../../../DummyData/stepper';
+import configureStepperData from './configureStepperData';
 
 const styles = theme => ({
     sideBarContainer: {
@@ -29,18 +29,21 @@ class SiteSetup extends Component {
         super(props);
 
         this.state = {
+            activeStep: 0,
             siteName: '',
             siteDomain: '',
             sources: [
                 {
-                    name: 'Select A Google Analytics Profile',
+                    name: 'Google Analytics',
+                    displayText: 'Selct a Google Analytics Profile',
                     data: ['Profile 1', 'Profile 2', 'Profile 3'],
                     selection: []
                 }
             ],
             targets: [
                 {
-                    name: 'Select A BigQuery Project',
+                    name: 'BigQuery',
+                    displayText: 'Select a BigQuery Project',
                     data: ['Project 1', 'Project 2', 'Project 3'],
                     selection: []
                 }
@@ -67,28 +70,36 @@ class SiteSetup extends Component {
         this.setState({
             [collection]: oldSources.map(source => {
                 if (source.name === e.target.name) {
-                    return { ...source, selection: [...e.target.value] };
+                    return { ...source, selection: [e.target.value] };
                 }
                 return source;
             })
         });
     };
 
+    updateStep = step => {
+        this.setState({
+            activeStep: step
+        });
+    };
+
     render() {
         const { classes } = this.props;
         const {
-            state: { siteName, siteDetails, sources, targets }
+            state: { siteName, siteDomain, sources, targets }
         } = this;
+        const stepperData = configureStepperData(this.state);
         return (
             <Fragment>
                 <div className={classes.tableNavWrapper}>
                     <aside className={classes.sideBarContainer}>
-                        <Stepper {...{ ...stepperData, detail: true }} />
+                        <Stepper {...{ ...stepperData, drawer: true }} />
                     </aside>
                     <div className={classes.tableContainer}>
                         <Wizard
                             completeName="Finish"
                             onComplete={this.onComplete}
+                            updateStep={this.updateStep}
                             steps={[
                                 {
                                     name: 'SiteDetails',
@@ -96,7 +107,7 @@ class SiteSetup extends Component {
                                         <SiteDetailsForm
                                             handleChange={this.handleChange}
                                             siteName={siteName}
-                                            siteDetails={siteDetails}
+                                            siteDomain={siteDomain}
                                         />
                                     )
                                 },

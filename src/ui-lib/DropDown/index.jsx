@@ -40,7 +40,7 @@ const DropDown = ({ sets, handleSelect, row, single }) => {
     const classes = useStyles(Theme);
     return (
         <div className={`${classes.container} ${row ? classes.row : ''}`}>
-            {sets.map(({ name, data, selection }) => {
+            {sets.map(({ name, data, selection, displayText }) => {
                 return (
                     <div className={classes.formContainer}>
                         <FormControl
@@ -48,7 +48,7 @@ const DropDown = ({ sets, handleSelect, row, single }) => {
                             fullWidth={!row}
                         >
                             <InputLabel htmlFor="select-multiple-chip">
-                                {name}
+                                {displayText || name}
                             </InputLabel>
                             <Select
                                 multiple={!single}
