@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Typography, TextField } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/styles';
 import mainTheme from '../../ui-lib/theme';
+import isUrl from '../../utils/validation/isUrl';
 
 const useStyles = makeStyles(theme => ({
     input: {
@@ -12,6 +13,7 @@ const useStyles = makeStyles(theme => ({
 
 const SiteDetailsForm = ({ handleChange, siteName, siteDomain }) => {
     const classes = useStyles(mainTheme);
+    const [error, setError] = useState(false);
     return (
         <Fragment>
             <Typography variant="h6" gutterbottom="true" align="center">
@@ -32,10 +34,19 @@ const SiteDetailsForm = ({ handleChange, siteName, siteDomain }) => {
                 id="siteDomain"
                 name="siteDomain"
                 label="Site Domain"
+                error={error}
                 value={siteDomain}
+                helperText={
+                    error ? 'Please Enter A Valid Domain With Protocol' : ''
+                }
                 className={classes.input}
                 fullWidth
-                onChange={handleChange}
+                onChange={e => {
+                    e.preventDefault();
+                    const isValid = isUrl(e.target.value);
+                    setError(!isValid);
+                    handleChange(e);
+                }}
             />
         </Fragment>
     );
