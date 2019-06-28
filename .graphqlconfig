@@ -1,0 +1,1 @@
+{"projects":{"dp2":{"schemaPath":"schema.graphql","extensions":{"endpoints":{"dev":"http://localhost:8003/graphql"}}}}}
