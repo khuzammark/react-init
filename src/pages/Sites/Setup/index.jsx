@@ -11,16 +11,30 @@ import configureStepperData from './configureStepperData';
 
 const styles = theme => ({
     sideBarContainer: {
-        maxWidth: theme.breakpoints.values.sm / 2
+        maxWidth: theme.breakpoints.values.sm / 2,
+        [theme.breakpoints.down('sm')]: {
+            minWidth: 0,
+            maxWidth: 'none'
+        }
     },
     tableNavWrapper: {
         display: 'flex',
         felxDirection: 'wrap',
         flexWrap: 'wrap',
-        alignContent: 'flex-start'
+        alignContent: 'flex-start',
+        [theme.breakpoints.down('xs')]: {
+            alignContent: 'normal',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            margin: theme.spacing(0)
+        }
     },
     tableContainer: {
-        flexGrow: 1
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignContent: 'center',
+        overflow: 'auto'
     }
 });
 
