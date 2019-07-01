@@ -1,0 +1,71 @@
+#import "../fragments.gql"
+mutation FinishFacebookAuthMutation(
+  $code: String!
+  $redirectUri: String!
+) {
+  finishFacebookAuth(
+    input: {
+      code: $code
+      redirectUri: $redirectUri
+    }
+  ) {
+    auth {
+      id
+    }
+  }
+}
+
+query FacebookAuthsQuery {
+  facebookAuths {
+    edges {
+      node {
+        id
+        org {
+          id
+          name
+        }
+        userAuth {
+          id
+          user {
+            id
+            email
+          }
+        }
+      }
+    }
+  }
+}
+
+query FacebookConfigsForAuthsQuery {
+  facebookAuths {
+    edges {
+      node {
+        id
+        adAccounts {
+          id
+          name
+          adCampaigns {
+            name
+            id
+            adSets{
+              name
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DoFacebookAuthMutation($redirectUri: String!) {
+  doFacebookAuth(input: { redirectUri: $redirectUri}) {
+    authorizationUrl
+  }
+}
+
+mutation DeleteFacebookAuthMutation($id: ID!) {
+  deleteFacebookAuth(input: { id: $id }) {
+    ok
+  }
+}

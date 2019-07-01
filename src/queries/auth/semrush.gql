@@ -1,0 +1,32 @@
+#import "../fragments.gql"
+query SemrushAuthsQuery {
+  semrushAuths {
+    edges {
+      cursor
+      node {
+        id
+        modified
+        org {
+          id
+          name
+        }
+        lastAuthedBy {
+          id
+          email
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteSemrushAuthMutation($id: ID!) {
+  deleteSemrushAuth(input: { id: $id }) {
+    ok
+  }
+}
+
+mutation CreateSemrushAuthMutation($apiKey: String!, $name: String!) {
+  createSemrushAuth(input: { apiKey: $apiKey, name: $name }) {
+    ok
+  }
+}

@@ -31,7 +31,6 @@ const RecipeDetails = ({ authenticated, match }) => {
     const {
         params: { id }
     } = match;
-    console.log('the id is ', id);
     if (id !== '1') {
         return <Redirect to="/recipes" />;
     }

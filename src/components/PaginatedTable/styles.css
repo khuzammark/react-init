@@ -1,0 +1,20 @@
+#tbl {
+  border-collapse: collapse !important;
+  border: none; }
+
+#t-body {
+  border: none; }
+
+.t-cell {
+  border: none; }
+
+.t-row {
+  display: flex;
+  flex-direction: row; }
+
+.action {
+  min-width: 90px;
+  text-align: center; }
+
+.status {
+  padding-left: 20px; }

@@ -1,0 +1,76 @@
+#import "./fragments.gql"
+
+query RecipeFeedErrorsQuery {
+  feedErrorsForRecipes {
+    edges {
+      node {
+        id
+        feed {
+          id
+          recipeInstance{
+            id
+            creatingUser {
+              email
+            }
+            recipe {
+              id
+              name
+            }
+          }
+          source {
+            __typename
+            ...googleAnalyticsDataSource
+            ...googleWebmastersDataSource
+            ...GoogleAdsAdPerformanceReportDataSource
+            ...GoogleAdsCampaignPerformanceReportDataSource
+            ...GoogleAdsFinalUrlReportDataSource
+            ...genericDataSource
+            ...majesticBacklinkDataSource
+            ...semrushDomainOrganicKeywordsDataSource
+            ...deepcrawlAllPagesReportDataSource
+            ...shopifyCustomersDataSource
+            ...shopifyRefundsDataSource
+            ...shopifyProductsDataSource
+            ...shopifyOrdersDataSource
+            ...facebookAdCreativesDataSource
+            ...facebookAdInsightsDataSource
+            ...facebookAdsDataSource
+            ...adobeAnalyticsDataSource
+          }
+        }
+        message
+        created
+      }
+    }
+  }
+}
+
+query DBTFeedErrorsQuery {
+  dbtErrorEntriesForRecipeInstances {
+    edges{
+      node {
+        id
+        recipeInstance {
+          id
+          site
+          creatingUser {
+            email
+          }
+          recipe {
+            name
+          }
+        }
+        runId
+        message
+        startedAt
+        finishedAt
+      }
+    }
+  }
+}
+
+mutation MarkErrorDoneMutation($errorId:ID!) {
+  markErrorDone(input:{ errorId: $errorId }) {
+    ok
+  }
+}

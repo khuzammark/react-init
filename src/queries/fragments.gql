@@ -1,0 +1,291 @@
+fragment googleAnalyticsDataSource on GoogleAnalyticsDataSource {
+  id
+  org {
+    id
+    name
+  }
+  accountId
+  accountName
+  accountId
+  profileName
+  webPropertyId
+  webPropertyName
+}
+
+fragment googleWebmastersDataSource on GoogleWebmastersDataSource {
+  id
+  org {
+    id
+    name
+  }
+  site
+}
+
+fragment GoogleAdsAdPerformanceReportDataSource on GoogleAdsAdPerformanceReportDataSource {
+  id
+  org {
+    id
+    name
+  }
+  accountId
+  accountName
+}
+
+fragment GoogleAdsCampaignPerformanceReportDataSource on GoogleAdsCampaignPerformanceReportDataSource {
+  id
+  org {
+    id
+    name
+  }
+  accountId
+  accountName
+}
+
+fragment GoogleAdsFinalUrlReportDataSource on GoogleAdsFinalUrlReportDataSource {
+  id
+  org {
+    id
+    name
+  }
+  accountId
+  accountName
+}
+
+fragment semrushDomainOrganicKeywordsDataSource on SemrushDomainOrganicKeywordsDataSource {
+  id
+  org {
+    id
+    name
+  }
+  domain
+}
+
+fragment majesticBacklinkDataSource on MajesticBacklinkDataSource {
+  id
+  org {
+    id
+    name
+  }
+  domain
+}
+
+fragment deepcrawlAllPagesReportDataSource on DeepcrawlAllPagesReportDataSource {
+  id
+  org {
+    id
+    name
+  }
+  name
+  domain
+  secondaryDomains
+  projectId
+  crawlId
+  reportId
+}
+
+fragment shopifyCustomersDataSource on ShopifyCustomersDataSource {
+  id
+  org {
+    id
+    name
+  }
+  shop
+}
+
+fragment shopifyRefundsDataSource on ShopifyRefundsDataSource {
+  id
+  org {
+    id
+    name
+  }
+  shop
+}
+
+fragment shopifyProductsDataSource on ShopifyProductsDataSource {
+  id
+  org {
+    id
+    name
+  }
+  shop
+}
+
+fragment shopifyOrdersDataSource on ShopifyOrdersDataSource {
+  id
+  org {
+    id
+    name
+  }
+  shop
+}
+
+fragment facebookAdCreativesDataSource on FacebookAdCreativesDataSource {
+  id
+  org {
+    id
+    name
+  }
+  adAccountId
+  adAccountName
+}
+
+fragment facebookAdInsightsDataSource on FacebookAdInsightsDataSource {
+  id
+  org {
+    id
+    name
+  }
+  adAccountId
+  adCampaignId
+  adAccountName
+}
+
+fragment facebookAdsDataSource on  FacebookAdsDataSource {
+  id
+  org {
+    id
+    name
+  }
+  adAccountId
+  adCampaignId
+  adSetId
+  adAccountName
+}
+
+fragment adobeAnalyticsDataSource on AdobeAnalyticsDataSource {
+  id
+  org {
+    id
+    name
+  }
+  name
+  globalCompanyId
+  rsid
+  dimensions
+  metrics
+}
+
+fragment genericDataSource on DataSource {
+  id
+  org {
+    id
+    name
+  }
+}
+
+fragment bigQueryDataTarget on BigQueryDataTarget {
+  id
+  org {
+    id
+    name
+  }
+  project
+  projectName
+}
+
+fragment analyticsAccounts on GoogleAuth {
+  analyticsAccounts {
+    id
+    name
+    webProperties {
+      id
+      name
+      profiles {
+        id
+        name
+      }
+    }
+  }
+}
+
+fragment webmasterSites on GoogleAuth {
+  webmasterSites {
+    url
+  }
+}
+
+fragment adobeGlobalCompanyAccounts on AdobeAuth {
+  adobeGlobalCompanyAccounts {
+    id
+    globalCompanyId
+    companyName
+  }
+}
+fragment adobeReportSuites on AdobeAuth {
+  adobeReportSuites {
+    id
+    rsid
+    name
+  }
+}
+
+fragment bigQueryProjects on GoogleAuth {
+  bigQueryProjects {
+    projectId
+    friendlyName
+  }
+}
+
+fragment userFragment on User {
+  id
+  email
+  firstName
+  lastName
+}
+
+fragment recipeInstanceFragment on RecipeInstance {
+  id
+  site
+  configurations
+  paused
+  recipe {
+    id
+    name
+    descriptionShort
+  }
+  lastDbtRun {
+    updatedAt
+    statusHumanized
+    statusMessage
+  }
+  feedSet {
+    edges {
+      node {
+        id
+        bigqueryTablename
+        source {
+          ...googleWebmastersDataSource
+          ...googleAnalyticsDataSource
+          ...GoogleAdsAdPerformanceReportDataSource
+          ...GoogleAdsCampaignPerformanceReportDataSource
+          ...GoogleAdsFinalUrlReportDataSource
+          ...semrushDomainOrganicKeywordsDataSource
+          ...majesticBacklinkDataSource
+          ...deepcrawlAllPagesReportDataSource
+          ...shopifyCustomersDataSource
+          ...shopifyRefundsDataSource
+          ...shopifyProductsDataSource
+          ...shopifyOrdersDataSource
+          ...facebookAdCreativesDataSource
+          ...facebookAdInsightsDataSource
+          ...facebookAdsDataSource
+          ...adobeAnalyticsDataSource
+        }
+        target {
+          ...bigQueryDataTarget
+        }
+        latestEvent {
+          id
+          status
+          created
+          rows
+          latestError {
+            id
+            message
+            errorClass
+          }
+        }
+      }
+    }
+  }
+}

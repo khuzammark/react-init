@@ -1,0 +1,118 @@
+#import "./fragments.gql"
+
+mutation DeleteFeedMutation($feedId: ID!) {
+  deleteFeed(input: { feedId: $feedId }) {
+    ok
+  }
+}
+
+mutation RunFeedMutation($feedId: ID!) {
+  runFeed(input: { feedId: $feedId }) {
+    ok
+  }
+}
+
+mutation CreateFeedMutation(
+  $sourceId: ID!
+  $targetId: ID!
+  $startDate: Date!
+  $endDate: Date
+  $name: String!
+  $description: String!
+) {
+  createFeed(
+    input: {
+      sourceId: $sourceId
+      targetId: $targetId
+      startDate: $startDate
+      endDate: $endDate
+      name: $name
+      description: $description
+    }
+  ) {
+    feed {
+      id
+    }
+  }
+}
+
+query FeedsQuery {
+  feeds {
+    edges {
+      node {
+        id
+        name
+        description
+        source {
+          __typename
+          ...googleAnalyticsDataSource
+          ...googleWebmastersDataSource
+          ...GoogleAdsAdPerformanceReportDataSource
+          ...GoogleAdsCampaignPerformanceReportDataSource
+          ...GoogleAdsFinalUrlReportDataSource
+          ...genericDataSource
+          ...majesticBacklinkDataSource
+          ...semrushDomainOrganicKeywordsDataSource
+          ...deepcrawlAllPagesReportDataSource
+          ...shopifyCustomersDataSource
+          ...shopifyRefundsDataSource
+          ...shopifyProductsDataSource
+          ...shopifyOrdersDataSource
+          ...facebookAdCreativesDataSource
+          ...facebookAdInsightsDataSource
+          ...facebookAdsDataSource
+          ...adobeAnalyticsDataSource
+        }
+        target {
+          __typename
+          ...bigQueryDataTarget
+        }
+        latestEvent {
+          id
+          status
+          modified
+          rows
+        }
+      }
+    }
+  }
+}
+
+query FeedErrorsQuery {
+  feedsWithErrors {
+    edges {
+      node{
+        id
+        openExceptions
+        recipeInstance {
+          id
+          site
+          recipe {
+            id
+            name
+          }
+        }
+        source {
+          __typename
+          ...googleAnalyticsDataSource
+          ...googleWebmastersDataSource
+          ...GoogleAdsAdPerformanceReportDataSource
+          ...GoogleAdsCampaignPerformanceReportDataSource
+          ...GoogleAdsFinalUrlReportDataSource
+          ...genericDataSource
+          ...majesticBacklinkDataSource
+          ...semrushDomainOrganicKeywordsDataSource
+          ...deepcrawlAllPagesReportDataSource
+          ...shopifyCustomersDataSource
+          ...shopifyRefundsDataSource
+          ...shopifyProductsDataSource
+          ...shopifyOrdersDataSource
+          ...facebookAdCreativesDataSource
+          ...facebookAdInsightsDataSource
+          ...facebookAdsDataSource
+          ...adobeAnalyticsDataSource
+        }
+      }
+    }
+  }
+}

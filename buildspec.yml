@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - npm i -g yarn
+      - export PATH="$PATH:./node_modules/.bin"
+      - yarn install
+      - echo "TODO ADD TESTS HERE"
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - ./scripts/s3-deploy-codebuild
+
+cache:
+  paths:
+    - 'node_modules/**/*'

@@ -1,0 +1,1560 @@
+"""A generic auth store."""
+type AuthStore implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """The organization for which this data source is being configured"""
+  org: Org!
+
+  """Indicates the user who authenticated the application to use this API"""
+  lastAuthedBy: User
+  googleauth: GoogleAuth
+  majesticauth: MajesticAuth
+  semrushauth: SemrushAuth
+  deepcrawlauth: DeepcrawlAuth
+  shopifyauth: ShopifyAuth
+  datasourceSet(before: String, after: String, first: Int, last: Int): DataSourceConnection
+  datatargetSet(before: String, after: String, first: Int, last: Int): DataTargetConnection
+}
+
+type AuthStoreConnection {
+  pageInfo: PageInfo!
+  edges: [AuthStoreEdge]!
+}
+
+type AuthStoreEdge {
+  """The item at the end of the edge"""
+  node: AuthStore
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Node definition for bigquery target."""
+type BigQueryDataTarget implements Node & DataTargetInterface {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  datatargetPtr: DataTarget!
+
+  """The ID of the object."""
+  id: ID!
+  org: Org
+  authStore: AuthStore
+
+  """The project this applies to"""
+  project: String
+
+  """The name of the project this applies to"""
+  projectName: String
+}
+
+"""Projects as retrieved by the API."""
+type BigQueryProject {
+  projectId: String
+  friendlyName: String
+}
+
+input CreateBigQueryDataTargetInput {
+  authStoreId: ID!
+  projectId: String!
+  projectFriendlyName: String!
+  clientMutationId: String
+}
+
+"""Create a bigquery target."""
+type CreateBigQueryDataTargetPayload {
+  dataTarget: BigQueryDataTarget
+  clientMutationId: String
+}
+
+input CreateDeepcrawlAllPagesReportDataSourceInput {
+  authStoreId: ID!
+  name: String!
+  domain: String!
+  secondaryDomains: String
+  crawlLimit: String!
+  callbackUrl: String
+  projectId: Int
+  crawlId: Int
+  reportId: Int
+  clientMutationId: String
+}
+
+"""Mutation for creating a deepcrawl data source."""
+type CreateDeepcrawlAllPagesReportDataSourcePayload {
+  dataSource: DeepcrawlAllPagesReportDataSource
+  clientMutationId: String
+}
+
+input CreateDeepcrawlAuthInput {
+  apiKey: String!
+  keyId: String!
+  accountId: String!
+  clientMutationId: String
+}
+
+"""Create a deepcrawl auth instance."""
+type CreateDeepcrawlAuthPayload {
+  ok: Boolean
+  deepcrawlAuth: DeepcrawlAuth
+  clientMutationId: String
+}
+
+input CreateFeedInput {
+  sourceId: ID!
+  targetId: ID!
+  startDate: Date!
+  endDate: Date
+  name: String!
+  description: String
+  clientMutationId: String
+}
+
+"""Mutation to create a feed."""
+type CreateFeedPayload {
+  feed: Feed
+  clientMutationId: String
+}
+
+input CreateGoogleAnalyticsDataSourceInput {
+  authStoreId: ID!
+  accountId: String!
+  accountName: String!
+  webPropertyId: String!
+  webPropertyName: String!
+  profileId: String!
+  profileName: String!
+  clientMutationId: String
+}
+
+"""Mutation for creating a google analytics data source."""
+type CreateGoogleAnalyticsDataSourcePayload {
+  dataSource: GoogleAnalyticsDataSource
+  clientMutationId: String
+}
+
+input CreateGoogleWebmastersDataSourceInput {
+  authStoreId: ID!
+  site: String!
+  clientMutationId: String
+}
+
+"""Mutation for creating a google webmasters data source."""
+type CreateGoogleWebmastersDataSourcePayload {
+  dataSource: GoogleWebmastersDataSource
+  clientMutationId: String
+}
+
+input CreateMajesticAuthInput {
+  apiKey: String!
+  clientMutationId: String
+}
+
+"""Create a majestic auth instance."""
+type CreateMajesticAuthPayload {
+  ok: Boolean
+  majesticAuth: MajesticAuth
+  clientMutationId: String
+}
+
+input CreateRecipeInput {
+  name: String!
+  description: String!
+  ga: Boolean
+  gsc: Boolean
+  semrush: Boolean
+  majestic: Boolean
+  deepcrawl: Boolean
+  gitUrl: String!
+  clientMutationId: String
+}
+
+input CreateRecipeInstanceInput {
+  recipeId: ID!
+  backfillDate: Date!
+  accountId: Int
+  accountName: String
+  webPropertyId: String
+  webPropertyName: String
+  profileId: Int
+  profileName: String
+  site: String
+  domain: String
+  project: String
+  projectName: String
+  googleAnalyticsDataSourceAuthStoreId: ID
+  googleWebmastersDataSourceAuthStoreId: ID
+  bigQueryDataTargetAuthStoreId: ID
+  majesticBacklinkDataSourceAuthStoreId: ID
+  semrushDomainOrganicKeywordDataSourceAuthStoreId: ID
+  clientMutationId: String
+}
+
+"""Create a recipe instance for a particular org."""
+type CreateRecipeInstancePayload {
+  recipeInstance: RecipeInstance
+  clientMutationId: String
+}
+
+"""Create a recipe."""
+type CreateRecipePayload {
+  ok: Boolean
+  recipe: Recipe
+  clientMutationId: String
+}
+
+input CreateSemrushAuthInput {
+  apiKey: String!
+  clientMutationId: String
+}
+
+"""Create a semrush auth instance."""
+type CreateSemrushAuthPayload {
+  ok: Boolean
+  semrushAuth: SemrushAuth
+  clientMutationId: String
+}
+
+input CreateShopifyRefundsDataSourceInput {
+  authStoreId: ID!
+  orderId: String!
+  orderName: String!
+  clientMutationId: String
+}
+
+"""Mutation for creating a shopify order refunds data source."""
+type CreateShopifyRefundsDataSourcePayload {
+  dataSource: ShopifyRefundsDataSource
+  clientMutationId: String
+}
+
+"""Graphql node for google data source."""
+type DataSource implements Node & DataSourceInterface {
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  feedSet(before: String, after: String, first: Int, last: Int): FeedConnection
+  realInstance: DataSourceUnion
+}
+
+type DataSourceConnection {
+  pageInfo: PageInfo!
+  edges: [DataSourceEdge]!
+}
+
+type DataSourceEdge {
+  """The item at the end of the edge"""
+  node: DataSource
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Interface for generic data source node."""
+interface DataSourceInterface {
+  org: Org
+  authStore: AuthStore
+}
+
+union DataSourceUnion = GoogleAnalyticsDataSource | GoogleWebmastersDataSource | MajesticBacklinkDataSource | SemrushDomainOrganicKeywordsDataSource | DeepcrawlAllPagesReportDataSource | ShopifyCustomersDataSource | ShopifyProductsDataSource | ShopifyOrdersDataSource | ShopifyRefundsDataSource | DataSource
+
+"""Defines a connection against the union of data source types."""
+type DataSourceUnionConnection {
+  pageInfo: PageInfo!
+  edges: [DataSourceUnionEdge]!
+}
+
+type DataSourceUnionEdge {
+  """The item at the end of the edge"""
+  node: DataSourceUnion
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Graphql node for google data target."""
+type DataTarget implements Node & DataTargetInterface {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  org: Org
+  authStore: AuthStore
+  bigquerydatatarget: BigQueryDataTarget
+  feedSet(before: String, after: String, first: Int, last: Int): FeedConnection
+  realInstance: DataTargetUnion
+}
+
+type DataTargetConnection {
+  pageInfo: PageInfo!
+  edges: [DataTargetEdge]!
+}
+
+type DataTargetEdge {
+  """The item at the end of the edge"""
+  node: DataTarget
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Interface for generic data target node."""
+interface DataTargetInterface {
+  org: Org
+  authStore: AuthStore
+}
+
+union DataTargetUnion = BigQueryDataTarget | DataTarget
+
+"""Defines a connection against the union of data target types."""
+type DataTargetUnionConnection {
+  pageInfo: PageInfo!
+  edges: [DataTargetUnionEdge]!
+}
+
+type DataTargetUnionEdge {
+  """The item at the end of the edge"""
+  node: DataTargetUnion
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+"""The deepcrawl data source node."""
+type DeepcrawlAllPagesReportDataSource implements Node & DataSourceInterface {
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  datasourcePtr: DataSource!
+
+  """Name to be assigned to deepcrawl project."""
+  name: String!
+
+  """Primary domain full url for crawl project(Include https://)"""
+  domain: String!
+
+  """
+  Secondary domains urls for crawl project, comma separated for multiple. (Include https://)
+  """
+  secondaryDomains: [String]!
+
+  """Maximum number of links to be crawled"""
+  crawlLimit: Int!
+
+  """Hook point for sending notifications when crawl finishes"""
+  callbackUrl: String!
+
+  """ID assigend to project on creation by deepcrawl."""
+  projectId: Int!
+
+  """ID assigend to a crawl on run by deepcrawl."""
+  crawlId: Int!
+
+  """ID assigend to report generated on crawl completion"""
+  reportId: Int!
+}
+
+"""Deepcrawl Auth Node."""
+type DeepcrawlAuth implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """The organization for which this data source is being configured"""
+  org: Org!
+
+  """Indicates the user who authenticated the application to use this API"""
+  lastAuthedBy: User
+  authstorePtr: AuthStore!
+
+  """Used to initiate an authenticate session"""
+  apiKey: String!
+
+  """
+  Unique id assigned to a api key, used to initiate authenticated session
+  """
+  keyId: String!
+
+  """
+  Unique id to identify an account, used to as first segment to api endpoint
+  """
+  accountId: String!
+
+  """
+  A string used to validate calls made in a session. Stays valid for 6hrs
+  """
+  token: String
+
+  """The time token expires."""
+  expiresAt: DateTime
+}
+
+type DeepcrawlAuthConnection {
+  pageInfo: PageInfo!
+  edges: [DeepcrawlAuthEdge]!
+}
+
+type DeepcrawlAuthEdge {
+  """The item at the end of the edge"""
+  node: DeepcrawlAuth
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input DeleteDataSourceInput {
+  id: ID!
+  clientMutationId: String
+}
+
+"""Delete a given data source by ID."""
+type DeleteDataSourcePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteDataTargetInput {
+  id: ID!
+  clientMutationId: String
+}
+
+"""Delete a given data target by ID."""
+type DeleteDataTargetPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteDeepcrawlAuthInput {
+  id: ID!
+  clientMutationId: String
+}
+
+"""Deletes a deepcrawl Auth."""
+type DeleteDeepcrawlAuthPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteFeedInput {
+  feedId: ID!
+  clientMutationId: String
+}
+
+"""Delete a feed."""
+type DeleteFeedPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteGoogleAuthInput {
+  id: ID!
+  clientMutationId: String
+}
+
+"""Deletes a Google Auth."""
+type DeleteGoogleAuthPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteMajesticAuthInput {
+  id: ID!
+  clientMutationId: String
+}
+
+"""Deletes a Majestic Auth."""
+type DeleteMajesticAuthPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteRecipeInstanceInput {
+  recipeInstanceId: ID
+  clientMutationId: String
+}
+
+"""Delete the recipe."""
+type DeleteRecipeInstancePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteSemrushAuthInput {
+  id: ID!
+  clientMutationId: String
+}
+
+"""Deletes a Semrush Auth."""
+type DeleteSemrushAuthPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteShopifyAuthInput {
+  id: ID!
+  clientMutationId: String
+}
+
+"""Deletes a Google Auth."""
+type DeleteShopifyAuthPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DoGoogleAuthInput {
+  redirectUri: String
+  clientMutationId: String
+}
+
+"""Mutation for handling Google Auth."""
+type DoGoogleAuthPayload {
+  authorizationUrl: String
+  clientMutationId: String
+}
+
+input DoShopifyAuthInput {
+  redirectUri: String
+  shop: String
+  clientMutationId: String
+}
+
+"""Mutation for handling Shopify Auth."""
+type DoShopifyAuthPayload {
+  authorizationUrl: String
+  clientMutationId: String
+}
+
+"""Represents a Feed node in graphql."""
+type Feed implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  source: DataSourceUnion
+  target: DataTargetUnion
+
+  """The individual who created the feed"""
+  creator: User
+
+  """The organization this feed is being run for"""
+  org: Org!
+
+  """The day we should start ingesting data from"""
+  startDate: Date!
+
+  """
+  The day we should stop ingesting data from. Leave empty to ingest up to current date.
+  """
+  endDate: Date
+
+  """The name of the feed"""
+  name: String!
+
+  """A description of the feed"""
+  description: String
+  recipeInstance: RecipeInstance
+  feedeventSet(before: String, after: String, first: Int, last: Int): FeedEventConnection
+  feederrorentrySet(before: String, after: String, first: Int, last: Int): FeedErrorEntryConnection
+  latestEvent: FeedEvent
+  latestError: FeedErrorEntry
+  bigqueryTablename: String
+}
+
+type FeedConnection {
+  pageInfo: PageInfo!
+  edges: [FeedEdge]!
+}
+
+type FeedEdge {
+  """The item at the end of the edge"""
+  node: Feed
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""The feed error entry node."""
+type FeedErrorEntry implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """Unique identifier for the error."""
+  guid: String!
+
+  """The error message."""
+  message: String!
+
+  """The stack trace."""
+  trace: String
+
+  """The classname of the error."""
+  errorClass: String!
+
+  """The feed the error is related to."""
+  feed: Feed!
+
+  """The specific feed event this error is related to"""
+  event: FeedEvent
+}
+
+type FeedErrorEntryConnection {
+  pageInfo: PageInfo!
+  edges: [FeedErrorEntryEdge]!
+}
+
+type FeedErrorEntryEdge {
+  """The item at the end of the edge"""
+  node: FeedErrorEntry
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Represents a Feed Event node in graphql."""
+type FeedEvent implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  feed: Feed!
+
+  """The last date data has been ingested from"""
+  lastDate: Date
+  status: FeedEventStatus!
+  after: String!
+
+  """Number of rows written"""
+  rows: Int!
+  feederrorentrySet(before: String, after: String, first: Int, last: Int): FeedErrorEntryConnection
+  latestError: FeedErrorEntry
+}
+
+type FeedEventConnection {
+  pageInfo: PageInfo!
+  edges: [FeedEventEdge]!
+}
+
+type FeedEventEdge {
+  """The item at the end of the edge"""
+  node: FeedEvent
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""An enumeration."""
+enum FeedEventStatus {
+  """1"""
+  COMPLETED
+
+  """2"""
+  SCHEDULED
+
+  """3"""
+  INCOMPLETE
+
+  """4"""
+  RATE_LIMITED
+}
+
+input FinishGoogleAuthInput {
+  code: String
+  state: String
+  scope: [String]
+  redirectUri: String
+  clientMutationId: String
+}
+
+"""Mutation for completing Google Auth."""
+type FinishGoogleAuthPayload {
+  auth: GoogleAuth
+  clientMutationId: String
+}
+
+input FinishShopifyAuthInput {
+  code: String
+  state: String
+  shop: String
+  clientMutationId: String
+}
+
+"""Mutation for completing Shopify Auth."""
+type FinishShopifyAuthPayload {
+  auth: ShopifyAuth
+  clientMutationId: String
+}
+
+"""
+The `GenericScalar` scalar type represents a generic
+GraphQL scalar value that could be:
+String, Boolean, Int, Float, List or Object.
+"""
+scalar GenericScalar
+
+"""The data we get on google analytics accounts."""
+type GoogleAnalyticsAccount {
+  id: String
+  name: String
+  auth: GoogleAuth
+  webProperties: [GoogleAnalyticsWebProperty]
+}
+
+"""Graphql node for google analytics data source."""
+type GoogleAnalyticsDataSource implements Node & DataSourceInterface {
+  datasourcePtr: DataSource!
+
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+
+  """The ID of the account"""
+  accountId: String!
+
+  """The name of the account"""
+  accountName: String!
+
+  """The ID of the web property under the account"""
+  webPropertyId: String!
+
+  """The name of the web property under the account"""
+  webPropertyName: String!
+
+  """The ID of the profile under the web property"""
+  profileId: String!
+
+  """The name of the profile under the web property"""
+  profileName: String!
+}
+
+"""Profile associated with a web property and an account."""
+type GoogleAnalyticsProfile {
+  id: String
+  name: String
+  auth: GoogleAuth
+  account: GoogleAnalyticsAccount
+  webProperty: GoogleAnalyticsWebProperty
+}
+
+"""Webproperties associated with an account."""
+type GoogleAnalyticsWebProperty {
+  id: String
+  name: String
+  auth: GoogleAuth
+  account: GoogleAnalyticsAccount
+  profiles: [GoogleAnalyticsProfile]
+}
+
+"""GraphQL Node for GoogleAuth."""
+type GoogleAuth implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """The organization for which this data source is being configured"""
+  org: Org!
+
+  """Indicates the user who authenticated the application to use this API"""
+  lastAuthedBy: User
+  authstorePtr: AuthStore!
+  userAuth: UserGoogleAuth
+  analyticsAccounts: [GoogleAnalyticsAccount]
+  webmasterSites: [GoogleWebmastersSite]
+  bigQueryProjects: [BigQueryProject]
+}
+
+type GoogleAuthConnection {
+  pageInfo: PageInfo!
+  edges: [GoogleAuthEdge]!
+}
+
+type GoogleAuthEdge {
+  """The item at the end of the edge"""
+  node: GoogleAuth
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Graphql node for google webmasters data source."""
+type GoogleWebmastersDataSource implements Node & DataSourceInterface {
+  datasourcePtr: DataSource!
+
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  site: String!
+}
+
+"""A site in Google Webmasters."""
+type GoogleWebmastersSite {
+  auth: GoogleAuth
+  url: String
+}
+
+"""Represents the data we would retrieve from a health check."""
+type HealthType {
+  healthy: Boolean
+  error: String
+}
+
+"""JSON String"""
+scalar JSONString
+
+"""Semrush Auth Node."""
+type MajesticAuth implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """The organization for which this data source is being configured"""
+  org: Org!
+
+  """Indicates the user who authenticated the application to use this API"""
+  lastAuthedBy: User
+  authstorePtr: AuthStore!
+  apiKey: String!
+}
+
+type MajesticAuthConnection {
+  pageInfo: PageInfo!
+  edges: [MajesticAuthEdge]!
+}
+
+type MajesticAuthEdge {
+  """The item at the end of the edge"""
+  node: MajesticAuth
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""The majestic data source node."""
+type MajesticBacklinkDataSource implements Node & DataSourceInterface {
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  datasourcePtr: DataSource!
+
+  """The domain to request backlink data for."""
+  domain: String!
+
+  """The number of backlinks to retrieve. Max is 5000. Defaults to 100."""
+  count: Int!
+
+  """
+  Whether to retrieve backlink data from a fresh index or a historical index.
+  """
+  datasourceOption: MajesticBacklinkDataSourceDatasourceOption!
+}
+
+"""An enumeration."""
+enum MajesticBacklinkDataSourceDatasourceOption {
+  """FRESH"""
+  A_1
+
+  """HISTORIC"""
+  A_2
+}
+
+"""Using multiple inheritance here to compose mutations."""
+type Mutation {
+  createRecipe(input: CreateRecipeInput!): CreateRecipePayload
+  createRecipeInstance(input: CreateRecipeInstanceInput!): CreateRecipeInstancePayload
+  deleteRecipeInstance(input: DeleteRecipeInstanceInput!): DeleteRecipeInstancePayload
+  runRecipeInstanceFeeds(input: RunRecipeInstanceFeedsInput!): RunRecipeInstanceFeedsPayload
+  triggerSinterJob(input: TriggerSinterJobInput!): TriggerSinterJobPayload
+  createFeed(input: CreateFeedInput!): CreateFeedPayload
+  deleteFeed(input: DeleteFeedInput!): DeleteFeedPayload
+  runFeed(input: RunFeedInput!): RunFeedPayload
+  createBigQueryDataTarget(input: CreateBigQueryDataTargetInput!): CreateBigQueryDataTargetPayload
+  deleteDataTarget(input: DeleteDataTargetInput!): DeleteDataTargetPayload
+  createGoogleAnalyticsDataSource(input: CreateGoogleAnalyticsDataSourceInput!): CreateGoogleAnalyticsDataSourcePayload
+  deleteDataSource(input: DeleteDataSourceInput!): DeleteDataSourcePayload
+  createGoogleWebmastersDataSource(input: CreateGoogleWebmastersDataSourceInput!): CreateGoogleWebmastersDataSourcePayload
+  createDeepcrawlAllPagesReportDataSource(input: CreateDeepcrawlAllPagesReportDataSourceInput!): CreateDeepcrawlAllPagesReportDataSourcePayload
+  createShopifyRefundsDataSource(input: CreateShopifyRefundsDataSourceInput!): CreateShopifyRefundsDataSourcePayload
+  doGoogleAuth(input: DoGoogleAuthInput!): DoGoogleAuthPayload
+  finishGoogleAuth(input: FinishGoogleAuthInput!): FinishGoogleAuthPayload
+  deleteGoogleAuth(input: DeleteGoogleAuthInput!): DeleteGoogleAuthPayload
+  createSemrushAuth(input: CreateSemrushAuthInput!): CreateSemrushAuthPayload
+  deleteSemrushAuth(input: DeleteSemrushAuthInput!): DeleteSemrushAuthPayload
+  createMajesticAuth(input: CreateMajesticAuthInput!): CreateMajesticAuthPayload
+  deleteMajesticAuth(input: DeleteMajesticAuthInput!): DeleteMajesticAuthPayload
+  createDeepcrawlAuth(input: CreateDeepcrawlAuthInput!): CreateDeepcrawlAuthPayload
+  deleteDeepcrawlAuth(input: DeleteDeepcrawlAuthInput!): DeleteDeepcrawlAuthPayload
+  doShopifyAuth(input: DoShopifyAuthInput!): DoShopifyAuthPayload
+  finishShopifyAuth(input: FinishShopifyAuthInput!): FinishShopifyAuthPayload
+  deleteShopifyAuth(input: DeleteShopifyAuthInput!): DeleteShopifyAuthPayload
+  tokenAuth(email: String!, password: String!): ObtainJSONWebToken
+  verifyToken(token: String!): Verify
+  refreshToken(token: String!): Refresh
+  registerUser(input: RegisterUserInput!): RegisterUserPayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The ID of the object."""
+  id: ID!
+}
+
+"""Obtain JSON Web Token mutation"""
+type ObtainJSONWebToken {
+  token: String
+}
+
+"""Org Node."""
+type Org implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """Name of the organization"""
+  name: String!
+  members(before: String, after: String, first: Int, last: Int): UserConnection
+  userSet(before: String, after: String, first: Int, last: Int): UserConnection
+  authstoreSet(before: String, after: String, first: Int, last: Int): AuthStoreConnection
+  datasourceSet(before: String, after: String, first: Int, last: Int): DataSourceConnection
+  datatargetSet(before: String, after: String, first: Int, last: Int): DataTargetConnection
+  feedSet(before: String, after: String, first: Int, last: Int): FeedConnection
+  recipeinstanceSet(before: String, after: String, first: Int, last: Int): RecipeInstanceConnection
+}
+
+type OrgConnection {
+  pageInfo: PageInfo!
+  edges: [OrgEdge]!
+}
+
+type OrgEdge {
+  """The item at the end of the edge"""
+  node: Org
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""Using multiple inheritance here to compose queries."""
+type Query {
+  feedErrors(before: String, after: String, first: Int, last: Int): FeedErrorEntryConnection
+  recipes(before: String, after: String, first: Int, last: Int): RecipeConnection
+  recipe(id: ID): Recipe
+  recipeInstances(monitor: Boolean, before: String, after: String, first: Int, last: Int): RecipeInstanceConnection
+  recipeInstance(id: ID): RecipeInstance
+  feeds(before: String, after: String, first: Int, last: Int): FeedConnection
+  feedEvent(before: String, after: String, first: Int, last: Int): FeedEventConnection
+  dataTargets(before: String, after: String, first: Int, last: Int): DataTargetUnionConnection
+  dataSources(before: String, after: String, first: Int, last: Int): DataSourceUnionConnection
+  googleAuths(before: String, after: String, first: Int, last: Int): GoogleAuthConnection
+
+  """The ID of the object"""
+  googleAuth(id: ID!): GoogleAuth
+  majesticAuths(before: String, after: String, first: Int, last: Int): MajesticAuthConnection
+  semrushAuths(before: String, after: String, first: Int, last: Int): SemrushAuthConnection
+  deepcrawlAuths(before: String, after: String, first: Int, last: Int): DeepcrawlAuthConnection
+  shopifyAuths(before: String, after: String, first: Int, last: Int): ShopifyAuthConnection
+
+  """The ID of the object"""
+  shopifyAuth(id: ID!): ShopifyAuth
+  userViewer: UserViewer
+  user(id: ID, email: String): User
+  users(before: String, after: String, first: Int, last: Int): UserConnection
+  orgs(before: String, after: String, first: Int, last: Int, name: String): OrgConnection
+  org(id: ID, name: String): Org
+
+  """A health check"""
+  health: HealthType
+}
+
+"""A recipe node."""
+type Recipe implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """The name of the recipe."""
+  name: String!
+  slug: String!
+
+  """Brief description."""
+  descriptionShort: String
+
+  """A longer description."""
+  descriptionLong: String
+
+  """
+  Specific rules for the feed to apply during datasource or data target creation.
+  """
+  configurations: JSONString
+  recipefeedconfigurationSet(before: String, after: String, first: Int, last: Int): RecipeFeedConfigurationConnection
+  recipeinstanceSet(before: String, after: String, first: Int, last: Int): RecipeInstanceConnection
+}
+
+type RecipeConnection {
+  pageInfo: PageInfo!
+  edges: [RecipeEdge]!
+}
+
+type RecipeEdge {
+  """The item at the end of the edge"""
+  node: Recipe
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""A recipe feed configuration node."""
+type RecipeFeedConfiguration implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """The recipe this configuration pertains to"""
+  recipe: Recipe!
+
+  """The content type ID of the auth store related to the data store"""
+  dataSourceAuthStoreContentType: Int!
+
+  """The content type ID for the required data source"""
+  dataSourceContentType: Int!
+
+  """The content type ID of the auth store related to the data target)"""
+  dataTargetAuthStoreContentType: Int!
+
+  """The content type ID for the required data target"""
+  dataTargetContentType: Int!
+  dataSourceAuthStoreContentTypeName: String
+  dataSourceContentTypeName: String
+  dataTargetAuthStoreContentTypeName: String
+  dataTargetContentTypeName: String
+}
+
+type RecipeFeedConfigurationConnection {
+  pageInfo: PageInfo!
+  edges: [RecipeFeedConfigurationEdge]!
+}
+
+type RecipeFeedConfigurationEdge {
+  """The item at the end of the edge"""
+  node: RecipeFeedConfiguration
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""A particular instance of a recipe."""
+type RecipeInstance implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  recipe: Recipe!
+
+  """The day we should start ingesting data from"""
+  backfillDate: Date!
+
+  """The org that should be able to access this recipe"""
+  org: Org!
+
+  """The user who created this recipe instance"""
+  creatingUser: User
+
+  """
+  Specific rules for the feed to apply during datasource or data target creation.
+  """
+  configurations: JSONString
+
+  """The repo ID for the recipe instance in sinter."""
+  sinterRepoId: Int
+
+  """The project ID for the recipe instance in sinter."""
+  sinterProjectId: Int
+
+  """The connection ID for the recipe instance in sinter."""
+  sinterConnectionId: Int
+
+  """The job id for the feed in sinter."""
+  sinterJobId: Int
+  feedSet(before: String, after: String, first: Int, last: Int): FeedConnection
+  lastFeedRun: String
+  status: String
+  site: String
+  lastDbtRun: SinterJobRun
+  dbtRuns(before: String, after: String, first: Int, last: Int): SinterJobRunConnection
+}
+
+type RecipeInstanceConnection {
+  pageInfo: PageInfo!
+  edges: [RecipeInstanceEdge]!
+  totalCount: Int
+}
+
+type RecipeInstanceEdge {
+  """The item at the end of the edge"""
+  node: RecipeInstance
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Refresh {
+  token: String
+  payload: GenericScalar
+}
+
+input RegisterUserInput {
+  email: String!
+  password: String!
+  firstName: String
+  lastName: String
+  orgName: String
+  clientMutationId: String
+}
+
+"""Mutation for user registraion."""
+type RegisterUserPayload {
+  ok: Boolean
+  user: User
+  token: String
+  clientMutationId: String
+}
+
+input RunFeedInput {
+  feedId: ID!
+  clientMutationId: String
+}
+
+"""Trigger the feed to run."""
+type RunFeedPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input RunRecipeInstanceFeedsInput {
+  recipeInstanceId: ID
+  clientMutationId: String
+}
+
+"""Run feeds for the recipe instance."""
+type RunRecipeInstanceFeedsPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+"""Semrush Auth Node."""
+type SemrushAuth implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """The organization for which this data source is being configured"""
+  org: Org!
+
+  """Indicates the user who authenticated the application to use this API"""
+  lastAuthedBy: User
+  authstorePtr: AuthStore!
+  apiKey: String!
+}
+
+type SemrushAuthConnection {
+  pageInfo: PageInfo!
+  edges: [SemrushAuthEdge]!
+}
+
+type SemrushAuthEdge {
+  """The item at the end of the edge"""
+  node: SemrushAuth
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""The semrush data source node."""
+type SemrushDomainOrganicKeywordsDataSource implements Node & DataSourceInterface {
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  datasourcePtr: DataSource!
+
+  """The domain we want to retrieve keywords for."""
+  domain: String!
+
+  """The number of keywords to request."""
+  displayLimit: Int!
+}
+
+"""GraphQL Node for ShopifyAuth."""
+type ShopifyAuth implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+
+  """The organization for which this data source is being configured"""
+  org: Org!
+
+  """Indicates the user who authenticated the application to use this API"""
+  lastAuthedBy: User
+  authstorePtr: AuthStore!
+  userAuth: UserShopifyAuth
+  shopifyRecentOrders: [ShopifyRecentOrders]
+}
+
+type ShopifyAuthConnection {
+  pageInfo: PageInfo!
+  edges: [ShopifyAuthEdge]!
+}
+
+type ShopifyAuthEdge {
+  """The item at the end of the edge"""
+  node: ShopifyAuth
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""The shopify customers data source node."""
+type ShopifyCustomersDataSource implements Node & DataSourceInterface {
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  datasourcePtr: DataSource!
+
+  """Name to be assigned to a shopify data source."""
+  name: String!
+}
+
+"""The shopify orders data source node."""
+type ShopifyOrdersDataSource implements Node & DataSourceInterface {
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  datasourcePtr: DataSource!
+
+  """Name to be assigned to a shopify data source."""
+  name: String!
+}
+
+"""The shopify products data source node."""
+type ShopifyProductsDataSource implements Node & DataSourceInterface {
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  datasourcePtr: DataSource!
+
+  """Name to be assigned to a shopify data source."""
+  name: String!
+}
+
+"""The orders available on shopify. default to previous month"""
+type ShopifyRecentOrders {
+  id: String
+  orderId: String
+  orderName: String
+  auth: ShopifyAuth
+}
+
+"""The shopify order refunds data source node."""
+type ShopifyRefundsDataSource implements Node & DataSourceInterface {
+  """The ID of the object."""
+  id: ID!
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+  org: Org
+  authStore: AuthStore
+  datasourcePtr: DataSource!
+
+  """Name to be assigned to a shopify data source."""
+  name: String!
+
+  """The ID for which to retrieve refund details."""
+  orderId: String!
+
+  """The name of order for which to retrieve refund details."""
+  orderName: String!
+}
+
+"""Represents a given job run in Sinter."""
+type SinterJobRun {
+  runDurationHumanized: String
+  createdAt: String
+  durationHumanized: String
+  hadDocsGenerated: Boolean
+  artifactsSaved: Boolean
+  artifactS3Path: String
+  createdAtHumanized: String
+  status: Int
+  ownerThreadId: String
+  dequeuedAt: String
+  lastHeartbeatAt: String
+  statusMessage: String
+  id: Int
+  environmentId: Int
+  statusHumanized: String
+  lastCheckedAt: String
+  projectId: Int
+  updatedAt: String
+  duration: String
+  finishedAtHumanized: String
+  queuedDurationHumanized: String
+  runDuration: String
+  dbtVersion: String
+  finishedAt: String
+  queuedDuration: String
+}
+
+"""The connection implementation for sinter job runs."""
+type SinterJobRunConnection {
+  pageInfo: PageInfo!
+  edges: [SinterJobRunEdge]!
+}
+
+type SinterJobRunEdge {
+  """The item at the end of the edge"""
+  node: SinterJobRun
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input TriggerSinterJobInput {
+  recipeInstanceId: ID!
+  clientMutationId: String
+}
+
+"""Trigger a sinter job for a given recipe instance."""
+type TriggerSinterJobPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+"""User Node."""
+type User implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  lastLogin: DateTime
+
+  """
+  Designates that this user has all permissions without explicitly assigning them.
+  """
+  isSuperuser: Boolean!
+  email: String!
+
+  """Designates whether the user can log into this admin site."""
+  isStaff: Boolean!
+
+  """
+  Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+  """
+  isActive: Boolean!
+
+  """When the user has confirmed"""
+  confirmedAt: DateTime
+
+  """Last time the user logged in"""
+  lastLoginAt: DateTime
+
+  """IP from last login"""
+  lastLoginIp: String
+
+  """Number of times the user has logged in"""
+  loginCount: Int!
+  orgs(before: String, after: String, first: Int, last: Int, name: String): OrgConnection
+
+  """The first name of the user"""
+  firstName: String!
+
+  """The last name of the user"""
+  lastName: String!
+  orgSet(before: String, after: String, first: Int, last: Int, name: String): OrgConnection
+  authstoreSet(before: String, after: String, first: Int, last: Int): AuthStoreConnection
+  usergoogleauthSet(before: String, after: String, first: Int, last: Int): UserGoogleAuthConnection
+  usershopifyauthSet(before: String, after: String, first: Int, last: Int): UserShopifyAuthConnection
+  feedSet(before: String, after: String, first: Int, last: Int): FeedConnection
+  recipeinstanceSet(before: String, after: String, first: Int, last: Int): RecipeInstanceConnection
+  totalSites: Int
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+}
+
+type UserEdge {
+  """The item at the end of the edge"""
+  node: User
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""GraphQL Node for UserGoogleAuth."""
+type UserGoogleAuth implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  user: User!
+  email: String
+  googleauthSet(before: String, after: String, first: Int, last: Int): GoogleAuthConnection
+}
+
+type UserGoogleAuthConnection {
+  pageInfo: PageInfo!
+  edges: [UserGoogleAuthEdge]!
+}
+
+type UserGoogleAuthEdge {
+  """The item at the end of the edge"""
+  node: UserGoogleAuth
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""GraphQL Node for UserShopifyAuth."""
+type UserShopifyAuth implements Node {
+  deleted: DateTime
+  created: DateTime!
+  modified: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  user: User!
+
+  """The fully qualified hostname of the user's shop. """
+  shop: String!
+  shopifyauthSet(before: String, after: String, first: Int, last: Int): ShopifyAuthConnection
+}
+
+type UserShopifyAuthConnection {
+  pageInfo: PageInfo!
+  edges: [UserShopifyAuthEdge]!
+}
+
+type UserShopifyAuthEdge {
+  """The item at the end of the edge"""
+  node: UserShopifyAuth
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""View node for identifying the current authenticated user."""
+type UserViewer {
+  user: User
+}
+
+type Verify {
+  payload: GenericScalar
+}
+

@@ -1,0 +1,369 @@
+#import "./fragments.gql"
+
+query DataSourcesAndTargetsQuery {
+  dataSources {
+    edges {
+      cursor
+      node {
+        __typename
+        ...googleAnalyticsDataSource
+        ...googleWebmastersDataSource
+        ...GoogleAdsAdPerformanceReportDataSource
+        ...GoogleAdsCampaignPerformanceReportDataSource
+        ...GoogleAdsFinalUrlReportDataSource
+        ...genericDataSource
+        ...majesticBacklinkDataSource
+        ...semrushDomainOrganicKeywordsDataSource
+        ...deepcrawlAllPagesReportDataSource
+        ...shopifyCustomersDataSource
+        ...shopifyRefundsDataSource
+        ...shopifyProductsDataSource
+        ...shopifyOrdersDataSource
+        ...facebookAdCreativesDataSource
+        ...facebookAdInsightsDataSource
+        ...facebookAdsDataSource
+        ...adobeAnalyticsDataSource
+      }
+    }
+  }
+  dataTargets {
+    edges {
+      cursor
+      node {
+        __typename
+        ...bigQueryDataTarget
+      }
+    }
+  }
+}
+
+query DataSourcesQuery {
+  dataSources {
+    edges {
+      cursor
+      node {
+        __typename
+        ...googleAnalyticsDataSource
+        ...googleWebmastersDataSource
+        ...GoogleAdsAdPerformanceReportDataSource
+        ...GoogleAdsCampaignPerformanceReportDataSource
+        ...GoogleAdsFinalUrlReportDataSource
+        ...semrushDomainOrganicKeywordsDataSource
+        ...majesticBacklinkDataSource
+        ...deepcrawlAllPagesReportDataSource
+        ...shopifyCustomersDataSource
+        ...shopifyRefundsDataSource
+        ...shopifyProductsDataSource
+        ...shopifyOrdersDataSource
+        ...facebookAdCreativesDataSource
+        ...facebookAdInsightsDataSource
+        ...facebookAdsDataSource
+        ...adobeAnalyticsDataSource
+      }
+    }
+  }
+}
+
+query DataTargetsQuery {
+  dataTargets {
+    edges {
+      cursor
+      node {
+        __typename
+        ...bigQueryDataTarget
+      }
+    }
+  }
+}
+
+mutation DeleteDataSource($id: ID!) {
+  deleteDataSource(input: { id: $id }) {
+    ok
+  }
+}
+
+mutation DeleteDataTarget($id: ID!) {
+  deleteDataTarget(input: { id: $id }) {
+    ok
+  }
+}
+
+query GaAccountsQuery($authStoreId: ID!) {
+  googleAuth(id: $authStoreId) {
+    analyticsAccounts {
+      id
+      name
+      webProperties {
+        id
+        name
+        profiles {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+
+mutation CreateGaDataSourceMutation(
+  $accountId: String!
+  $accountName: String!
+  $webPropertyId: String!
+  $webPropertyName: String!
+  $profileId: String!
+  $profileName: String!
+  $authStoreId: ID!
+) {
+  createGoogleAnalyticsDataSource(
+    input: {
+      accountId: $accountId
+      accountName: $accountName
+      webPropertyId: $webPropertyId
+      webPropertyName: $webPropertyName
+      profileId: $profileId
+      profileName: $profileName
+      authStoreId: $authStoreId
+    }
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+query BigQueryProjectsQuery($authStoreId: ID!) {
+  googleAuth(id: $authStoreId) {
+    bigQueryProjects {
+      projectId
+      friendlyName
+    }
+  }
+}
+
+mutation CreateBigQueryDataTargetMutation(
+  $projectId: String!
+  $friendlyName: String!
+  $authStoreId: ID!
+) {
+  createBigQueryDataTarget(
+    input: {
+      authStoreId: $authStoreId
+      projectId: $projectId
+      projectFriendlyName: $friendlyName
+    }
+  ) {
+    dataTarget {
+      id
+    }
+  }
+}
+
+query WebmasterSitesQuery($authStoreId: ID!) {
+  googleAuth(id: $authStoreId) {
+    webmasterSites {
+      url
+    }
+  }
+}
+
+mutation CreateGoogleWebmasterDataSourceMutation($site: String!, $authStoreId: ID!) {
+  createGoogleWebmastersDataSource(
+    input: { authStoreId: $authStoreId, site: $site }
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+mutation CreateGoogleAdsAdPerformanceReportDataSourceMutation($authStoreId: ID!, $accountName: String!, $accountId: String!) {
+  createGoogleAdsAdPerformanceReportDataSource(
+    input: { authStoreId: $authStoreId, accountId: $accountId, accountName: $accountName,}
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+mutation CreateGoogleAdsCampaignPerformanceReportDataSourceMutation($authStoreId: ID!, $accountName: String!, $accountId: String!) {
+  createGoogleAdsCampaignPerformanceReportDataSource(
+    input: { authStoreId: $authStoreId, accountId: $accountId, accountName: $accountName,}
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+mutation CreateGoogleAdsFinalUrlReportDataSourceMutation($authStoreId: ID!, $accountName: String!, $accountId: String!) {
+  createGoogleAdsFinalUrlReportDataSource(
+    input: { authStoreId: $authStoreId, accountId: $accountId, accountName: $accountName,}
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+query ShopifyRefundsQuery($authStoreId: ID!) {
+  shopifyAuth(id: $authStoreId) {
+    shopifyRecentOrders {
+      id
+      orderId
+      orderName
+    }
+  }
+}
+
+mutation CreateShopifyRefundsMutation(
+  $orderId: String!
+  $orderName: String!
+  $authStoreId: ID!
+) {
+  createShopifyRefundsDataSource(
+    input: {
+      orderId: $orderId
+      orderName: $orderName
+      authStoreId: $authStoreId
+    }
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+query FacebookAdAccountsQuery($authStoreId: ID!) {
+  facebookAuth(id: $authStoreId) {
+    adAccounts{
+      id
+      name
+    }
+  }
+}
+
+query FacebookAdCampaignsQuery($authStoreId: ID!, $adAccountId: String! ) {
+  facebookAuth(id: $authStoreId) {
+    adCampaigns(adAccountId: $adAccountId){
+      id
+      name
+    }
+  }
+}
+
+query FacebookAdSetsQuery($authStoreId: ID!, $adAccountId: String!, $adCampaignId: String! ) {
+  facebookAuth(id: $authStoreId) {
+    adSets(adAccountId: $adAccountId, adCampaignId: $adCampaignId){
+      id
+      name
+    }
+  }
+}
+
+mutation CreateFacebookAdCreativesDataSourceMutation(
+  $adAccountId: String!
+  $adAccountName: String!
+  $authStoreId: ID!
+) {
+  createFacebookAdCreativesDataSource(
+    input: {
+      adAccountId: $adAccountId
+      adAccountName: $adAccountName
+      authStoreId: $authStoreId
+    }
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+mutation CreateFacebookAdInsightsDataSourceMutation(
+  $adAccountId: String!
+  $adAccountName: String!
+  $adCampaignId: String!
+  $adCampaignName: String!
+  $authStoreId: ID!
+) {
+  createFacebookAdInsightsDataSource(
+    input: {
+      adAccountId: $adAccountId
+      adAccountName: $adAccountName
+      adCampaignId: $adCampaignId
+      adCampaignName: $adCampaignName
+      authStoreId: $authStoreId
+    }
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+mutation CreateFacebookAdsDataSourceMutation(
+  $adAccountId: String!
+  $adAccountName: String!
+  $adCampaignId: String!
+  $adCampaignName: String!
+  $adSetId: String!
+  $adSetName: String!
+  $authStoreId: ID!
+) {
+  createFacebookAdsDataSource(
+    input: {
+      adAccountId: $adAccountId
+      adAccountName: $adAccountName
+      adCampaignId: $adCampaignId
+      adCampaignName: $adCampaignName
+      adSetId: $adSetId
+      adSetName: $adSetName
+      authStoreId: $authStoreId
+    }
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+mutation CreateAdobeAnalyticsDataSourceMutation(
+  $name: String!
+  $globalCompanyId: String!
+  $rsid: String!
+  $dimensions: String!
+  $metrics: String!
+  $authStoreId: ID!
+) {
+  createAdobeAnalyticsDataSource(
+    input: {
+      name: $name
+      globalCompanyId: $globalCompanyId
+      rsid: $rsid
+      dimensions: $dimensions
+      metrics: $metrics
+      authStoreId: $authStoreId
+    }
+  ) {
+    dataSource {
+      id
+    }
+  }
+}
+
+query AdobeCompanyAccountsQuery($authStoreId: ID!) {
+  adobeAuth(id: $authStoreId) {
+    adobeGlobalCompanyAccounts {
+      globalCompanyId
+      companyName
+    }
+  }
+}
+
+query AdobeReportSuitesQuery($authStoreId: ID!, $globalCompanyId: String!) {
+  adobeAuth(id: $authStoreId) {
+    adobeReportSuites(globalCompanyId: $globalCompanyId) {
+      rsid
+    }
+  }
+}

@@ -1,0 +1,122 @@
+#import "./fragments.gql"
+
+query UserViewerQuery {
+  userViewer {
+    user {
+      id
+      billingEnabled
+      email
+      isSuperuser
+      org {
+        id
+        recipes {
+          totalCount
+          edges {
+            node {
+              id
+              name
+              authRequired
+              descriptionShort
+            }
+          }
+        }
+      }
+      recipeinstanceSet {
+        totalCount
+        edges {
+          node {
+            ...recipeInstanceFragment
+          }
+        }
+      }
+      authStores {
+        totalCount
+      }
+      totalSites
+      creditCards {
+        id
+        last4
+        funding
+        isDefault
+      }
+      bankAccounts {
+        id
+        last4
+        bankName
+        isDefault
+      }
+    }
+  }
+}
+
+query OrgQuery($name: String, $id: ID) {
+  org(id: $id, name: $name) {
+    id
+    name
+    members {
+      edges {
+        node {
+          id
+          ...userFragment
+        }
+      }
+    }
+  }
+}
+
+query UserQuery($email: String, $id: ID) {
+  user(id: $id, email: $email) {
+    ...userFragment
+  }
+}
+
+mutation RegisterUserMutation (
+  $email: String!
+  $firstName: String!
+  $lastName: String!
+  $orgName: String!
+  $password: String!
+) {
+  registerUser(
+    input: {
+      email: $email
+      firstName: $firstName
+      lastName: $lastName
+      orgName: $orgName
+      password: $password
+    }
+  ) {
+    ok
+    user {
+      ...userFragment
+    }
+    token
+  }
+}
+
+query UserActivitySummaryQuery {
+  users {
+    edges {
+      node {
+        id
+        email
+        totalSites
+        created
+        orgSet(first: 1) {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation TokenAuthMutation($email: String!, $password: String!) {
+  tokenAuth(email: $email, password: $password) {
+    token
+  }
+}

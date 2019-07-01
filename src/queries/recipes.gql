@@ -1,0 +1,411 @@
+#import "./fragments.gql"
+
+query RecipeInstancesQuery {
+  recipeInstances {
+    edges {
+      node {
+        id
+        ...recipeInstanceFragment
+      }
+    }
+  }
+}
+
+
+query RecipeMonitorInstancesQuery {
+  recipeInstances(monitor: true) {
+    edges {
+      node {
+        id
+        recipe {
+          id
+          name
+        }
+        creatingUser {
+          id
+          email
+        }
+        lastDbtRun {
+          updatedAt
+          statusHumanized
+          statusMessage
+        }
+        lastFeedRun
+        status
+        site
+      }
+    }
+  }
+}
+
+mutation TriggerSinterJobMutation($recipeInstanceId: ID!) {
+  triggerSinterJob(input: { recipeInstanceId: $recipeInstanceId }) {
+    ok
+  }
+}
+
+mutation DeleteRecipeInstanceMutation($recipeInstanceId: ID!) {
+  deleteRecipeInstance(input: { recipeInstanceId: $recipeInstanceId }) {
+    ok
+  }
+}
+
+mutation RunRecipeInstanceFeedsMutation($recipeInstanceId: ID!) {
+  runRecipeInstanceFeeds(input: { recipeInstanceId: $recipeInstanceId }) {
+    ok
+  }
+}
+
+mutation PauseRecipeInstanceMutation($recipeInstanceId: ID!) {
+  pauseRecipeInstance(input: { recipeInstanceId: $recipeInstanceId }) {
+    ok
+  }
+}
+
+mutation ResumeRecipeInstanceMutation($recipeInstanceId: ID!) {
+  resumeRecipeInstance(input: { recipeInstanceId: $recipeInstanceId }) {
+    ok
+  }
+}
+
+mutation ActivateRecipeMutation($recipeId: ID!) {
+  activateRecipe(input: { recipeId: $recipeId }) {
+    ok
+  }
+}
+
+mutation DeactivateRecipeMutation($recipeId: ID!) {
+  deactivateRecipe(input: { recipeId: $recipeId }) {
+    ok
+  }
+}
+
+query RecipeQuery($recipeId: ID!) {
+  recipe(id: $recipeId) {
+    id
+    name
+    descriptionLong
+    recipefeedconfigurationSet {
+      edges {
+        node {
+          id
+          dataSourceAuthStoreContentTypeName
+          dataSourceContentTypeName
+          dataTargetAuthStoreContentTypeName
+          dataTargetContentTypeName
+        }
+      }
+    }
+  }
+  majesticAuths {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+  semrushAuths {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+  deepcrawlAuths {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}
+
+mutation CreateRecipeInstanceMutation(
+  $recipeId: ID!,
+  $backfillDate: Date!,
+  $accountId: Int,
+  $accountName: String,
+  $webPropertyId: String,
+  $webPropertyName: String,
+  $profileId: Int,
+  $profileName: String,
+  $site: String,
+  $domain: String,
+  $project: String,
+  $projectName: String,
+  $googleAnalyticsDataSourceAuthStoreId: ID,
+  $googleWebmastersDataSourceAuthStoreId: ID,
+  $GoogleAdsAdPerformanceReportDataSourceAuthStoreId: ID,
+  $GoogleAdsCampaignPerformanceReportDataSourceAuthStoreId: ID,
+  $GoogleAdsFinalUrlReportDataSourceAuthStoreId: ID,
+  $facebookAdsDataSourceAuthStoreId: ID,
+  $facebookAdsDataSourceAccountId: String,
+  $facebookAdsDataSourceAccountName: String,
+  $facebookAdsDataSourceCampaignId: String,
+  $facebookAdsDataSourceCampaignName: String,
+  $facebookAdsDataSourceAdSetId: String,
+  $facebookAdsDataSourceAdSetName: String,
+  $facebookAdCreativesDataSourceAuthStoreId: ID
+  $facebookAdCreativesDataSourceAccountId: String,
+  $facebookAdCreativesDataSourceAccountName: String,
+  $facebookAdInsightsDataSourceAuthStoreId: ID,
+  $facebookAdInsightsDataSourceAccountId: String,
+  $facebookAdInsightsDataSourceAccountName: String,
+  $facebookAdInsightsDataSourceCampaignId: String,
+  $facebookAdInsightsDataSourceCampaignName: String,
+  $deepcrawlAllPagesReportDataSourceAuthStoreId: ID,
+  $majesticBacklinkDataSourceAuthStoreId: ID,
+  $semrushDomainOrganicKeywordDataSourceAuthStoreId: ID,
+  $adobeAnalyticsDataSourceAuthStoreId: ID,
+  $adobeAnalyticsDataSourcename: String,
+  $adobeGlobalCompanyId: String,
+  $adobeRsid: String,
+  $adobeDimensions: String,
+  $adobeMetrics: String,
+  $bigQueryDataTargetAuthStoreId: ID,
+  $shopifyOrdersDataSourceAuth: ID,
+  $shopifyRefundsDataSourceAuth: ID,
+  $shopifyCustomersDataSourceAuth: ID,
+  $shopifyProductsDataSourceAuth: ID,
+) {
+  createRecipeInstance(
+    input: {
+      recipeId: $recipeId
+      backfillDate: $backfillDate
+      site: $site
+      domain: $domain
+      googleAnalyticsDataSource: {
+        authStoreId: $googleAnalyticsDataSourceAuthStoreId
+        accountId: $accountId
+        accountName: $accountName
+        webPropertyId: $webPropertyId
+        webPropertyName: $webPropertyName
+        profileId: $profileId
+        profileName: $profileName
+      }
+      googleWebmastersDataSource: {
+        authStoreId: $googleWebmastersDataSourceAuthStoreId
+      }
+      GoogleAdsAdPerformanceReportDataSource: {
+        authStoreId: $GoogleAdsAdPerformanceReportDataSourceAuthStoreId
+        accountId: $accountId
+        accountName: $accountName
+      }
+      GoogleAdsCampaignPerformanceReportDataSource: {
+        authStoreId: $GoogleAdsCampaignPerformanceReportDataSourceAuthStoreId
+        accountId: $accountId
+        accountName: $accountName
+      }
+      GoogleAdsFinalUrlReportDataSource: {
+        authStoreId: $GoogleAdsFinalUrlReportDataSourceAuthStoreId
+        accountId: $accountId
+        accountName: $accountName
+      }
+      semrushDomainOrganicKeywordDataSource: { authStoreId: $semrushDomainOrganicKeywordDataSourceAuthStoreId }
+      majesticBacklinkDataSource: { authStoreId: $majesticBacklinkDataSourceAuthStoreId }
+      deepcrawlAllPagesReportDataSource: { authStoreId: $deepcrawlAllPagesReportDataSourceAuthStoreId }
+      facebookAdsDataSource: {
+        authStoreId: $facebookAdsDataSourceAuthStoreId,
+        accountId: $facebookAdsDataSourceAccountId,
+        accountName: $facebookAdsDataSourceAccountName,
+        campaignId: $facebookAdsDataSourceCampaignId,
+        campaignName: $facebookAdsDataSourceCampaignName,
+        adSetId: $facebookAdsDataSourceAdSetId,
+        adSetName: $facebookAdsDataSourceAdSetName,
+      }
+      facebookAdCreativesDataSource: {
+        authStoreId: $facebookAdCreativesDataSourceAuthStoreId
+        accountId: $facebookAdCreativesDataSourceAccountId
+        accountName: $facebookAdCreativesDataSourceAccountName
+      }
+      facebookAdInsightsDataSource: {
+        authStoreId: $facebookAdInsightsDataSourceAuthStoreId,
+        accountId: $facebookAdInsightsDataSourceAccountId,
+        accountName: $facebookAdInsightsDataSourceAccountName,
+        campaignId: $facebookAdInsightsDataSourceCampaignId,
+        campaignName: $facebookAdInsightsDataSourceCampaignName,
+      }
+      adobeAnalyticsDataSource: {
+        authStoreId: $adobeAnalyticsDataSourceAuthStoreId,
+        name: $adobeAnalyticsDataSourcename
+        globalCompanyId: $adobeGlobalCompanyId
+        rsid: $adobeRsid
+        dimensions: $adobeDimensions
+        metrics: $adobeMetrics
+      }
+      bigQueryDataTarget: {
+        authStoreId: $bigQueryDataTargetAuthStoreId
+        project: $project
+        projectName: $projectName
+      }
+      shopifyOrdersDataSource: {
+        authStoreId: $shopifyOrdersDataSourceAuth
+      }
+      shopifyCustomersDataSource: {
+        authStoreId: $shopifyCustomersDataSourceAuth
+      }
+      shopifyProductsDataSource: {
+        authStoreId: $shopifyProductsDataSourceAuth
+      }
+      shopifyRefundsDataSource: {
+        authStoreId: $shopifyRefundsDataSourceAuth
+      }
+    }
+  ) {
+    recipeInstance {
+      id
+    }
+  }
+}
+
+query RecipeInstanceFeedDetailsQuery($recipeInstanceId: ID!) {
+  recipeInstance(id: $recipeInstanceId) {
+    site
+    creatingUser {
+      id
+      email
+    }
+    ...recipeInstanceFragment
+  }
+}
+
+mutation CreateRecipeMutation(
+  $name: String!
+  $description: String!
+  $descriptionLong: String!
+  $googleAnalytics:  Boolean!
+  $googleSearchConsole:  Boolean!
+  $GoogleAdsAdPerformanceReport:  Boolean!
+  $GoogleAdsCampaignPerformanceReport:  Boolean!
+  $GoogleAdsFinalUrlReport:  Boolean!
+  $semrush:  Boolean!
+  $majestic:  Boolean!
+  $deepcrawl:  Boolean!
+  $shopifyCustomers:  Boolean!
+  $shopifyProducts:  Boolean!
+  $shopifyOrders:  Boolean!
+  $shopifyRefunds:  Boolean!
+  $facebookAds:  Boolean!
+  $facebookAdCreatives:  Boolean!
+  $facebookAdInsights: Boolean!
+  $adobeAnalytics: Boolean!
+  $gitUrl: String!
+) {
+  createRecipe(
+    input: {
+      name: $name
+      description: $description
+      descriptionLong: $descriptionLong
+      googleAnalytics: $googleAnalytics
+      googleSearchConsole: $googleSearchConsole
+      GoogleAdsAdPerformanceReport: $GoogleAdsAdPerformanceReport
+      GoogleAdsCampaignPerformanceReport: $GoogleAdsCampaignPerformanceReport
+      GoogleAdsFinalUrlReport: $GoogleAdsFinalUrlReport
+      semrush: $semrush
+      majestic: $majestic
+      deepcrawl: $deepcrawl
+      shopifyCustomers: $shopifyCustomers
+      shopifyProducts: $shopifyProducts
+      shopifyOrders: $shopifyOrders
+      shopifyRefunds: $shopifyRefunds
+      facebookAds: $facebookAds
+      facebookAdCreatives: $facebookAdCreatives
+      facebookAdInsights: $facebookAdInsights 
+      adobeAnalytics: $adobeAnalytics
+      gitUrl: $gitUrl
+    }
+  ) {
+    ok
+  }
+}
+
+query RecipesQuery {
+  recipes {
+    edges {
+      node {
+        id
+        name
+        descriptionShort
+        descriptionLong
+        activatedForOrg
+        pricePerMonth
+        configurations
+        recipeinstanceSet {
+          totalCount
+        }
+      }
+    }
+  }
+}
+
+query RecipeInstanceDbtRunsQuery($recipeInstanceId: ID!) {
+  recipeInstance(id:$recipeInstanceId) {
+    id
+    recipe {
+      id
+      name
+    }
+    site
+    creatingUser {
+      id
+      email
+    }
+    dbtRuns {
+      edges {
+        node {
+          id
+          statusHumanized
+          statusMessage
+          duration
+          durationHumanized
+          finishedAt
+          finishedAtHumanized
+        }
+      }
+    }
+  }
+}
+
+query RecipeInstanceDBTErrorsQuery($recipeInstanceId:ID!) {
+  recipeInstance(id:$recipeInstanceId) {
+    id
+    site
+    recipe {
+      id
+      name
+    }
+    unresolvedDbtErrors {
+      edges {
+        node {
+          id
+          runId
+          message
+          startedAt
+          finishedAt
+        }
+      }
+    }
+  }
+}
+
+query RecipeInstancesDBTErrorsQuery {
+  recipeInstances(monitor:true) {
+    edges {
+      node{
+        id
+        site
+        creatingUser {
+          id
+          email
+        }
+        recipe {
+          id
+          name
+        }
+        unresolvedDbtErrors {
+          totalCount
+        }
+      }
+    }
+  }
+}

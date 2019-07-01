@@ -1,0 +1,54 @@
+#import "../fragments.gql"
+query AdobeAuthsQuery {
+  adobeAuths {
+    edges {
+      cursor
+      node {
+        id
+        modified
+        org {
+          id
+          name
+        }
+        lastAuthedBy {
+          id
+          email
+        }
+      }
+    }
+  }
+}
+
+query AdobeAuthsIntegrationsQuery {
+  adobeAuths {
+    edges {
+      node {
+        id
+        ...adobeCompanyAccounts
+        ...adobeReportSuites
+      }
+    }
+  }
+}
+
+
+mutation DeleteAdobeAuthMutation($id: ID!) {
+  deleteAdobeAuth(input: { id: $id }) {
+    ok
+  }
+}
+
+mutation CreateAdobeAuthMutation(
+  $clientId: String!
+  $technicalAccountId: String!
+  $technicalAccountEmail: String!
+  $organizationId: String!
+  $clientSecret: String!
+  $privateKey: String!
+) {
+  createAdobeAuth(
+    input: { clientId: $clientId, technicalAccountId: $technicalAccountId, technicalAccountEmail: $technicalAccountEmail, organizationId: $organizationId, clientSecret: $clientSecret, privateKey: $privateKey }
+  ) {
+    ok
+  }
+}

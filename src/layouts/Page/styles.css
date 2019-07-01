@@ -1,0 +1,8 @@
+#m-c {
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
+#m-f {
+  flex-grow: 1; }

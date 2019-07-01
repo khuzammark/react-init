@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+if [[ $CODEBUILD_BUILD_SUCCEEDING != "1" ]]; then
+  echo "Not deploying because the build is not succeeding."
+  exit 1
+fi
+
+if [[ $CODEBUILD_WEBHOOK_HEAD_REF == "refs/heads/master" ]]; then
+  echo "Deploying to production on $(date)"
+  ./scripts/s3-deploy
+else
+  echo "Not deploying on branch $CODEBUILD_WEBHOOK_BASE_REF"
+fi

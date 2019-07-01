@@ -1,0 +1,82 @@
+mutation AddBankAccountMutation(
+  $stripeToken: String!, $setAsDefault: Boolean = false
+) {
+  addBankAccount(input: {
+    stripeToken: $stripeToken, setAsDefault: $setAsDefault
+  }) {
+    bankAccount {
+      id
+    }
+  }
+}
+
+mutation AddCreditCardMutation(
+  $stripeToken: String!,
+  $firstName: String!,
+  $lastName: String!,
+  $setAsDefault: Boolean = false
+) {
+  addCreditCard(input: {
+    stripeToken: $stripeToken,
+    setAsDefault: $setAsDefault,
+    firstName: $firstName,
+    lastName: $lastName
+  }) {
+    card {
+      id
+    }
+  }
+}
+
+query InvoicesQuery {
+  invoices {
+    edges {
+      node {
+        id
+        name
+        user {
+          id
+          email
+        }
+        org {
+          id
+          name
+        }
+        charges {
+          edges {
+            node {
+              id
+              name
+              quantity
+              rate
+            }
+          }
+        }
+        payments {
+          edges {
+            node {
+              id
+              amount
+              created
+            }
+          }
+        }
+        created
+        dueDate
+        totalAmount
+        remainingBalance
+        status
+      }
+    }
+  }
+}
+
+mutation SubmitPaymentFromSourceMutation($invoiceId: ID! $sourceId: String!) {
+  submitPaymentFromSource(input: {
+    invoiceId: $invoiceId
+    sourceId: $sourceId
+  }) {
+    ok
+    message
+  }
+}

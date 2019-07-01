@@ -1,0 +1,39 @@
+#import "../fragments.gql"
+query DeepcrawlAuthsQuery {
+  deepcrawlAuths {
+    edges {
+      cursor
+      node {
+        id
+        modified
+        org {
+          id
+          name
+        }
+        lastAuthedBy {
+          id
+          email
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteDeepcrawlAuthMutation($id: ID!) {
+  deleteDeepcrawlAuth(input: { id: $id }) {
+    ok
+  }
+}
+
+mutation CreateDeepcrawlAuthMutation(
+  $apiKey: String!
+  $keyId: String!
+  $accountId: String!
+  $name: String!
+) {
+  createDeepcrawlAuth(
+    input: { apiKey: $apiKey, keyId: $keyId, accountId: $accountId, name: $name }
+  ) {
+    ok
+  }
+}

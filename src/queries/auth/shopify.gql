@@ -1,0 +1,63 @@
+#import "../fragments.gql"
+mutation FinishShopifyAuthMutation(
+  $code: String!
+  $state: String!
+  $shop: String!
+) {
+  finishShopifyAuth(
+    input: {
+      code: $code
+      state: $state
+      shop: $shop
+    }
+  ) {
+    auth {
+      id
+    }
+  }
+}
+
+query ShopifyAuthsQuery {
+  shopifyAuths {
+    edges {
+      node {
+        id
+        org {
+          id
+          name
+        }
+        userAuth {
+          id
+          shop
+          user {
+            id
+            email
+          }
+        }
+      }
+    }
+  }
+}
+
+query ShopifyAuthsIntegrationsQuery {
+  shopifyAuths {
+    edges {
+      node {
+        id
+        ...shopifyRecentOrders
+      }
+    }
+  }
+}
+
+mutation DoShopifyAuthMutation($redirectUri: String!, $shop: String!) {
+  doShopifyAuth(input: { redirectUri: $redirectUri, shop: $shop }) {
+    authorizationUrl
+  }
+}
+
+mutation DeleteShopifyAuthMutation($id: ID!) {
+  deleteShopifyAuth(input: { id: $id }) {
+    ok
+  }
+}

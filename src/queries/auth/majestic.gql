@@ -1,0 +1,32 @@
+#import "../fragments.gql"
+query MajesticAuthsQuery {
+  majesticAuths {
+    edges {
+      cursor
+      node {
+        id
+        modified
+        org {
+          id
+          name
+        }
+        lastAuthedBy {
+          id
+          email
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteMajesticAuthMutation($id: ID!) {
+  deleteMajesticAuth(input: { id: $id }) {
+    ok
+  }
+}
+
+mutation CreateMajesticAuthMutation($apiKey: String!, $name: String!) {
+  createMajesticAuth(input: { apiKey: $apiKey, name: $name }) {
+    ok
+  }
+}

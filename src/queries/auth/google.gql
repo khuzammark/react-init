@@ -1,0 +1,77 @@
+#import "../fragments.gql"
+query GoogleAuthsQuery {
+  googleAuths {
+    edges {
+      node {
+        id
+        org {
+          id
+          name
+        }
+        userAuth {
+          id
+          user {
+            id
+            email
+          }
+          email
+        }
+      }
+    }
+  }
+}
+
+mutation DoGoogleAuthMutation($redirectUri: String!) {
+  doGoogleAuth(input: { redirectUri: $redirectUri }) {
+    authorizationUrl
+  }
+}
+
+query GoogleAuthsIntegrationsQuery {
+  googleAuths {
+    edges {
+      node {
+        id
+        ...analyticsAccounts
+        ...webmasterSites
+      }
+    }
+  }
+}
+
+query GoogleAuthBigQueryProjectsQuery {
+  googleAuths {
+    edges {
+      node {
+        id
+        ...bigQueryProjects
+      }
+    }
+  }
+}
+
+mutation DeleteGoogleAuthMutation($id: ID!) {
+  deleteGoogleAuth(input: { id: $id }) {
+    ok
+  }
+}
+
+mutation FinishGoogleAuthMutation(
+  $code: String!
+  $state: String!
+  $scope: [String]
+  $redirectUri: String
+) {
+  finishGoogleAuth(
+    input: {
+      code: $code
+      state: $state
+      scope: $scope
+      redirectUri: $redirectUri
+    }
+  ) {
+    auth {
+      id
+    }
+  }
+}

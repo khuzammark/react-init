@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+npm run build
+aws s3 sync build/ s3://cifl-ui
+# just the main bundle for now
+PATHS=$(find build/* | grep main.*\\.js$ | perl -pe "s/build\//\//g" | perl -pe "s/ /,/g")
+aws cloudfront create-invalidation \
+  --distribution-id=E3SZB6BQU4KHDY \
+  --paths="$PATHS,/index.html,/service-worker.js,/manifest.json,/asset-manifest.json"
