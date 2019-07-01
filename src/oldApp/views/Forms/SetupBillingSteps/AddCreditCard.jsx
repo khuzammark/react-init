@@ -62,7 +62,9 @@ class AddCreditCard extends React.Component {
                         CARD NUMBER
                       </InputLabel>
                       <CardNumberElement
-                        className={`${classes.customInput} ${classes.stripeInput}`}
+                        className={`${classes.customInput} ${
+                          classes.stripeInput
+                        }`}
                       />
                     </FormControl>
                   </Grid>
@@ -72,7 +74,9 @@ class AddCreditCard extends React.Component {
                         EXPIRATION DATE
                       </InputLabel>
                       <CardExpiryElement
-                        className={`${classes.customInput} ${classes.stripeInput}`}
+                        className={`${classes.customInput} ${
+                          classes.stripeInput
+                        }`}
                       />
                     </FormControl>
                   </Grid>
@@ -114,7 +118,9 @@ class AddCreditCard extends React.Component {
                         Security Code
                       </InputLabel>
                       <CardCVCElement
-                        className={`${classes.customInput} ${classes.stripeInput}`}
+                        className={`${classes.customInput} ${
+                          classes.stripeInput
+                        }`}
                       />
                     </FormControl>
                   </Grid>

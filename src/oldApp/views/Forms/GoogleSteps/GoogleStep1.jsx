@@ -39,7 +39,9 @@ class GoogleStep1 extends React.Component {
       _.get(data, "googleAuths.edges", []),
       ({ node }) => (
         <MenuItem key={node.id} value={node.id}>
-          {`Google Auth for ${node.userAuth.email} (created by ${node.userAuth.user.email} for ${node.org.name})`}
+          {`Google Auth for ${node.userAuth.email} (created by ${
+            node.userAuth.user.email
+          } for ${node.org.name})`}
         </MenuItem>
       )
     );
@@ -105,7 +107,9 @@ export default withStyles(extendedFormsStyle)(
     graphql(DoGoogleAuthMutation, {
       options: {
         variables: {
-          redirectUri: `${window.location.origin}/auth-stores/google/oauth/callback`
+          redirectUri: `${
+            window.location.origin
+          }/auth-stores/google/oauth/callback`
         }
       }
     })

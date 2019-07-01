@@ -42,7 +42,9 @@ class DataTargetStartForm extends React.Component {
                       <Subject className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${classes.marginTop30}`}
+                      className={`${classes.cardDescription} ${
+                        classes.marginTop30
+                      }`}
                     >
                       Push data into a BigQuery Table. This is a target for
                       other ingredients.

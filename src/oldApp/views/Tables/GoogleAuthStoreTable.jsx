@@ -189,7 +189,9 @@ export default withStyles({ ...extendedTablesStyle, ...sweetAlertStyle })(
       name: "doGoogleAuth",
       options: {
         variables: {
-          redirectUri: `${window.location.origin}/dashboard/auth-stores/google/oauth/callback`
+          redirectUri: `${
+            window.location.origin
+          }/dashboard/auth-stores/google/oauth/callback`
         }
       }
     }),

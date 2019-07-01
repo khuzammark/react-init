@@ -17,7 +17,9 @@ class GoogleOAuthStep extends React.Component {
         state,
         code,
         scope,
-        redirectUri: `${window.location.origin}/dashboard/auth-stores/google/oauth/callback`
+        redirectUri: `${
+          window.location.origin
+        }/dashboard/auth-stores/google/oauth/callback`
       },
       refetchQueries: [{ query: UserViewerQuery }]
     });

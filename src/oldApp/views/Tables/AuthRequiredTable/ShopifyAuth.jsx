@@ -20,7 +20,9 @@ function ShopifyAuth({ classes, doShopifyAuth, clearAlert }) {
     } = await doShopifyAuth({
       variables: {
         shop,
-        redirectUri: `${window.location.origin}/dashboard/auth-stores/shopify/oauth/callback`
+        redirectUri: `${
+          window.location.origin
+        }/dashboard/auth-stores/shopify/oauth/callback`
       }
     });
     window.location.href = authorizationUrl;

@@ -96,9 +96,9 @@ class RecipeSiteTable extends React.Component {
               <CardIcon color="primary">
                 <FlashOn />
               </CardIcon>
-              <h4
-                className={classes.cardIconTitle}
-              >{`${recipeInstance.recipe.name} - ${recipeInstance.site}`}</h4>
+              <h4 className={classes.cardIconTitle}>{`${
+                recipeInstance.recipe.name
+              } - ${recipeInstance.site}`}</h4>
             </CardHeader>
             <CardBody>
               <Table
