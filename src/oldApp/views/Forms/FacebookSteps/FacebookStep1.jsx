@@ -27,9 +27,7 @@ class FacebookStep1 extends React.Component {
       _.get(data, "facebookAuths.edges", []),
       ({ node }) => (
         <MenuItem key={node.id} value={node.id}>
-          {`Facebook Auth for ${node.userAuth.user.email} (created by ${
-            node.userAuth.user.email
-          } for ${node.org.name})`}
+          {`Facebook Auth for ${node.userAuth.user.email} (created by ${node.userAuth.user.email} for ${node.org.name})`}
         </MenuItem>
       )
     );

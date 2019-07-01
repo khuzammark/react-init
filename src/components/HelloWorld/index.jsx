@@ -1,8 +1,8 @@
-import React from 'react';
-import './styles.scss';
+import React from "react";
+import "./styles.scss";
 
 const HelloWorld = () => {
-    return <div className="h-w">Hello World</div>;
+  return <div className="h-w">Hello World</div>;
 };
 
 HelloWorld.propTypes = {};

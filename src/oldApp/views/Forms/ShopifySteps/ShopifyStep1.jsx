@@ -27,9 +27,7 @@ class ShopifyStep1 extends React.Component {
       _.get(data, "shopifyAuths.edges", []),
       ({ node }) => (
         <MenuItem key={node.id} value={node.id}>
-          {`Shopify Auth for ${node.userAuth.user.email} (created by ${
-            node.userAuth.user.email
-          } for ${node.org.name})`}
+          {`Shopify Auth for ${node.userAuth.user.email} (created by ${node.userAuth.user.email} for ${node.org.name})`}
         </MenuItem>
       )
     );

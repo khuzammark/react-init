@@ -39,9 +39,7 @@ class DataSourceStartForm extends React.Component {
                       <TableChart className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull sessions and goal completions by landing page, source
                       and medium.
@@ -70,9 +68,7 @@ class DataSourceStartForm extends React.Component {
                       <List className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull impressions and clicks by landing page and search
                       query.
@@ -101,9 +97,7 @@ class DataSourceStartForm extends React.Component {
                       <List className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull adwords ad perfomance reports for a specified
                       account.
@@ -136,9 +130,7 @@ class DataSourceStartForm extends React.Component {
                       <List className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull adwords ads campaign perfomance reports for an
                       account.
@@ -167,9 +159,7 @@ class DataSourceStartForm extends React.Component {
                       <List className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull adwords final url reports for a specified account.
                     </p>
@@ -195,9 +185,7 @@ class DataSourceStartForm extends React.Component {
                       <TableChart className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull domain organic search keywords from semrush
                     </p>
@@ -227,9 +215,7 @@ class DataSourceStartForm extends React.Component {
                       <TableChart className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull Majestic Backlinks data
                     </p>
@@ -255,9 +241,7 @@ class DataSourceStartForm extends React.Component {
                       <List className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull All Pages Report from deepcrawl.
                     </p>
@@ -285,9 +269,7 @@ class DataSourceStartForm extends React.Component {
                       <List className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull refunds data for a given shopify order.
                     </p>
@@ -319,9 +301,7 @@ class DataSourceStartForm extends React.Component {
                       <TableChart className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull Facebook Ad Creatives.
                     </p>
@@ -349,9 +329,7 @@ class DataSourceStartForm extends React.Component {
                       <List className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull facebook ad insights.
                     </p>
@@ -377,9 +355,7 @@ class DataSourceStartForm extends React.Component {
                       <List className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull facebook ads.
                     </p>
@@ -409,9 +385,7 @@ class DataSourceStartForm extends React.Component {
                       <TableChart className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Pull Facebook Ad Creatives.
                     </p>

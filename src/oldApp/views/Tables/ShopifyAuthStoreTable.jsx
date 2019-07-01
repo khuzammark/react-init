@@ -64,9 +64,7 @@ class ShopifyAuthStoreTable extends React.Component {
               } = await doShopifyAuth({
                 variables: {
                   shop: shop,
-                  redirectUri: `${
-                    window.location.origin
-                  }/dashboard/auth-stores/shopify/oauth/callback`
+                  redirectUri: `${window.location.origin}/dashboard/auth-stores/shopify/oauth/callback`
                 },
                 refetchQueries: [{ query: ShopifyAuthsQuery }]
               });

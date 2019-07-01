@@ -25,9 +25,7 @@ class AdobeStep1 extends React.Component {
 
     const menuItems = _.map(_.get(data, "adobeAuths.edges", []), ({ node }) => (
       <MenuItem key={node.id} value={node.id}>
-        {`Adobe Auth for ${node.lastAuthedBy.email} (created by ${
-          node.lastAuthedBy.email
-        } for ${node.org.name})`}
+        {`Adobe Auth for ${node.lastAuthedBy.email} (created by ${node.lastAuthedBy.email} for ${node.org.name})`}
       </MenuItem>
     ));
 

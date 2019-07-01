@@ -42,9 +42,7 @@ class APIAuthStartForm extends React.Component {
                   <TableChart className={classes.iconRose} />
                 </div>
                 <p
-                  className={`${classes.cardDescription} ${
-                    classes.marginTop30
-                  }`}
+                  className={`${classes.cardDescription} ${classes.marginTop30}`}
                 >
                   Pull sessions and goal completions by landing page, source and
                   medium.
@@ -71,9 +69,7 @@ class APIAuthStartForm extends React.Component {
                   <List className={classes.iconRose} />
                 </div>
                 <p
-                  className={`${classes.cardDescription} ${
-                    classes.marginTop30
-                  }`}
+                  className={`${classes.cardDescription} ${classes.marginTop30}`}
                 >
                   Pull impressions and clicks by landing page and search query.
                 </p>
@@ -99,9 +95,7 @@ class APIAuthStartForm extends React.Component {
                   <Key className={classes.iconRose} />
                 </div>
                 <p
-                  className={`${classes.cardDescription} ${
-                    classes.marginTop30
-                  }`}
+                  className={`${classes.cardDescription} ${classes.marginTop30}`}
                 >
                   Pull unique backlinks by landing page (data updates monthly).
                 </p>
@@ -119,9 +113,7 @@ class APIAuthStartForm extends React.Component {
                   <Link className={classes.iconRose} />
                 </div>
                 <p
-                  className={`${classes.cardDescription} ${
-                    classes.marginTop30
-                  }`}
+                  className={`${classes.cardDescription} ${classes.marginTop30}`}
                 >
                   Pull organic keyword rankings by landing page (data updates
                   monthly).
@@ -152,9 +144,7 @@ class APIAuthStartForm extends React.Component {
                       <GetApp className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Run a complete crawl of your site (data updates monthly).
                     </p>
@@ -180,9 +170,7 @@ class APIAuthStartForm extends React.Component {
                       <Subject className={classes.iconRose} />
                     </div>
                     <p
-                      className={`${classes.cardDescription} ${
-                        classes.marginTop30
-                      }`}
+                      className={`${classes.cardDescription} ${classes.marginTop30}`}
                     >
                       Push data into a BigQuery Table. This is a target for
                       other ingredients.

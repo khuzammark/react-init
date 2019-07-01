@@ -107,9 +107,7 @@ class LoginPage extends React.Component {
                   <form action="#" method="GET" onSubmit={this.onSubmit}>
                     <Card login className={classes[this.state.cardAnimaton]}>
                       <CardHeader
-                        className={`${classes.cardHeader} ${
-                          classes.textCenter
-                        }`}
+                        className={`${classes.cardHeader} ${classes.textCenter}`}
                         color="rose"
                       >
                         <h4 className={classes.cardTitle}>Log in</h4>

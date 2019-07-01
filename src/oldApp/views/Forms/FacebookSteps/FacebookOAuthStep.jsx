@@ -15,9 +15,7 @@ class FacebookOAuthStep extends React.Component {
     await mutate({
       variables: {
         code,
-        redirectUri: `${
-          window.location.origin
-        }/dashboard/auth-stores/facebook/oauth/callback`
+        redirectUri: `${window.location.origin}/dashboard/auth-stores/facebook/oauth/callback`
       },
       refetchQueries: [{ query: UserViewerQuery }]
     }).then(() => history.push(localStorage.getItem("oauthPostRedirectUrl")));

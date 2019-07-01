@@ -204,9 +204,7 @@ export default withStyles({ ...extendedTablesStyle, ...sweetAlertStyle })(
       name: "doFacebookAuth",
       options: {
         variables: {
-          redirectUri: `${
-            window.location.origin
-          }/dashboard/auth-stores/facebook/oauth/callback`
+          redirectUri: `${window.location.origin}/dashboard/auth-stores/facebook/oauth/callback`
         }
       }
     }),
@@ -214,9 +212,7 @@ export default withStyles({ ...extendedTablesStyle, ...sweetAlertStyle })(
       name: "doGoogleAuth",
       options: {
         variables: {
-          redirectUri: `${
-            window.location.origin
-          }/dashboard/auth-stores/google/oauth/callback`
+          redirectUri: `${window.location.origin}/dashboard/auth-stores/google/oauth/callback`
         }
       }
     }),
