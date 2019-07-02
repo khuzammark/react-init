@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from "react";
 import ReactRouterPropTypes from "react-router-prop-types";
 import { graphql } from "react-apollo";
-import { Wizard, Snackbar } from "../../ui-lib";
-import Page from "../../layouts/Page";
-import LoginForm from "../../components/LoginForm";
-import { TokenAuthMutation } from "../../queries/users.gql";
+import { Wizard, Snackbar } from "ui-lib";
+import Page from "layouts/Page";
+import LoginForm from "components/LoginForm";
+import { TokenAuthMutation } from "queries/users.gql";
 
 class Login extends Component {
   constructor(props) {

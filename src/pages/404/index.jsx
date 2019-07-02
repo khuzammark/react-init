@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { Typography, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
-import { CTAButton, mainTheme } from "../../ui-lib";
-import Page from "../../layouts/Page";
+import { CTAButton, mainTheme } from "ui-lib";
+import Page from "layouts/Page";
 
 const useStyles = makeStyles(theme => ({
   container: {

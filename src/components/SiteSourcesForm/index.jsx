@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core/";
-import { DropDown } from "../../ui-lib";
+import { DropDown } from "ui-lib";
 
 const SiteSourcesForm = ({ handleSelect, sources }) => {
   return (

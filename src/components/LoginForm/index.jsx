@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Typography, TextField } from "@material-ui/core/";
-import { Link } from "../../ui-lib";
+import { Link } from "ui-lib";
 
 const LoginForm = ({ handleChange, email, password }) => {
   return (

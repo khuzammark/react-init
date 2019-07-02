@@ -4,11 +4,11 @@ import ReactRouterPropTypes from "react-router-prop-types";
 import { orderBy, uniqBy } from "lodash";
 import { compareAsc, compareDesc } from "date-fns";
 import { withStyles } from "@material-ui/styles";
-import { Hero, DropDown, CTAButton } from "../../ui-lib";
-import Page from "../../layouts/Page";
-import HeroData from "../../DummyData/hero";
-import PaginatedTable from "../../components/PaginatedTable/index2";
-import sitesData from "../../DummyData/sitesData";
+import { Hero, DropDown, CTAButton } from "ui-lib";
+import Page from "layouts/Page";
+import HeroData from "DummyData/hero";
+import PaginatedTable from "components/PaginatedTable";
+import sitesData from "DummyData/sitesData";
 
 const styles = theme => ({
   cardContainer: {

@@ -8,10 +8,19 @@ import Theme from "../theme";
 const useStyles = makeStyles(() => ({
   link: {
     display: "inline-block"
+  },
+  noHover: {
+    "&:hover": {
+      backgroundColor: "transparent"
+    },
+    "&:click": {
+      backgroundColor: "transparent"
+    },
+    backgroundColor: "transparent"
   }
 }));
 
-const LinkComponent = ({ name, link, color, button, bold }) => {
+const LinkComponent = ({ name, link, color, button, bold, hover }) => {
   const classes = useStyles();
   const CollisionLink = React.forwardRef((props, ref) => (
     <RouterLink innerRef={ref} to={link || "#"} {...props} />
@@ -35,7 +44,11 @@ const LinkComponent = ({ name, link, color, button, bold }) => {
       break;
   }
   return button ? (
-    <Button color={linkColor} component={CollisionLink}>
+    <Button
+      color={linkColor}
+      component={CollisionLink}
+      className={[hover ? null : classes.noHover]}
+    >
       <Typography
         component="p"
         variant="body1"
@@ -49,7 +62,7 @@ const LinkComponent = ({ name, link, color, button, bold }) => {
       color={linkColor}
       component={CollisionLink}
       href={link}
-      className={classes.link}
+      className={[classes.link, hover ? null : classes.noHover]}
     >
       <Typography
         component="p"
@@ -67,11 +80,13 @@ LinkComponent.propTypes = {
   link: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   button: PropTypes.bool,
-  bold: PropTypes.bool
+  bold: PropTypes.bool,
+  hover: PropTypes.bool
 };
 
 LinkComponent.defaultProps = {
   button: true,
+  hover: true,
   bold: false
 };
 

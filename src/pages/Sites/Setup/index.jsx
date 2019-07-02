@@ -1,12 +1,12 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/styles";
-import { Wizard, Stepper } from "../../../ui-lib";
-import Page from "../../../layouts/Page";
-import SiteDetailsForm from "../../../components/SiteDetailsForm";
-import SiteSourcesForm from "../../../components/SiteSourcesForm";
-import BigQueryForm from "../../../components/BigQueryForm";
-import ConfirmSiteSetup from "../../../components/ConfirmSiteSetup";
+import { Wizard, Stepper } from "ui-lib";
+import Page from "layouts/Page";
+import SiteDetailsForm from "components/SiteDetailsForm";
+import SiteSourcesForm from "components/SiteSourcesForm";
+import BigQueryForm from "components/BigQueryForm";
+import ConfirmSiteSetup from "components/ConfirmSiteSetup";
 import configureStepperData from "./configureStepperData";
 
 const styles = theme => ({

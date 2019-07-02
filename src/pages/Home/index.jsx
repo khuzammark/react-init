@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Hero, Stepper, RecipeDetail, CTA } from "../../ui-lib";
-import Page from "../../layouts/Page";
-import HeroData from "../../DummyData/hero";
-import StepperData from "../../DummyData/stepper";
-import recipeDetailData from "../../DummyData/recipeDetail";
-import ctaData from "../../DummyData/cta";
+import { Hero, Stepper, RecipeDetail, CTA } from "ui-lib";
+import Page from "layouts/Page";
+import HeroData from "DummyData/hero";
+import StepperData from "DummyData/stepper";
+import recipeDetailData from "DummyData/recipeDetail";
+import ctaData from "DummyData/cta";
 
 const useStyles = makeStyles(() => ({
   stepperContainer: {

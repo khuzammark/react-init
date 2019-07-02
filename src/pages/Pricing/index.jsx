@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core";
-import { PricingCard, mainTheme } from "../../ui-lib";
+import { PricingCard, mainTheme } from "ui-lib";
 
-import Page from "../../layouts/Page";
-import pricingData from "../../DummyData/pricingCard";
+import Page from "layouts/Page";
+import pricingData from "DummyData/pricingCard";
 
 const useStyles = makeStyles(theme => ({
   cardContainer: {

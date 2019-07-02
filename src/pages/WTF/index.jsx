@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
-import { Hero, Stepper, CTA } from "../../ui-lib";
+import { Hero, Stepper, CTA } from "ui-lib";
 
-import Page from "../../layouts/Page";
-import HeroData from "../../DummyData/hero";
-import StepperData from "../../DummyData/stepper";
-import ctaData from "../../DummyData/cta";
+import Page from "layouts/Page";
+import HeroData from "DummyData/hero";
+import StepperData from "DummyData/stepper";
+import ctaData from "DummyData/cta";
 
 const Home = () => {
   return (

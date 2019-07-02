@@ -2,14 +2,14 @@ import React, { Component, Fragment } from "react";
 import { withStyles } from "@material-ui/core";
 import ReactRouterPropTypes from "react-router-prop-types";
 import PropTypes from "prop-types";
-import { Stepper, Wizard, PricingCard } from "../../ui-lib";
-import Page from "../../layouts/Page";
-import AccountDetailsForm from "../../components/AccountDetailsForm";
-import BillingDetailsForm from "../../components/BillingDetailsForm";
-import InvoiceTable from "../../components/InvoiceTable";
-import stepperData from "../../DummyData/stepper";
-import pricingData from "../../DummyData/pricingCard";
-import invoiceData from "../../DummyData/invoice";
+import { Stepper, Wizard, PricingCard } from "ui-lib";
+import Page from "layouts/Page";
+import AccountDetailsForm from "components/AccountDetailsForm";
+import BillingDetailsForm from "components/BillingDetailsForm";
+import InvoiceTable from "components/InvoiceTable";
+import stepperData from "DummyData/stepper";
+import pricingData from "DummyData/pricingCard";
+import invoiceData from "DummyData/invoice";
 
 const styles = theme => {
   return {

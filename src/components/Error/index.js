@@ -4,7 +4,7 @@ import { Slide, Typography, Container, Grid } from "@material-ui/core";
 import { Warning } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 
-import { mainTheme } from "../../ui-lib";
+import { mainTheme } from "ui-lib";
 
 const useStyles = makeStyles(theme => ({
   container: {

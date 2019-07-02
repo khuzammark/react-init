@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import ReactRouterPropTypes from "react-router-prop-types";
-import { Wizard } from "../../ui-lib";
-import Page from "../../layouts/Page";
-import RegisterForm from "../../components/RegisterForm";
+import { Wizard } from "ui-lib";
+import Page from "layouts/Page";
+import RegisterForm from "components/RegisterForm";
 
 class Register extends Component {
   constructor(props) {

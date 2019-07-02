@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import ReactRouterPropTypes from "react-router-prop-types";
 import { Redirect } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
-import { RecipeDetail, mainTheme, Stepper, SimpleTable } from "../../../ui-lib";
+import { RecipeDetail, mainTheme, Stepper, SimpleTable } from "ui-lib";
 
-import Page from "../../../layouts/Page";
-import recipeDetailData from "../../../DummyData/recipeDetail";
-import stepperData from "../../../DummyData/stepper";
-import simpletableData from "../../../DummyData/simpletable";
+import Page from "layouts/Page";
+import recipeDetailData from "DummyData/recipeDetail";
+import stepperData from "DummyData/stepper";
+import simpletableData from "DummyData/simpletable";
 
 const useStyles = makeStyles(theme => ({
   sideBarContainer: {

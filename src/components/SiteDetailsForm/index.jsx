@@ -2,8 +2,8 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { Typography, TextField } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/styles";
-import mainTheme from "../../ui-lib/theme";
-import isUrl from "../../utils/validation/isUrl";
+import mainTheme from "ui-lib/theme";
+import isUrl from "utils/validation/isUrl";
 
 const useStyles = makeStyles(theme => ({
   input: {

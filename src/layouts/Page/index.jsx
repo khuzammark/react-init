@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { Container, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { isEmpty } from "lodash";
-import { UserConsumer } from "../../contexts/UserContext";
-import { Header, Footer, mainTheme } from "../../ui-lib";
-import HeaderData from "../../DummyData/header";
-import FooterData from "../../DummyData/footer";
+import { UserConsumer } from "contexts/UserContext";
+import { Header, Footer, mainTheme } from "ui-lib";
+import HeaderData from "DummyData/header";
+import FooterData from "DummyData/footer";
 import "./styles.scss";
 
 const useStyles = makeStyles(theme => ({
@@ -25,19 +25,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const defaultOptions = {
-  showLinks: true
+  showLinks: true,
+  authenticated: false
 };
 
 export default (Component, options) => {
   const PageLayout = props => {
     const classes = useStyles(mainTheme);
-    const { showLinks } = options || defaultOptions;
+    const { showLinks, authenticated } = options || defaultOptions;
     return (
       <Box height={1} className={classes.box}>
         <UserConsumer>
           {user => {
             console.log("the user in laout is ", user);
-            return (
+            return authenticated && isEmpty(user) ? (
+              <Redirect to="/" />
+            ) : (
               <Fragment>
                 <Header
                   {...{
