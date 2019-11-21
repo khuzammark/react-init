@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import './styles.scss';
 
-export default Component => {
-    const Page = () => {
-        return (
-            <div>
-                <Component />
-            </div>
-        );
-    };
-
-    Page.propTypes = {};
-
-    return Page;
+const Page = ({ children }) => {
+  return <div className="main-container">{children}</div>;
 };
+
+Page.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+};
+
+export default Page;

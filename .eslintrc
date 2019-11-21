@@ -36,5 +36,8 @@
       "error",
       { "allow": ["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] }
     ]
+  },
+  "settings": {
+    "import/resolver": "webpack"
   }
 }
