@@ -20,6 +20,7 @@
     "react/prefer-stateless-function": "warn",
     "react/jsx-one-expression-per-line": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/no-unresolved": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "linebreak-style": "off",
     "global-require": "off",
@@ -38,6 +39,10 @@
     ]
   },
   "settings": {
-    "import/resolver": "webpack"
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
   }
 }
