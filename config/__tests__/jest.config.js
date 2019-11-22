@@ -3,7 +3,7 @@ module.exports = {
   browser: false,
   bail: false,
   collectCoverageFrom: [
-    'src/**/*.{js,jsx}',
+    'client/**/*.{js,jsx}',
     '!**/node_modules/**',
     '!**/vendor/**'
   ],
