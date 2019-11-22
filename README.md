@@ -6,6 +6,12 @@ Based off of React Bolt
 
 ### Includes
 
+React
+
+Redux
+
+Express
+
 Webpack 4
 
 Babel 7
